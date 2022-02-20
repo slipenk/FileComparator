@@ -5,14 +5,20 @@ server:
 
 spring:
   datasource:
-    password:
     url: jdbc:mysql://localhost:3306/filecomparator
-    username:
+    username: root
+    password: ENC(9nP1MzuXmsknDnCc8ecbIu9XdFdZsFoW)
   jpa:
     hibernate:
       ddl-auto: create-drop
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL5Dialect
+        dialect: org.hibernate.dialect.MySQL8Dialect
         format_sql: true
     show-sql: true
+
+jasypt:
+    encryptor:
+      algorithm: PBEWithMD5AndDES
+      iv-generator-classname: org.jasypt.iv.NoIvGenerator
+      password: Salah
