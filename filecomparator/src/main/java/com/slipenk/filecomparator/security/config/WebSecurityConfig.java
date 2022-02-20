@@ -26,7 +26,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("berulia/registration/**")
+                .antMatchers( "/berulia/registration/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
