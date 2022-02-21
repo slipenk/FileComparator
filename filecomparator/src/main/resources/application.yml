@@ -16,9 +16,26 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect
         format_sql: true
     show-sql: true
+  mail:
+    host: localhost
+    port: 1025
+    username: hello
+    password: ENC(KcyKsN8Tql1CCKe0DypxAA==)
+    properties:
+      mail:
+        smtp:
+          ssl:
+            trust: "*"
+          auth: true
+          starttls:
+            enable: true
+          connectiontimeout: 5000
+          timeout: 3000
+          writetimeout: 5000
 
 jasypt:
     encryptor:
       algorithm: PBEWithMD5AndDES
       iv-generator-classname: org.jasypt.iv.NoIvGenerator
       password: Salah
+
