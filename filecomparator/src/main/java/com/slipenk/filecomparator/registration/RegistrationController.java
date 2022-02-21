@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("berulia/registration")
 @AllArgsConstructor
-public class UserRegistrationController {
+public class RegistrationController {
 
     private static final String TOKEN = "token";
     private final RegistrationService registrationService;

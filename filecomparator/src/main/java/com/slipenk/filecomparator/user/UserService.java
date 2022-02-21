@@ -29,21 +29,22 @@ public class UserService implements UserDetailsService {
     }
 
     public String signUpUser(User user) {
-        checkUserPresence(user);
-        encryptPassword(user);
-        userRepository.save(user);
-        createToken(user);
-
-        return "";
+        boolean userPresent = checkUserPresence(user);
+        if(!userPresent) {
+            encryptPassword(user);
+            userRepository.save(user);
+        }
+        return createToken(user);
     }
 
-    private void checkUserPresence(User user) {
+    private boolean checkUserPresence(User user) {
         boolean userPresent = userRepository
                 .findByEmail(user.getEmail())
                 .isPresent();
-        if (userPresent) {
+        if (userPresent && user.getEnabled()) {
             throw new IllegalStateException(String.format(USER_EXISTS, user.getEmail()));
         }
+        return userPresent;
     }
 
     private void encryptPassword(User user) {
@@ -51,7 +52,7 @@ public class UserService implements UserDetailsService {
         user.setPassword(encodedPassword);
     }
 
-    private void createToken(User user) {
+    private String createToken(User user) {
         String token = UUID.randomUUID().toString();
         ConfirmationToken confirmationToken = new ConfirmationToken(
                 token,
@@ -60,6 +61,7 @@ public class UserService implements UserDetailsService {
                 user
         );
         confirmationTokenService.saveConfirmationToken(confirmationToken);
+        return token;
     }
 
     public void enableUser(String email) {
