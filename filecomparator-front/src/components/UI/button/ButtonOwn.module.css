@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Kurale&display=swap');
+.myBtn {
+    padding: 1% 2%;
+    margin: 1% 0;
+    color: black;
+    font-size: 2.2vw;
+    font-family: 'Kurale', serif;
+    background: rgba(142, 255, 139, 47);;
+    border: 5px solid black;
+    cursor: pointer;
+    border-radius: 30px;
+    width: 63%;
+}
