@@ -1,42 +1,64 @@
 @import url('https://fonts.googleapis.com/css2?family=Kurale&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap');
 .RegistrationDiv {
-    height: 85%;
-    width: 45%;
-    border-color: black;
-    border-width: 5px;
-    border-style: solid;
+    height: 85vh;
+    border: 1vh solid black;
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
     background-color: #FFFBF2;
-    border-radius: 10%;
-    font-size: 2.2vw;
+    border-radius: 10vh;
     font-family: 'Kurale', serif;
 }
-.container {
-
-}
-
 .col_h {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2.2vw;
+    font-size: 1.6vw;
+    height: 7vh;
+    margin-right: 3vw;
 }
-
 .col_input {
     display: flex;
     justify-content: right;
-    margin-top: 0.5%;
-    margin-right: 3%;
+    margin-right: 2.6vw;
+    margin-top: 0.5vw;
 }
 .col_input_btn {
     display: flex;
     justify-content: right;
-    margin-top: 2%;
-    margin-right: 7%;
+    margin-top: 1vh;
+    margin-right: 6vw;
 }
+.HBer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Amatic SC', cursive;
+    font-size: 3vw;
+    margin-top: -12vh;
+}
+.BerulyaImg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.ImageDiv {
+    width: 15vw;
+    margin-right: 6vw;
+    margin-left: 6vw;
+}
+.flexDiv {
+    display: flex;
+    flex-direction: row;
+}
+.flexDivCol {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 
 
 

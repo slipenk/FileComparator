@@ -2,12 +2,13 @@
 .myInput {
     padding: 1% 2%;
     margin: 1% 0;
-    border: 5px solid black;
-    border-radius: 30px;
-    font-size: 2.2vw;
+    border: 1vh solid black;
+    border-radius: 10vh;
+    font-size: 1.5vw;
     font-family: 'Kurale', serif;
     text-align: center;
     color: #888888;
     background-color: #FFFCE2;
-    width: 63%;
+    width: 24vw;
+    height: 6vh;
 }
