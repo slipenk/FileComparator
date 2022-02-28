@@ -1,7 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Kurale&display=swap');
 .myBtn {
-    padding: 1% 2%;
-    margin: 1% 0;
     color: black;
     font-size: 1.5vw;
     font-family: 'Kurale', serif;
@@ -9,7 +7,7 @@
     border: 0.6vh solid black;
     cursor: pointer;
     border-radius: 10vh;
-    width: 18vw;
+    width: 20vw;
     height: 9vh;
 }
 .myBtn:hover {

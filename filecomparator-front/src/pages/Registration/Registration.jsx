@@ -9,9 +9,17 @@ const Registration = () => {
         <div className={classes.RegistrationDiv}>
             <div className={classes.flexDiv}>
                <LogoName/>
-            <form>
-                <RegistrationForm/>
-            </form>
+                <div>
+                <form>
+                    <RegistrationForm/>
+                </form>
+                <div className={classes.alreadyReg}>
+                    Вже маєте акаунт?
+                    <div>
+                        <a href=" "><i>Вхід</i></a>
+                    </div>
+                </div>
+                </div>
             </div>
         </div>
     );
