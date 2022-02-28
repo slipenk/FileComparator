@@ -12,3 +12,13 @@
     width: 22vw;
     height: 6vh;
 }
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+}
+input:focus {
+    outline: none;
+}
+input:focus::placeholder {
+    color: transparent;
+}

@@ -6,6 +6,9 @@ import Logo from "../../icons/Berulya.png";
 import NameInput from "../../icons/NameIcon.png";
 import SurnameInput from "../../icons/SurnameIcon.png";
 import EmailInput from "../../icons/EmailIcon.png";
+import PasswordInput from "../../icons/PasswordIcon.png";
+import RPasswordInput from "../../icons/RPassword.png";
+import DateBirthInput from "../../icons/DateBirthIcon.png";
 
 
 const Registration = () => {
@@ -53,7 +56,7 @@ const Registration = () => {
                     <div className={classes.col_input}>
                         <div className={classes.IMGContainer}>
                             <div className={classes.alignCenterIMG}>
-                                <img className={classes.IconInput} src={NameInput} alt="БЕРУЛЯ"/>
+                                <img className={classes.IconInput} src={PasswordInput} alt="БЕРУЛЯ"/>
                             </div>
                         <InputOwn type="password" placeholder="Пароль"/>
                         </div>
@@ -61,7 +64,7 @@ const Registration = () => {
                     <div className={classes.col_input}>
                         <div className={classes.IMGContainer}>
                             <div className={classes.alignCenterIMG}>
-                                <img className={classes.IconInput} src={NameInput} alt="БЕРУЛЯ"/>
+                                <img className={classes.IconInput} src={RPasswordInput} alt="БЕРУЛЯ"/>
                             </div>
                         <InputOwn type="password" placeholder="Повторіть пароль"/>
                         </div>
@@ -69,9 +72,14 @@ const Registration = () => {
                     <div className={classes.col_input}>
                         <div className={classes.IMGContainer}>
                             <div className={classes.alignCenterIMG}>
-                                <img className={classes.IconInput} src={NameInput} alt="БЕРУЛЯ"/>
+                                <img className={classes.IconInput} src={DateBirthInput} alt="БЕРУЛЯ"/>
                             </div>
-                        <InputOwn type="date" placeholder="Дата народження"/>
+                        <InputOwn type="text" placeholder="Дата народження" onFocus={(e) => {
+                            e.currentTarget.type = "date";
+                        }} onBlur={(e) => {
+                            e.currentTarget.type = "text";
+                            e.currentTarget.placeholder = "Дата народження";
+                        }} />
                         </div>
                     </div>
                     <div className={classes.col_input + ' ' + classes.col_input_btn}>
@@ -83,6 +91,8 @@ const Registration = () => {
             </div>
         </div>
     );
+
 };
+
 
 export default Registration;

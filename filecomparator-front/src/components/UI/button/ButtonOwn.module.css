@@ -5,10 +5,17 @@
     color: black;
     font-size: 1.5vw;
     font-family: 'Kurale', serif;
-    background: rgba(142, 255, 139, 47);;
+    background: rgba(142, 255, 139, 47);
     border: 0.6vh solid black;
     cursor: pointer;
     border-radius: 10vh;
     width: 18vw;
     height: 9vh;
+}
+.myBtn:hover {
+    background: rgba(198, 255, 197, 30);
+}
+
+.myBtn:active {
+    background: rgba(15, 241, 9, 50);
 }
