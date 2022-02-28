@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Kurale&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap');
+
 .RegistrationDiv {
     height: 85vh;
-    border: 1vh solid black;
+    border: 0.6vh solid black;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -37,7 +38,7 @@
     justify-content: center;
     font-family: 'Amatic SC', cursive;
     font-size: 3vw;
-    margin-top: -12vh;
+    margin-top: -10vh;
 }
 .BerulyaImg {
     display: flex;
@@ -58,6 +59,24 @@
     flex-direction: column;
     justify-content: center;
 }
+.IconInput {
+    width: 3vw;
+    height: 3vw;
+    margin-left: 0.4vw;
+}
+.alignCenterIMG {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.IMGContainer {
+    display: flex;
+    flex-direction: row;
+    border: 0.6vh solid black;
+    border-radius: 10vh;
+    background-color: #FFFCE2;
+}
+
 
 
 

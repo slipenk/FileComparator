@@ -2,7 +2,10 @@ import React from "react";
 import classes from './Registration.module.css';
 import InputOwn from "../../components/UI/input/InputOwn";
 import ButtonOwn from "../../components/UI/button/ButtonOwn";
-import Logo from "./Berulya.png";
+import Logo from "../../icons/Berulya.png";
+import NameInput from "../../icons/NameIcon.png";
+import SurnameInput from "../../icons/SurnameIcon.png";
+import EmailInput from "../../icons/EmailIcon.png";
 
 
 const Registration = () => {
@@ -24,22 +27,52 @@ const Registration = () => {
                         <h1>Реєстрація</h1>
                     </div>
                     <div className={classes.col_input}>
-                        <InputOwn type="text" placeholder="Ім'я"/>
+                        <div className={classes.IMGContainer}>
+                            <div className={classes.alignCenterIMG}>
+                                <img className={classes.IconInput} src={NameInput} alt="БЕРУЛЯ"/>
+                            </div>
+                             <InputOwn type="text" placeholder="Ім'я"/>
+                        </div>
                     </div>
                     <div className={classes.col_input}>
+                        <div className={classes.IMGContainer}>
+                            <div className={classes.alignCenterIMG}>
+                                <img className={classes.IconInput} src={SurnameInput} alt="БЕРУЛЯ"/>
+                            </div>
                         <InputOwn type="text" placeholder="Прізвище"/>
+                        </div>
                     </div>
                     <div className={classes.col_input}>
+                        <div className={classes.IMGContainer}>
+                            <div className={classes.alignCenterIMG}>
+                                <img className={classes.IconInput} src={EmailInput} alt="БЕРУЛЯ"/>
+                            </div>
                         <InputOwn type="email" placeholder="Електронна пошта"/>
+                        </div>
                     </div>
                     <div className={classes.col_input}>
+                        <div className={classes.IMGContainer}>
+                            <div className={classes.alignCenterIMG}>
+                                <img className={classes.IconInput} src={NameInput} alt="БЕРУЛЯ"/>
+                            </div>
                         <InputOwn type="password" placeholder="Пароль"/>
+                        </div>
                     </div>
                     <div className={classes.col_input}>
+                        <div className={classes.IMGContainer}>
+                            <div className={classes.alignCenterIMG}>
+                                <img className={classes.IconInput} src={NameInput} alt="БЕРУЛЯ"/>
+                            </div>
                         <InputOwn type="password" placeholder="Повторіть пароль"/>
+                        </div>
                     </div>
                     <div className={classes.col_input}>
+                        <div className={classes.IMGContainer}>
+                            <div className={classes.alignCenterIMG}>
+                                <img className={classes.IconInput} src={NameInput} alt="БЕРУЛЯ"/>
+                            </div>
                         <InputOwn type="date" placeholder="Дата народження"/>
+                        </div>
                     </div>
                     <div className={classes.col_input + ' ' + classes.col_input_btn}>
                         <ButtonOwn>ЗАРЕЄСТРУВАТИСЯ</ButtonOwn>

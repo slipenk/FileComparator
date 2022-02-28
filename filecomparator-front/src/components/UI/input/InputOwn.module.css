@@ -1,14 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Kurale&display=swap');
 .myInput {
     padding: 1% 2%;
-    margin: 1% 0;
-    border: 1vh solid black;
+    margin: 1% 0 0;
+    border: 0 solid black;
     border-radius: 10vh;
     font-size: 1.5vw;
     font-family: 'Kurale', serif;
     text-align: center;
     color: #888888;
     background-color: #FFFCE2;
-    width: 24vw;
+    width: 22vw;
     height: 6vh;
 }
