@@ -10,9 +10,7 @@ const Registration = () => {
             <div className={classes.flexDiv}>
                <LogoName/>
                 <div>
-                <form>
                     <RegistrationForm/>
-                </form>
                 <div className={classes.alreadyReg}>
                     Вже маєте акаунт?
                     <div>
