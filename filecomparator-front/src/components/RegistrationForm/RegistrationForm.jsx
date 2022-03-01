@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import classes from "./RegistrationForm.module.css";
 import NameInput from "../../icons/NameIcon.png";
 import InputOwn from "../UI/input/InputOwn";
@@ -13,7 +13,8 @@ import 'tippy.js/dist/tippy.css'
 
 
 const RegistrationForm = () => {
-    const {handleChange, handleSubmit, values, errors, isSubmitting, backgroundColor_} = useForm(validate);
+    const {handleChange, handleSubmit, values, errors, isSubmitting,
+        BCUsername, BCEmail, BCPassword, BCPasswordR} = useForm(validate);
 
 
     return (
@@ -23,65 +24,68 @@ const RegistrationForm = () => {
                 <h1>Реєстрація</h1>
             </div>
             <div className={classes.col_input}>
-                <div className={classes.IMGContainer} style={{backgroundColor: backgroundColor_}}>
+                <div className={classes.IMGContainer} style={{backgroundColor: BCUsername}}>
                     <div className={classes.alignCenterIMG} >
                         <img className={classes.IconInput} src={NameInput} alt="Прізвисько"/>
                     </div>
 
-                    <Tippy content={errors.username} enabled={isSubmitting}>
+                    <Tippy content={errors.username ? errors.username : ""} enabled={isSubmitting}>
                     <InputOwn type="text"
                               placeholder="Прізвисько"
                               name="username"
                               value={values.username}
                               onChange={handleChange}
                               autoComplete="off"
-                              style={{backgroundColor: backgroundColor_}}/>
+                              style={{backgroundColor: BCUsername}}/>
                     </Tippy>
                 </div>
 
             </div>
             <div className={classes.col_input}>
-                <div className={classes.IMGContainer}>
+                <div className={classes.IMGContainer} style={{backgroundColor: BCEmail}}>
                     <div className={classes.alignCenterIMG}>
                         <img className={classes.IconInput} src={EmailInput} alt="Електронна пошта"/>
                     </div>
-                    <Tippy content={errors.email} enabled={isSubmitting}  >
+                    <Tippy content={errors.email ? errors.email : ""} enabled={isSubmitting}  >
                     <InputOwn type="text"
                               placeholder="Електронна пошта"
                               name="email"
                               value={values.email}
                               onChange={handleChange}
-                              autoComplete="off"/>
+                              autoComplete="off"
+                              style={{backgroundColor: BCEmail}}/>
                     </Tippy>
                 </div>
             </div>
             <div className={classes.col_input}>
-                <div className={classes.IMGContainer}>
+                <div className={classes.IMGContainer} style={{backgroundColor: BCPassword}}>
                     <div className={classes.alignCenterIMG}>
                         <img className={classes.IconInput} src={PasswordInput} alt="Пароль"/>
                     </div>
-                    <Tippy content={errors.password} enabled={isSubmitting}>
+                    <Tippy content={errors.password ? errors.password : ""} enabled={isSubmitting}>
                     <InputOwn type="password"
                               placeholder="Пароль"
                               name="password"
                               value={values.password}
                               onChange={handleChange}
-                              autoComplete="off"/>
+                              autoComplete="off"
+                              style={{backgroundColor: BCPassword}}/>
                     </Tippy>
                 </div>
             </div>
             <div className={classes.col_input}>
-                <div className={classes.IMGContainer}>
+                <div className={classes.IMGContainer} style={{backgroundColor: BCPasswordR}}>
                     <div className={classes.alignCenterIMG}>
                         <img className={classes.IconInput} src={RPasswordInput} alt="Повторіть пароль"/>
                     </div>
-                    <Tippy content={errors.passwordR} enabled={isSubmitting}>
+                    <Tippy content={errors.passwordR ? errors.passwordR : ""} enabled={isSubmitting}>
                     <InputOwn type="password"
                               placeholder="Повторіть пароль"
                               name="passwordR"
                               value={values.passwordR}
                               onChange={handleChange}
-                              autoComplete="off"/>
+                              autoComplete="off"
+                              style={{backgroundColor: BCPasswordR}}/>
                     </Tippy>
                 </div>
             </div>

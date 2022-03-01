@@ -19,7 +19,9 @@ export default function validateInfo(values) {
         errors.password = 'Перевірте правильність написання пароля. Вимоги (мінімум): одна велика літера, одна маленька літера, одна цифра, один спеціальний символ. Довжина пароля: від 8 до 24 символів'
     }
 
-    if (values.passwordR !== values.password) {
+    if (!values.passwordR) {
+        errors.passwordR = 'Потрібно ввести ваш пароль знову для перевірки'
+    } else  if (values.passwordR !== values.password) {
         errors.passwordR = 'Паролі повинні співпадати'
     }
 

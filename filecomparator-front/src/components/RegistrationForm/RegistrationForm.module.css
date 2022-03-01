@@ -29,3 +29,9 @@
     height: 3vw;
     margin-left: 0.9vw;
 }
+.tippy-box[data-theme~="custom"] {
+    background-color: #f7f7f7;
+    color: black;
+    border: 1px solid #ededed;
+    border-radius: 0;
+}
