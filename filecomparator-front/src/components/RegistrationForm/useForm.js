@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const useForm = (validate) => {
+const useForm = (callback, validate) => {
     const [values, setValues] = useState({
         username: '',
         email: '',
@@ -9,22 +9,29 @@ const useForm = (validate) => {
     });
     const [errors, setErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false)
+    const [isToolTipUsername, setToolTipUsername] = useState(false)
+    const [isToolTipEmail, setToolTipEmail] = useState(false)
+    const [isToolTipPassword, setToolTipPassword] = useState(false)
+    const [isToolTipPasswordR, setToolTipPasswordR] = useState(false)
     const [BCUsername, setBCUsername] = useState('#FFFCE2');
     const [BCEmail, setBCEmail] = useState('#FFFCE2');
     const [BCPassword, setBCPassword] = useState('#FFFCE2');
     const [BCPasswordR, setBCPasswordR] = useState('#FFFCE2');
 
     const handleChange = e => {
-        setIsSubmitting(false);
         const { name, value } = e.target;
-        if (name === 'username') {
+        if (name === "username") {
             setBCUsername("#FFFCE2")
-        } else if (name === 'email') {
+            setToolTipUsername(false)
+        } else if (name === "email") {
             setBCEmail("#FFFCE2")
-        } else if (name === 'password') {
+            setToolTipEmail(false)
+        } else if (name === "password") {
             setBCPassword("#FFFCE2")
-        } else if (name === 'passwordR') {
+            setToolTipPassword(false)
+        } else if (name === "passwordR") {
             setBCPasswordR("#FFFCE2")
+            setToolTipPasswordR(false)
         }
         setValues({
             ...values,
@@ -34,23 +41,28 @@ const useForm = (validate) => {
 
     useEffect(
         () => {
-            if (Object.keys(errors).length === 0) {
+            if (Object.keys(errors).length === 0 && isSubmitting) {
                 setBCUsername("#FFFCE2")
                 setBCEmail("#FFFCE2")
                 setBCPassword("#FFFCE2")
                 setBCPasswordR("#FFFCE2")
+                callback();
             } else {
                 if (errors.username) {
-                   setBCUsername("#FD8E90")
+                    setBCUsername("#FD8E90")
+                    setToolTipUsername(true)
                 }
                 if (errors.email) {
                     setBCEmail("#FD8E90")
+                    setToolTipEmail(true)
                 }
                 if (errors.password) {
                     setBCPassword("#FD8E90")
+                    setToolTipPassword(true)
                 }
                 if (errors.passwordR) {
                     setBCPasswordR("#FD8E90")
+                    setToolTipPasswordR(true)
                 }
             }
         },
@@ -60,21 +72,12 @@ const useForm = (validate) => {
     const handleSubmit = e => {
         e.preventDefault();
         setErrors(validate(values));
-        setIsSubmitting(true);
+        setIsSubmitting(true)
     };
 
-    /*useEffect(
-        () => {
-            if (Object.keys(errors).length === 0 && isSubmitting) {
-                callback();
-            }
-        },
-        [errors]
-    ); */
-
-
     return { handleChange, handleSubmit, values, errors, isSubmitting,
-        BCUsername, BCEmail, BCPassword, BCPasswordR};
+        BCUsername, BCEmail, BCPassword, BCPasswordR, isToolTipUsername,
+        isToolTipEmail, isToolTipPassword, isToolTipPasswordR};
 };
 
 export default useForm;

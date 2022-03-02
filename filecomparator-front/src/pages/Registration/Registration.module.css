@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Kurale&display=swap');
 
 .RegistrationDiv {
-    height: 85vh;
     border: 0.6vh solid black;
     position: absolute;
     left: 50%;
@@ -14,12 +13,16 @@
 .flexDiv {
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 85vh;
 }
 .alreadyReg {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
     margin-top: 1.9vh;
     font-size: 2.5vh;
     color: #888888;
