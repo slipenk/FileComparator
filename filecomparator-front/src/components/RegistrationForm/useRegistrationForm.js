@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const useForm = (callback, validate) => {
+const useRegistrationForm = (callback, validate) => {
     const [values, setValues] = useState({
         username: '',
         email: '',
@@ -80,4 +80,4 @@ const useForm = (callback, validate) => {
         isToolTipEmail, isToolTipPassword, isToolTipPasswordR};
 };
 
-export default useForm;
+export default useRegistrationForm;

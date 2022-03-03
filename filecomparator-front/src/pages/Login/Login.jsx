@@ -1,11 +1,9 @@
 import React, {useState} from "react";
 import classes from '../../FormStyle/FormStyle.module.css';
 import LogoName from "../../components/LogoName/LogoName";
-import RegistrationForm from "../../components/RegistrationForm/RegistrationForm";
-import RegistrationSuccess from "../RegistrationSuccess/RegistrationSuccess";
+import LoginForm from "../../components/LoginForm/LoginForm";
 
-
-const Registration = () => {
+const Login = () => {
     const [isSubmitted, setIsSubmitted] = useState(false);
 
     function submitForm() {
@@ -17,11 +15,10 @@ const Registration = () => {
             <div className={classes.flexDiv}>
                 <LogoName/>
                 <div>
-                    {!isSubmitted ? <RegistrationForm submitForm={submitForm} /> : <RegistrationSuccess/>}
+                    {!isSubmitted ? <LoginForm submitForm={submitForm} /> : null}
                     <div className={classes.alreadyReg}>
-                        Вже маєте акаунт?
                         <div>
-                            <a href=" "><i>Вхід</i></a>
+                            <a href=" "><i>Ще не маєте акаунту?<br/>Давайте створимо :)</i></a>
                         </div>
                     </div>
                 </div>
@@ -30,5 +27,4 @@ const Registration = () => {
     );
 };
 
-
-export default Registration;
+export default Login;

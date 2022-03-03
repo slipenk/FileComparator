@@ -1,3 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Kurale&display=swap');
+.RegistrationDiv {
+    border: 0.6vh solid black;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #FFFBF2;
+    border-radius: 10vh;
+    font-family: 'Kurale', serif;
+}
+.flexDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 85vh;
+}
+.alreadyReg {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 1.9vh;
+    font-size: 2.5vh;
+    color: #888888;
+    margin-right: 1.5vw;
+}
+a:link {
+    color: rgba(169, 139, 255, 47);
+    text-decoration: none;
+}
+a:visited {
+    color: rgba(169, 139, 255, 47);
+}
+a:hover {
+    color:  black;
+}
+a:active {
+    color: rgba(169, 139, 255, 47);
+}
 .col_h {
     display: flex;
     justify-content: center;

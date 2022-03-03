@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./RegistrationForm.module.css";
+import classes from "../../FormStyle/FormStyle.module.css";
 import NameInput from "../../icons/NameIcon.png";
 import InputOwn from "../UI/input/InputOwn";
 import EmailInput from "../../icons/EmailIcon.png";
@@ -7,14 +7,14 @@ import PasswordInput from "../../icons/PasswordIcon.png";
 import RPasswordInput from "../../icons/RPassword.png";
 import SubmitButtonForm from "../SubmitButtonForm/SubmitButtonForm";
 import validate from "./RegistrationValidation.js";
-import useForm from "./useForm";
+import useRegistrationForm from "./useRegistrationForm";
 import Tippy from "@tippy.js/react"
 import 'tippy.js/dist/tippy.css'
 
 
 const RegistrationForm = ({submitForm}) => {
     const {handleChange, handleSubmit, values, errors, BCUsername, BCEmail, BCPassword, BCPasswordR, isToolTipUsername,
-        isToolTipEmail, isToolTipPassword, isToolTipPasswordR} = useForm(submitForm, validate);
+        isToolTipEmail, isToolTipPassword, isToolTipPasswordR} = useRegistrationForm(submitForm, validate);
 
     return (
         <form onSubmit={handleSubmit} autoComplete="off">
@@ -43,7 +43,7 @@ const RegistrationForm = ({submitForm}) => {
                         <div className={classes.alignCenterIMG}>
                             <img className={classes.IconInput} src={EmailInput} alt="Електронна пошта"/>
                         </div>
-                        <Tippy content={errors.email ? errors.email : ""} enabled={isToolTipEmail}  >
+                        <Tippy content={errors.email ? errors.email : ""} enabled={isToolTipEmail}>
                             <InputOwn type="text"
                               placeholder="Електронна пошта"
                               name="email"
