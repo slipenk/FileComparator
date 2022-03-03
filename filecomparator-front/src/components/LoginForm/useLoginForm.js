@@ -2,7 +2,8 @@ import { useState, useEffect, useContext} from 'react';
 import AuthContext from "../../context/AuthProvider";
 import axios from "../../API/axios"
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"
+import "react-toastify/dist/ReactToastify.css";
+
 
 const useLoginForm = (callback, validateInfoEmailPassword) => {
     const { setAuth } = useContext(AuthContext);
@@ -38,6 +39,7 @@ const useLoginForm = (callback, validateInfoEmailPassword) => {
             if (Object.keys(errors).length === 0 && isSubmitting) {
                 setBCEmail("#FFFCE2");
                 setBCPassword("#FFFCE2");
+                handleSubmitAfterValidation().then();
                 callback();
             } else {
                 if (errors.email) {
@@ -53,20 +55,32 @@ const useLoginForm = (callback, validateInfoEmailPassword) => {
         [errors]
     );
 
-    const handleSubmit = async (e) => {
+    const handleSubmit =  (e) => {
         e.preventDefault();
         setErrors(validateInfoEmailPassword(values));
+        setIsSubmitting(true);
+    };
 
+    const handleSubmitAfterValidation = async () => {
         try {
-            const response = await axios.post(LOGIN_URL, JSON.stringify({...values.email, ...values.password}),
+            const response = axios({
+                url: LOGIN_URL,
+                method: "POST",
+                data: JSON.stringify({...values.email, ...values.password}),
+                config: {
+                    headers: {"Content-Type": "application/json"},
+                    withCredentials: true
+                }
+            })
+           /* const response = await axios.post(LOGIN_URL, JSON.stringify({...values.email, ...values.password}),
                 {
                     headers: {"Content-Type": "application/json"},
                     withCredentials: true
-                });
+                });*/
+            console.log(response);
             const accessToken = response?.data?.accessToken;
             const roles = response?.data?.roles;
             setAuth({ ...values.email, ...values.password, roles, accessToken })
-            setIsSubmitting(true);
         } catch (e) {
             if (!e?.response) {
                 diffToast("Нема відповіді від сервера")
@@ -78,7 +92,7 @@ const useLoginForm = (callback, validateInfoEmailPassword) => {
                 diffToast("Неуспішна авторизація")
             }
         }
-    };
+    }
 
     const diffToast = (message) => {
         toast.error(message, {

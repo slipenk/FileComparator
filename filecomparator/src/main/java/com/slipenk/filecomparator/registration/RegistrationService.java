@@ -33,13 +33,11 @@ public class RegistrationService {
             throw new IllegalStateException(INVALID_EMAIL);
         }
         String token = userService.signUpUser(
-                new User(registrationRequest.getFirstName(),
-                        registrationRequest.getLastName(),
+                new User(registrationRequest.getUsername(),
                         registrationRequest.getEmail(),
                         registrationRequest.getPassword(),
-                        registrationRequest.getDateBirth(),
                         UserRole.USER));
-        emailSender.send(registrationRequest.getEmail(), buildEmail(registrationRequest.getFirstName(), CONFIRMATION_LINK + token));
+        emailSender.send(registrationRequest.getEmail(), buildEmail(registrationRequest.getUsername(), CONFIRMATION_LINK + token));
         return token;
     }
 
