@@ -1,6 +1,8 @@
 import { useState, useEffect, useContext} from 'react';
 import AuthContext from "../../context/AuthProvider";
 import axios from "../../API/axios"
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"
 
 const useLoginForm = (callback, validateInfoEmailPassword) => {
     const { setAuth } = useContext(AuthContext);
@@ -9,7 +11,6 @@ const useLoginForm = (callback, validateInfoEmailPassword) => {
         password: ''
     });
     const [errors, setErrors] = useState({});
-    const [errorsBack, setErrorsBack] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isToolTipEmail, setToolTipEmail] = useState(false);
     const [isToolTipPassword, setToolTipPassword] = useState(false);
@@ -68,20 +69,32 @@ const useLoginForm = (callback, validateInfoEmailPassword) => {
             setIsSubmitting(true);
         } catch (e) {
             if (!e?.response) {
-                setErrorsBack("Нема відповіді від сервера")
+                diffToast("Нема відповіді від сервера")
             } else if (e?.response.status === 400) {
-                setErrorsBack("Не надійшла інформація про користувача")
+                diffToast("Не надійшла інформація про користувача")
             } else if (e?.response.status === 401) {
-                setErrorsBack("Користувач не авторизувався")
+                diffToast("Користувач не авторизувався")
             } else {
-                setErrorsBack("Неуспішна авторизація")
+                diffToast("Неуспішна авторизація")
             }
         }
-
     };
 
+    const diffToast = (message) => {
+        toast.error(message, {
+            position: "top-center",
+            theme: "colored",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
+    }
+
     return { handleChange, handleSubmit, values, errors, isSubmitting,
-        BCEmail, BCPassword, isToolTipEmail, isToolTipPassword, errorsBack};
+        BCEmail, BCPassword, isToolTipEmail, isToolTipPassword};
 };
 
 export default useLoginForm;

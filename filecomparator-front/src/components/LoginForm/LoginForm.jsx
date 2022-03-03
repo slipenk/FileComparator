@@ -7,11 +7,12 @@ import classes from "../../FormStyle/FormStyle.module.css";
 import validateInfoEmailPassword from "../Validation/Validation";
 import useLoginForm from "./useLoginForm";
 import Tippy from "@tippy.js/react"
-import 'tippy.js/dist/tippy.css'
+import "tippy.js/dist/tippy.css"
+import { ToastContainer } from "react-toastify";
 
 const LoginForm = ({submitForm}) => {
     const {handleChange, handleSubmit, values, errors, BCEmail, BCPassword,
-        isToolTipEmail, isToolTipPassword, errorsBack} = useLoginForm(submitForm, validateInfoEmailPassword);
+        isToolTipEmail, isToolTipPassword} = useLoginForm(submitForm, validateInfoEmailPassword);
 
     return (
         <form onSubmit={handleSubmit} autoComplete="off">
@@ -53,6 +54,7 @@ const LoginForm = ({submitForm}) => {
                 </div>
                 <SubmitButtonForm value={"УВІЙТИ"} />
             </div>
+            <ToastContainer/>
         </form>
     );
 };
