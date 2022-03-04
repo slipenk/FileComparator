@@ -1,13 +1,19 @@
-import { useState, useEffect } from 'react';
+import {useState, useEffect, useContext} from 'react';
+import axios from "../../API/axios";
+import AuthContext from "../../context/AuthProvider";
+import diffToast from "../../Toast/Toast";
+import "react-toastify/dist/ReactToastify.css";
 
 const useRegistrationForm = (callback, validate) => {
+    const { setAuth } = useContext(AuthContext);
     const [values, setValues] = useState({
-        username: '',
-        email: '',
-        password: '',
-        passwordR: ''
+        username: "slipenk",
+        email: "slipenk92@gmail.com",
+        password: "CERcer12_",
+        passwordR: "CERcer12_"
     });
     const [errors, setErrors] = useState({});
+    const [isAuth, setIsAuth] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [isToolTipUsername, setToolTipUsername] = useState(false)
     const [isToolTipEmail, setToolTipEmail] = useState(false)
@@ -17,6 +23,7 @@ const useRegistrationForm = (callback, validate) => {
     const [BCEmail, setBCEmail] = useState('#FFFCE2');
     const [BCPassword, setBCPassword] = useState('#FFFCE2');
     const [BCPasswordR, setBCPasswordR] = useState('#FFFCE2');
+    const REGISTRATION_URL = "/berulia/registration/register";
 
     const handleChange = e => {
         const { name, value } = e.target;
@@ -46,7 +53,10 @@ const useRegistrationForm = (callback, validate) => {
                 setBCEmail("#FFFCE2")
                 setBCPassword("#FFFCE2")
                 setBCPasswordR("#FFFCE2")
-                callback();
+                handleSubmitAfterValidation().then();
+                if(isAuth) {
+                    callback();
+                }
             } else {
                 if (errors.username) {
                     setBCUsername("#FD8E90")
@@ -74,6 +84,32 @@ const useRegistrationForm = (callback, validate) => {
         setErrors(validate(values));
         setIsSubmitting(true)
     };
+
+    const handleSubmitAfterValidation = async () => {
+        try {
+            const response = axios({
+                url: REGISTRATION_URL,
+                method: 'POST',
+                data: JSON.stringify({username: values.username, email: values.email, password: values.password}),
+                dataType: 'json',
+                headers: {
+                        'Content-Type': 'application/json; charset=utf-8'
+                }
+            });
+            if (!response.ok) {
+                diffToast(response.message())
+                setIsAuth(false);
+                return ;
+            }
+            setIsAuth(true);
+            const accessToken = response?.data?.accessToken;
+            const roles = response?.data?.roles;
+            setAuth(values.email, values.password, roles, accessToken)
+        } catch (e) {
+            setIsAuth(false);
+            diffToast("Неуспішна реєстрація")
+        }
+    }
 
     return { handleChange, handleSubmit, values, errors, isSubmitting,
         BCUsername, BCEmail, BCPassword, BCPasswordR, isToolTipUsername,

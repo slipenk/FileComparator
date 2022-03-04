@@ -2,6 +2,7 @@ import { useState, useEffect, useContext} from 'react';
 import AuthContext from "../../context/AuthProvider";
 import axios from "../../API/axios"
 import { toast } from "react-toastify";
+import diffToast from "../../Toast/Toast";
 import "react-toastify/dist/ReactToastify.css";
 
 
@@ -69,9 +70,11 @@ const useLoginForm = (callback, validateInfoEmailPassword) => {
             const response = axios({
                 url: LOGIN_URL,
                 method: "POST",
-                data: JSON.stringify({...values.email, ...values.password}),
+                data: JSON.stringify({email: values.email, password: values.password}),
+                dataType: "json",
                 config: {
-                    headers: {"Content-Type": "application/json"},
+                    headers: {"Content-Type": "application/json",
+                                "Accept": "application/json"},
                     withCredentials: true
                 }
             })
@@ -83,33 +86,13 @@ const useLoginForm = (callback, validateInfoEmailPassword) => {
             setIsAuth(true);
             const accessToken = response?.data?.accessToken;
             const roles = response?.data?.roles;
-            setAuth({ ...values.email, ...values.password, roles, accessToken })
+            setAuth(values.email, values.password, roles, accessToken)
         } catch (e) {
             setIsAuth(false);
-            if (!e?.response) {
-                diffToast("Нема відповіді від сервера")
-            } else if (e?.response.status === 400) {
-                diffToast("Не надійшла інформація про користувача")
-            } else if (e?.response.status === 401) {
-                diffToast("Користувач не авторизувався")
-            } else {
-                diffToast("Неуспішна авторизація")
-            }
+            diffToast("Неуспішна авторизація")
         }
     }
 
-    const diffToast = (message) => {
-        toast.error(message, {
-            position: "top-center",
-            theme: "colored",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-        });
-    }
 
     return { handleChange, handleSubmit, values, errors, isSubmitting,
         BCEmail, BCPassword, isToolTipEmail, isToolTipPassword};

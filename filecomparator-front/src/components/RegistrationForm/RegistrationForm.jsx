@@ -10,6 +10,7 @@ import validate from "./RegistrationValidation.js";
 import useRegistrationForm from "./useRegistrationForm";
 import Tippy from "@tippy.js/react"
 import 'tippy.js/dist/tippy.css'
+import { ToastContainer } from "react-toastify";
 
 
 const RegistrationForm = ({submitForm}) => {
@@ -88,6 +89,7 @@ const RegistrationForm = ({submitForm}) => {
                 </div>
                 <SubmitButtonForm value={"ЗАРЕЄСТРУВАТИСЯ"} />
             </div>
+            <ToastContainer/>
         </form>
     );
 };

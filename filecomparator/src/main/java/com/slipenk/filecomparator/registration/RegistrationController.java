@@ -11,7 +11,8 @@ public class RegistrationController {
     private static final String TOKEN = "token";
     private final RegistrationService registrationService;
 
-    @PostMapping
+    @PostMapping(path = "register",
+            consumes = "application/json")
     public String register(@RequestBody RegistrationRequest registrationRequest) {
         return registrationService.register(registrationRequest);
     }
