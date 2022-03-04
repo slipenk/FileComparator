@@ -13,6 +13,7 @@ const useLoginForm = (callback, validateInfoEmailPassword) => {
     });
     const [errors, setErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isAuth, setIsAuth] = useState(false);
     const [isToolTipEmail, setToolTipEmail] = useState(false);
     const [isToolTipPassword, setToolTipPassword] = useState(false);
     const [BCEmail, setBCEmail] = useState('#FFFCE2');
@@ -40,7 +41,9 @@ const useLoginForm = (callback, validateInfoEmailPassword) => {
                 setBCEmail("#FFFCE2");
                 setBCPassword("#FFFCE2");
                 handleSubmitAfterValidation().then();
-                callback();
+                if(isAuth) {
+                    callback();
+                }
             } else {
                 if (errors.email) {
                     setBCEmail("#FD8E90");
@@ -72,16 +75,17 @@ const useLoginForm = (callback, validateInfoEmailPassword) => {
                     withCredentials: true
                 }
             })
-           /* const response = await axios.post(LOGIN_URL, JSON.stringify({...values.email, ...values.password}),
-                {
-                    headers: {"Content-Type": "application/json"},
-                    withCredentials: true
-                });*/
-            console.log(response);
+            if (!response.ok) {
+                diffToast(response.message())
+                setIsAuth(false);
+                return ;
+            }
+            setIsAuth(true);
             const accessToken = response?.data?.accessToken;
             const roles = response?.data?.roles;
             setAuth({ ...values.email, ...values.password, roles, accessToken })
         } catch (e) {
+            setIsAuth(false);
             if (!e?.response) {
                 diffToast("Нема відповіді від сервера")
             } else if (e?.response.status === 400) {
