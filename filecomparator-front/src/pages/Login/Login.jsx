@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import classes from '../../FormStyle/FormStyle.module.css';
 import LogoName from "../../components/LogoName/LogoName";
 import LoginForm from "../../components/LoginForm/LoginForm";
+import { Link } from 'react-router-dom';
 
 const Login = () => {
     const [isSubmitted, setIsSubmitted] = useState(false);
@@ -18,7 +19,7 @@ const Login = () => {
                     {!isSubmitted ? <LoginForm submitForm={submitForm} /> : null}
                     <div className={classes.alreadyReg}>
                         <div>
-                            <a href=" "><i>Ще не маєте акаунту?<br/>Давайте створимо :)</i></a>
+                            <Link to="/registration" > <i>Ще не маєте акаунту?<br/>Давайте створимо :)</i></Link>
                         </div>
                     </div>
                 </div>

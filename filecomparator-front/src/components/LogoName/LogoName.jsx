@@ -1,6 +1,6 @@
 import React from "react";
 import classes from './LogoName.module.css';
-import Logo from "../../icons/Berulya.png";
+import Logo from "../../icons/Berulia.png";
 
 const LogoName = () => {
     return (

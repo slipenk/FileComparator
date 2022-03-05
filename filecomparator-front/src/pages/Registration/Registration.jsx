@@ -3,6 +3,7 @@ import classes from '../../FormStyle/FormStyle.module.css';
 import LogoName from "../../components/LogoName/LogoName";
 import RegistrationForm from "../../components/RegistrationForm/RegistrationForm";
 import RegistrationSuccess from "../RegistrationSuccess/RegistrationSuccess";
+import { Link } from 'react-router-dom';
 
 
 const Registration = () => {
@@ -21,7 +22,7 @@ const Registration = () => {
                     <div className={classes.alreadyReg}>
                         Вже маєте акаунт?
                         <div>
-                            <a href=" "><i>Вхід</i></a>
+                            <Link to="/login" ><i>Вхід</i></Link>
                         </div>
                     </div>
                 </div>

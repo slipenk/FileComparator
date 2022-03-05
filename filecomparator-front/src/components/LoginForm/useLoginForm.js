@@ -1,20 +1,18 @@
-import { useState, useEffect, useContext} from 'react';
-import AuthContext from "../../context/AuthProvider";
+import { useState, useEffect} from 'react';
 import axios from "../../API/axios"
-import { toast } from "react-toastify";
 import diffToast from "../../Toast/Toast";
 import "react-toastify/dist/ReactToastify.css";
+import { useAuth } from "../../context/context";
 
 
 const useLoginForm = (callback, validateInfoEmailPassword) => {
-    const { setAuth } = useContext(AuthContext);
+    const [auth, setAuth] = useAuth(useAuth);
     const [values, setValues] = useState({
         email: '',
         password: ''
     });
     const [errors, setErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [isAuth, setIsAuth] = useState(false);
     const [isToolTipEmail, setToolTipEmail] = useState(false);
     const [isToolTipPassword, setToolTipPassword] = useState(false);
     const [BCEmail, setBCEmail] = useState('#FFFCE2');
@@ -42,7 +40,7 @@ const useLoginForm = (callback, validateInfoEmailPassword) => {
                 setBCEmail("#FFFCE2");
                 setBCPassword("#FFFCE2");
                 handleSubmitAfterValidation().then();
-                if(isAuth) {
+                if(auth) {
                     callback();
                 }
             } else {
@@ -67,7 +65,7 @@ const useLoginForm = (callback, validateInfoEmailPassword) => {
 
     const handleSubmitAfterValidation = async () => {
         try {
-            const response = axios({
+                axios({
                 url: LOGIN_URL,
                 method: "POST",
                 data: JSON.stringify({email: values.email, password: values.password}),
@@ -78,17 +76,13 @@ const useLoginForm = (callback, validateInfoEmailPassword) => {
                     withCredentials: true
                 }
             })
-            if (!response.ok) {
-                diffToast(response.message())
-                setIsAuth(false);
-                return ;
-            }
-            setIsAuth(true);
-            const accessToken = response?.data?.accessToken;
-            const roles = response?.data?.roles;
-            setAuth(values.email, values.password, roles, accessToken)
+            setAuth(true);
+            localStorage.setItem('auth', 'true');
+           // const accessToken = response?.data?.accessToken;
+           // const roles = response?.data?.roles;
+           // setAuth(values.email, values.password, roles, accessToken)
         } catch (e) {
-            setIsAuth(false);
+            setAuth(false);
             diffToast("Неуспішна авторизація")
         }
     }

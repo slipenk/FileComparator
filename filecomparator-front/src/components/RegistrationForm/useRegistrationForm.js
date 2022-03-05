@@ -1,11 +1,9 @@
-import {useState, useEffect, useContext} from 'react';
+import {useState, useEffect} from 'react';
 import axios from "../../API/axios";
-import AuthContext from "../../context/AuthProvider";
 import diffToast from "../../Toast/Toast";
 import "react-toastify/dist/ReactToastify.css";
 
 const useRegistrationForm = (callback, validate) => {
-    const { setAuth } = useContext(AuthContext);
     const [values, setValues] = useState({
         username: "slipenk",
         email: "slipenk92@gmail.com",
@@ -13,7 +11,7 @@ const useRegistrationForm = (callback, validate) => {
         passwordR: "CERcer12_"
     });
     const [errors, setErrors] = useState({});
-    const [isAuth, setIsAuth] = useState(false);
+    const [isReg, setIsReg] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [isToolTipUsername, setToolTipUsername] = useState(false)
     const [isToolTipEmail, setToolTipEmail] = useState(false)
@@ -54,7 +52,7 @@ const useRegistrationForm = (callback, validate) => {
                 setBCPassword("#FFFCE2")
                 setBCPasswordR("#FFFCE2")
                 handleSubmitAfterValidation().then();
-                if(isAuth) {
+                if(isReg) {
                     callback();
                 }
             } else {
@@ -96,17 +94,13 @@ const useRegistrationForm = (callback, validate) => {
                         'Content-Type': 'application/json; charset=utf-8'
                 }
             });
-            if (!response.ok) {
-                diffToast(response.message())
-                setIsAuth(false);
-                return ;
-            }
-            setIsAuth(true);
-            const accessToken = response?.data?.accessToken;
-            const roles = response?.data?.roles;
-            setAuth(values.email, values.password, roles, accessToken)
+            console.log(response);
+            setIsReg(true);
+           // const accessToken = response?.data?.accessToken;
+           // const roles = response?.data?.roles;
+           // setAuth(values.email, values.password, roles, accessToken)
         } catch (e) {
-            setIsAuth(false);
+            setIsReg(false);
             diffToast("Неуспішна реєстрація")
         }
     }
