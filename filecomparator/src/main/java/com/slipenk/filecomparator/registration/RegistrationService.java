@@ -49,7 +49,7 @@ public class RegistrationService {
                         new IllegalStateException(TOKEN_NOT_FOUND));
 
         if (confirmationToken.getConfirmedAt() != null) {
-            throw new IllegalStateException(EMAIL_ALREADY_CONFIRMED);
+            return EMAIL_ALREADY_CONFIRMED;
         }
 
         LocalDateTime expiredAt = confirmationToken.getExpiresAt();
@@ -121,7 +121,7 @@ public class RegistrationService {
                 "      <td width=\"10\" valign=\"middle\"><br></td>\n" +
                 "      <td style=\"font-family:Helvetica,Arial,sans-serif;font-size:19px;line-height:1.315789474;max-width:560px\">\n" +
                 "        \n" +
-                "            <p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\">Привіт " + name + ",</p><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> Дякуємо за реєстрацію. Будь ласка, натисніть на посилання нижче, щоб активувати свій обліковий запис: </p><blockquote style=\"Margin:0 0 20px 0;border-left:10px solid #b1b4b6;padding:15px 0 0.1px 15px;font-size:19px;line-height:25px\"><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> <a href=\"" + link + "\">Активувати зараз</a> </p></blockquote>\n Термін дії посилання закінчиться через 15 хвилин. <p>До зустрічі!</p>" +
+                "            <p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\">Привіт " + name + ",</p><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> Дякуємо за реєстрацію. Будь ласка, натисніть на посилання нижче, щоб активувати свій обліковий запис: </p><blockquote style=\"Margin:0 0 20px 0;border-left:10px solid #b1b4b6;padding:15px 0 0.1px 15px;font-size:19px;line-height:25px\"><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> <a href=\"" + link + "\">Активувати зараз</a> </p></blockquote>\n Термін дії посилання закінчиться через 19 хвилин. <p>До зустрічі!</p>" +
                 "        \n" +
                 "      </td>\n" +
                 "      <td width=\"10\" valign=\"middle\"><br></td>\n" +

@@ -10,7 +10,7 @@ const Registration = () => {
     const [isSubmitted, setIsSubmitted] = useState(false);
 
     function submitForm() {
-        setIsSubmitted(true)
+        setIsSubmitted(true);
     }
 
     return (

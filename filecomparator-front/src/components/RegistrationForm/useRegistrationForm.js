@@ -12,11 +12,11 @@ const useRegistrationForm = (callback, validate) => {
     });
     const [errors, setErrors] = useState({});
     const [isReg, setIsReg] = useState(false);
-    const [isSubmitting, setIsSubmitting] = useState(false)
-    const [isToolTipUsername, setToolTipUsername] = useState(false)
-    const [isToolTipEmail, setToolTipEmail] = useState(false)
-    const [isToolTipPassword, setToolTipPassword] = useState(false)
-    const [isToolTipPasswordR, setToolTipPasswordR] = useState(false)
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isToolTipUsername, setToolTipUsername] = useState(false);
+    const [isToolTipEmail, setToolTipEmail] = useState(false);
+    const [isToolTipPassword, setToolTipPassword] = useState(false);
+    const [isToolTipPasswordR, setToolTipPasswordR] = useState(false);
     const [BCUsername, setBCUsername] = useState('#FFFCE2');
     const [BCEmail, setBCEmail] = useState('#FFFCE2');
     const [BCPassword, setBCPassword] = useState('#FFFCE2');
@@ -47,65 +47,69 @@ const useRegistrationForm = (callback, validate) => {
     useEffect(
         () => {
             if (Object.keys(errors).length === 0 && isSubmitting) {
-                setBCUsername("#FFFCE2")
-                setBCEmail("#FFFCE2")
-                setBCPassword("#FFFCE2")
-                setBCPasswordR("#FFFCE2")
+                setBCUsername("#FFFCE2");
+                setBCEmail("#FFFCE2");
+                setBCPassword("#FFFCE2");
+                setBCPasswordR("#FFFCE2");
                 handleSubmitAfterValidation().then();
-                if(isReg) {
-                    callback();
-                }
             } else {
                 if (errors.username) {
-                    setBCUsername("#FD8E90")
-                    setToolTipUsername(true)
+                    setBCUsername("#FD8E90");
+                    setToolTipUsername(true);
                 }
                 if (errors.email) {
-                    setBCEmail("#FD8E90")
-                    setToolTipEmail(true)
+                    setBCEmail("#FD8E90");
+                    setToolTipEmail(true);
                 }
                 if (errors.password) {
-                    setBCPassword("#FD8E90")
-                    setToolTipPassword(true)
+                    setBCPassword("#FD8E90");
+                    setToolTipPassword(true);
                 }
                 if (errors.passwordR) {
-                    setBCPasswordR("#FD8E90")
-                    setToolTipPasswordR(true)
+                    setBCPasswordR("#FD8E90");
+                    setToolTipPasswordR(true);
                 }
             }
         },
-        [errors]
+        [errors] // eslint-disable-line react-hooks/exhaustive-deps
     );
 
     const handleSubmit = e => {
         e.preventDefault();
         setErrors(validate(values));
-        setIsSubmitting(true)
+        setIsSubmitting(true);
     };
 
+    useEffect(() => {
+        if(isReg) {
+            callback();
+        }
+    }, [isReg]); // eslint-disable-line react-hooks/exhaustive-deps
+
+
     const handleSubmitAfterValidation = async () => {
-        try {
-            const response = axios({
-                url: REGISTRATION_URL,
-                method: 'POST',
-                data: JSON.stringify({username: values.username, email: values.email, password: values.password}),
-                dataType: 'json',
-                headers: {
-                        'Content-Type': 'application/json; charset=utf-8'
-                }
-            });
-            console.log(response);
-            setIsReg(true);
+        axios({
+            url: REGISTRATION_URL,
+            method: 'POST',
+            data: JSON.stringify({username: values.username, email: values.email, password: values.password}),
+            dataType: 'json',
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            }
+        }).then(
+            setIsReg(true)
+        ).catch(() => {
+            setIsReg(false);
+            diffToast("Неуспішна реєстрація");
+        })
+
            // const accessToken = response?.data?.accessToken;
            // const roles = response?.data?.roles;
            // setAuth(values.email, values.password, roles, accessToken)
-        } catch (e) {
-            setIsReg(false);
-            diffToast("Неуспішна реєстрація")
-        }
     }
 
-    return { handleChange, handleSubmit, values, errors, isSubmitting,
+
+    return { handleChange, handleSubmit, values, errors,
         BCUsername, BCEmail, BCPassword, BCPasswordR, isToolTipUsername,
         isToolTipEmail, isToolTipPassword, isToolTipPasswordR};
 };

@@ -1,6 +1,6 @@
 import React from "react";
 import {useAuth} from "../context/context";
-import {Routes, Route, Link} from "react-router-dom";
+import {Routes, Route} from "react-router-dom";
 import {privateRoutes, publicRoutes} from "../router/router";
 
 const AppRouter = () => {

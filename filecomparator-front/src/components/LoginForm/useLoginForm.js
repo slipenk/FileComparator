@@ -8,8 +8,8 @@ import { useAuth } from "../../context/context";
 const useLoginForm = (callback, validateInfoEmailPassword) => {
     const [auth, setAuth] = useAuth(useAuth);
     const [values, setValues] = useState({
-        email: '',
-        password: ''
+        email: "slipenk92@gmail.com",
+        password: "CERcer12_"
     });
     const [errors, setErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -54,37 +54,34 @@ const useLoginForm = (callback, validateInfoEmailPassword) => {
                 }
             }
         },
-        [errors]
+        [errors] // eslint-disable-line react-hooks/exhaustive-deps
     );
 
-    const handleSubmit =  (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         setErrors(validateInfoEmailPassword(values));
         setIsSubmitting(true);
     };
 
     const handleSubmitAfterValidation = async () => {
-        try {
-                axios({
-                url: LOGIN_URL,
-                method: "POST",
-                data: JSON.stringify({email: values.email, password: values.password}),
-                dataType: "json",
-                config: {
-                    headers: {"Content-Type": "application/json",
-                                "Accept": "application/json"},
-                    withCredentials: true
-                }
-            })
-            setAuth(true);
-            localStorage.setItem('auth', 'true');
-           // const accessToken = response?.data?.accessToken;
-           // const roles = response?.data?.roles;
-           // setAuth(values.email, values.password, roles, accessToken)
-        } catch (e) {
+        let formData = new FormData();
+
+        formData.append('username', values.email);
+        formData.append('password', values.password);
+
+        axios({
+            url: LOGIN_URL,
+            method: 'POST',
+            data: formData,
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        }).then(
+            setAuth(true)
+        ).catch(() => {
             setAuth(false);
             diffToast("Неуспішна авторизація")
-        }
+        })
     }
 
 
