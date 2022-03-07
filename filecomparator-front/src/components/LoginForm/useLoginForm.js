@@ -76,11 +76,19 @@ const useLoginForm = (callback, validateInfoEmailPassword) => {
             headers: {
                 'content-type': 'multipart/form-data'
             }
-        }).then(
-            setAuth(true)
-        ).catch(() => {
+        }).then(() => {
+            setAuth(true);
+        }
+        ).catch((err) => {
+            const object = JSON.stringify(err.response.data);
+            const message = object.split(":")[1].split(",")[0];
+
+            if(message === "\"User is disabled\"") {
+                diffToast("Користувач неактивований. Причина: користувач не підтвердив свою електронну пошту");
+            } else {
+                diffToast("Неуспішна авторизація");
+            }
             setAuth(false);
-            diffToast("Неуспішна авторизація")
         })
     }
 

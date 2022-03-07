@@ -21,6 +21,14 @@ public class ConfirmationTokenService {
         return confirmationTokenRepository.findByToken(token);
     }
 
+    public Optional<ConfirmationToken> getTokenByUserID(Long ID) {
+        return confirmationTokenRepository.getTokenByUserID(ID);
+    }
+
+    public void deleteToken(String token) {
+        confirmationTokenRepository.deleteByToken(token);
+    }
+
     public void setConfirmedAt(String token) {
          confirmationTokenRepository.updateConfirmedAt(
                 token, LocalDateTime.now());

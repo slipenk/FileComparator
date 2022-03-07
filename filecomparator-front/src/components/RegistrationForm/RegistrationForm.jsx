@@ -89,7 +89,7 @@ const RegistrationForm = ({submitForm}) => {
                 </div>
                 <SubmitButtonForm value={"ЗАРЕЄСТРУВАТИСЯ"} />
             </div>
-            <ToastContainer/>
+            <ToastContainer className={classes.toast}/>
         </form>
     );
 };

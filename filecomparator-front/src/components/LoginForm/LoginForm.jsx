@@ -54,7 +54,7 @@ const LoginForm = ({submitForm}) => {
                 </div>
                 <SubmitButtonForm value={"УВІЙТИ"} />
             </div>
-            <ToastContainer/>
+            <ToastContainer className={classes.toast}/>
         </form>
     );
 };

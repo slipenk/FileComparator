@@ -84,3 +84,6 @@ input:-webkit-autofill:active{
     -webkit-box-shadow: 0 0 0 30px #FFFCE2 inset !important;
     -webkit-text-fill-color: #888888;
 }
+.toast {
+    text-align: center !important;
+}

@@ -20,7 +20,7 @@ public class RegistrationService {
     private static final String TOKEN_NOT_FOUND = "Токен не знайдений";
     private static final String EMAIL_ALREADY_CONFIRMED = "Електронна пошта вже підтверджена";
     private static final String TOKEN_EXPIRED = "Термін дії токена закінчився";
-    private static final String CONFIRMED = "Підтверджено";
+    private static final String CONFIRMED = "Електронна пошта підтверджена";
     private static final String CONFIRMATION_LINK = "http://localhost:8080/berulia/registration/confirm?token=";
     private final UserService userService;
     private EmailValidator emailValidator;
@@ -55,7 +55,7 @@ public class RegistrationService {
         LocalDateTime expiredAt = confirmationToken.getExpiresAt();
 
         if (expiredAt.isBefore(LocalDateTime.now())) {
-            throw new IllegalStateException(TOKEN_EXPIRED);
+            return TOKEN_EXPIRED;
         }
 
         confirmationTokenService.setConfirmedAt(token);
