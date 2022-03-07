@@ -7,7 +7,6 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,9 +18,6 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException {
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
         Map<String, Object> data = new HashMap<>();
-        data.put(
-                "timestamp",
-                Calendar.getInstance().getTime());
         data.put(
                 "exception",
                 exception.getMessage());

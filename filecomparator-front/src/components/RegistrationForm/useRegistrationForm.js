@@ -81,9 +81,7 @@ const useRegistrationForm = (callback, validate) => {
     };
 
     useEffect(() => {
-        if(isReg) {
-            callback();
-        }
+            callback(isReg);
     }, [isReg]); // eslint-disable-line react-hooks/exhaustive-deps
 
 
@@ -96,11 +94,14 @@ const useRegistrationForm = (callback, validate) => {
             headers: {
                 'Content-Type': 'application/json; charset=utf-8'
             }
-        }).then(
-            setIsReg(true)
-        ).catch(() => {
+        }).then(() => {
+                setIsReg(true);
+        }
+        ).catch((err) => {
+            const object = JSON.stringify(err.response.data);
+            const message = object.split(":")[1];
             setIsReg(false);
-            diffToast("Неуспішна реєстрація");
+            diffToast(message.slice(1, -2));
         })
 
            // const accessToken = response?.data?.accessToken;

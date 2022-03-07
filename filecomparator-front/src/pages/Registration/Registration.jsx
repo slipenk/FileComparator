@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import classes from '../../FormStyle/FormStyle.module.css';
 import LogoName from "../../components/LogoName/LogoName";
 import RegistrationForm from "../../components/RegistrationForm/RegistrationForm";
@@ -9,9 +9,14 @@ import { Link } from 'react-router-dom';
 const Registration = () => {
     const [isSubmitted, setIsSubmitted] = useState(false);
 
-    function submitForm() {
-        setIsSubmitted(true);
+    function submitForm(value) {
+        setIsSubmitted(value);
+        console.log(value);
     }
+    useEffect(() => {
+        setIsSubmitted(isSubmitted);
+        console.log(isSubmitted);
+    }, [isSubmitted]); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div className={classes.RegistrationDiv}>

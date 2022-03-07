@@ -40,9 +40,7 @@ const useLoginForm = (callback, validateInfoEmailPassword) => {
                 setBCEmail("#FFFCE2");
                 setBCPassword("#FFFCE2");
                 handleSubmitAfterValidation().then();
-                if(auth) {
-                    callback();
-                }
+                callback(auth);
             } else {
                 if (errors.email) {
                     setBCEmail("#FD8E90");
@@ -81,7 +79,7 @@ const useLoginForm = (callback, validateInfoEmailPassword) => {
         }
         ).catch((err) => {
             const object = JSON.stringify(err.response.data);
-            const message = object.split(":")[1].split(",")[0];
+            const message = object.split(":")[1];
 
             if(message === "\"User is disabled\"") {
                 diffToast("Користувач неактивований. Причина: користувач не підтвердив свою електронну пошту");

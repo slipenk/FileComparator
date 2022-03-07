@@ -18,9 +18,8 @@ import java.util.UUID;
 public class UserService implements UserDetailsService {
 
     private static final String EMPTY_STRING = "";
-    private static final String MESSAGE_USER_NOT_FOUND = "Користувач з електронною поштою \"%s\" відсутній у системі";
-    private static final String USER_EXISTS = "Користувач з електронною поштою \"%s\" вже існує в системі";
-    private static final String USER_DATA_NOT_MATCH = "Користувач існує, але пошта непідтверджена. Щоб згенерувати новий лист, то потрібно, щоб дані співпадали";
+    private static final String MESSAGE_USER_NOT_FOUND = "Користувач з електронною поштою %s відсутній у системі";
+    private static final String USER_EXISTS = "Користувач з електронною поштою %s вже існує в системі";
     private static final String CONFIRM_EMAIL = "Термін дії токена ще не минув, будь ласка, підтвердіть вашу електронну пошту";
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -39,31 +38,33 @@ public class UserService implements UserDetailsService {
             userRepository.save(user);
             return createToken(user);
         } else {
-            User exUSER = userRepository.findByEmail(user.getEmail())
-                    .orElseThrow(() -> new UsernameNotFoundException(String.format(MESSAGE_USER_NOT_FOUND, user.getEmail())));
+            User exUSER = getUser(user);
             Optional<ConfirmationToken> confirmationTokenOptional = confirmationTokenService.getTokenByUserID(exUSER.getID());
             ConfirmationToken confirmationToken = confirmationTokenOptional.orElse(null);
             assert confirmationToken != null;
-            if (!user.equals(exUSER) && user.getEmail().equals(exUSER.getEmail())) {
-                throw new IllegalStateException(String.format(USER_EXISTS, user.getEmail()));
-            } else if (!confirmationToken.getExpiresAt().isBefore(LocalDateTime.now()) && user.equals(exUSER)) {
+            if (!confirmationToken.getExpiresAt().isBefore(LocalDateTime.now())) {
                 throw new IllegalStateException(CONFIRM_EMAIL);
-            } else if (confirmationToken.getConfirmedAt() == null && user.equals(exUSER)) {
+            } else if (confirmationToken.getConfirmedAt() == null) {
                 confirmationTokenService.deleteToken(confirmationToken.getToken());
-                return createToken(user);
-            } else if (confirmationToken.getConfirmedAt() == null && !user.equals(exUSER)) {
-                throw new UsernameNotFoundException(USER_DATA_NOT_MATCH);
+                return createToken(exUSER);
             }
             return EMPTY_STRING;
         }
+    }
+
+    private User getUser(User user) {
+        return userRepository.findByEmail(user.getEmail())
+                .orElseThrow(() -> new UsernameNotFoundException(String.format(MESSAGE_USER_NOT_FOUND, user.getEmail())));
     }
 
     private boolean checkUserPresence(User user) {
         boolean userPresent = userRepository
                 .findByEmail(user.getEmail())
                 .isPresent();
-        if (userPresent && user.getEnabled()) {
-            throw new IllegalStateException(String.format(USER_EXISTS, user.getEmail()));
+        if (userPresent) {
+            if(getUser(user).getEnabled()) {
+                throw new IllegalStateException(String.format(USER_EXISTS, user.getEmail()));
+            }
         }
         return userPresent;
     }
