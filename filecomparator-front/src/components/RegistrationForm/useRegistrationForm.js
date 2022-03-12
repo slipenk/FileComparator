@@ -98,10 +98,14 @@ const useRegistrationForm = (callback, validate) => {
                 setIsReg(true);
         }
         ).catch((err) => {
-            const object = JSON.stringify(err.response.data);
-            const message = object.split(":")[1];
-            setIsReg(false);
-            diffToast(message.slice(1, -2));
+            if(err.response.data) {
+                const object = JSON.stringify(err.response.data);
+                const message = object.split(":")[1];
+                setIsReg(false);
+                diffToast(message.slice(1, -2));
+            } else {
+                diffToast("Неуспішна реєстрація");
+            }
         })
 
            // const accessToken = response?.data?.accessToken;

@@ -11,11 +11,9 @@ const Registration = () => {
 
     function submitForm(value) {
         setIsSubmitted(value);
-        console.log(value);
     }
     useEffect(() => {
         setIsSubmitted(isSubmitted);
-        console.log(isSubmitted);
     }, [isSubmitted]); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (

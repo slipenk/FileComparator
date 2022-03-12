@@ -18,6 +18,7 @@ const useLoginForm = (callback, validateInfoEmailPassword) => {
     const [BCEmail, setBCEmail] = useState('#FFFCE2');
     const [BCPassword, setBCPassword] = useState('#FFFCE2');
     const LOGIN_URL = "/login";
+    const FORGOT_PASSWORD_URL = "/berulia/forgot";
 
     const handleChange = e => {
         const { name, value } = e.target;
@@ -57,9 +58,36 @@ const useLoginForm = (callback, validateInfoEmailPassword) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setErrors(validateInfoEmailPassword(values));
+        setErrors(validateInfoEmailPassword(values, false));
         setIsSubmitting(true);
     };
+
+    const handleForgotPassword = async () => {
+        setErrors(validateInfoEmailPassword(values, true));
+        if (Object.keys(errors).length === 0) {
+            axios({
+                url: FORGOT_PASSWORD_URL,
+                method: 'POST',
+                data: values.email,
+                dataType: 'json',
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8'
+                }
+
+            }).then(() => {
+                diffToast("На вашу електронну пошту надійшов лист з новим паролем. Будь ласка, перегляньте вашу електронну скриньку");
+            }
+            ).catch((err) => {
+                if(err.response.data) {
+                    const object = JSON.stringify(err.response.data);
+                    const message = object.split(":")[1];
+                    diffToast(message.slice(1, -2));
+                } else {
+                    diffToast("Проблема з надсиланням запиту");
+                }
+            })
+        }
+    }
 
     const handleSubmitAfterValidation = async () => {
         let formData = new FormData();
@@ -78,20 +106,27 @@ const useLoginForm = (callback, validateInfoEmailPassword) => {
             setAuth(true);
         }
         ).catch((err) => {
-            const object = JSON.stringify(err.response.data);
-            const message = object.split(":")[1];
-
-            if(message === "\"User is disabled\"") {
-                diffToast("Користувач неактивований. Причина: користувач не підтвердив свою електронну пошту");
+            if(err.response.data) {
+                const object = JSON.stringify(err.response.data);
+                const message = object.split(":")[1];
+                if (message === "\"User is disabled\"") {
+                    diffToast("Користувач неактивований. Причина: користувач не підтвердив свою електронну пошту");
+                } else if (message.slice(0, -1) === "\"Bad credentials\"") {
+                    diffToast("Неправильний логін або пароль");
+                }
+                else {
+                    diffToast("Неуспішна авторизація");
+                }
+                setAuth(false);
             } else {
                 diffToast("Неуспішна авторизація");
             }
-            setAuth(false);
         })
+
     }
 
 
-    return { handleChange, handleSubmit, values, errors, isSubmitting,
+    return { handleChange, handleSubmit, handleForgotPassword, values, errors, isSubmitting,
         BCEmail, BCPassword, isToolTipEmail, isToolTipPassword};
 };
 

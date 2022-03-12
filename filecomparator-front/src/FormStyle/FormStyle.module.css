@@ -81,6 +81,9 @@ a:active {
     display: flex;
     align-items: center;
 }
+.IconForgotPassword {
+    cursor: pointer;
+}
 .SubmitButtonFormLogin {
     margin-right: 4vw;
 }

@@ -1,4 +1,4 @@
-export default function validateInfoEmailPassword(values) {
+export default function validateInfoEmailPassword(values, isForgotPass) {
     let errors = {}
 
     if (!values.email.trim()) {
@@ -9,10 +9,12 @@ export default function validateInfoEmailPassword(values) {
         errors.email = "Перевірте правильність написання електронної пошти. Приклад: \"abc@mail.com\" (лише латиниця)"
     }
 
-    if (!values.password) {
-        errors.password = "Потрібно ввести ваш пароль"
-    } else if (!/^[A-z][A-z0-9-_]{3,23}$/i.test(values.password)) {
-        errors.password = "Перевірте правильність написання пароля. Вимоги (мінімум): одна велика літера, одна маленька літера, одна цифра, один спеціальний символ. Довжина пароля: від 8 до 24 символів (лише латиниця)"
+    if (!isForgotPass) {
+        if (!values.password) {
+            errors.password = "Потрібно ввести ваш пароль"
+        } else if (!/^[A-z][A-z0-9-_]{3,23}$/i.test(values.password)) {
+            errors.password = "Перевірте правильність написання пароля. Вимоги (мінімум): одна велика літера, одна маленька літера, одна цифра, один спеціальний символ. Довжина пароля: від 8 до 24 символів (лише латиниця)"
+        }
     }
 
     return errors;

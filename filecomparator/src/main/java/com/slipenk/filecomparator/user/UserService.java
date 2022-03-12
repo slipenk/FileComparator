@@ -38,7 +38,7 @@ public class UserService implements UserDetailsService {
             userRepository.save(user);
             return createToken(user);
         } else {
-            User exUSER = getUser(user);
+            User exUSER = getUserByEmail(user.getEmail());
             Optional<ConfirmationToken> confirmationTokenOptional = confirmationTokenService.getTokenByUserID(exUSER.getID());
             ConfirmationToken confirmationToken = confirmationTokenOptional.orElse(null);
             assert confirmationToken != null;
@@ -52,9 +52,9 @@ public class UserService implements UserDetailsService {
         }
     }
 
-    private User getUser(User user) {
-        return userRepository.findByEmail(user.getEmail())
-                .orElseThrow(() -> new UsernameNotFoundException(String.format(MESSAGE_USER_NOT_FOUND, user.getEmail())));
+    public User getUserByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException(String.format(MESSAGE_USER_NOT_FOUND, email)));
     }
 
     private boolean checkUserPresence(User user) {
@@ -62,11 +62,16 @@ public class UserService implements UserDetailsService {
                 .findByEmail(user.getEmail())
                 .isPresent();
         if (userPresent) {
-            if(getUser(user).getEnabled()) {
+            if(getUserByEmail(user.getEmail()).getEnabled()) {
                 throw new IllegalStateException(String.format(USER_EXISTS, user.getEmail()));
             }
         }
         return userPresent;
+    }
+
+    public void changeForgottenPassword(String password, String email) {
+        String encodedPassword = bCryptPasswordEncoder.encode(password);
+        userRepository.changePassword(encodedPassword, email);
     }
 
     private void encryptPassword(User user) {

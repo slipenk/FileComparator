@@ -12,7 +12,7 @@ import "tippy.js/dist/tippy.css"
 import { ToastContainer } from "react-toastify";
 
 const LoginForm = ({submitForm}) => {
-    const {handleChange, handleSubmit, values, errors, BCEmail, BCPassword,
+    const {handleChange, handleSubmit, handleForgotPassword, values, errors, BCEmail, BCPassword,
         isToolTipEmail, isToolTipPassword} = useLoginForm(submitForm, validateInfoEmailPassword);
 
     return (
@@ -55,7 +55,7 @@ const LoginForm = ({submitForm}) => {
                     </div>
                     <div className={classes.IconForgot}>
                         <Tippy placement="right" content="Забули пароль?">
-                            <img className={classes.IconInput} src={ForgotPassword} alt="Забули пароль?"/>
+                            <img className={classes.IconInput + " " + classes.IconForgotPassword} src={ForgotPassword} onClick={handleForgotPassword} alt="Забули пароль?"/>
                         </Tippy>
                     </div>
                 </div>
