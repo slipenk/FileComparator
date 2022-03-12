@@ -2,6 +2,7 @@ import React from "react";
 import InputOwn from "../UI/input/InputOwn";
 import EmailInput from "../../icons/EmailIcon.png";
 import PasswordInput from "../../icons/PasswordIcon.png";
+import ForgotPassword from "../../icons/ForgotPassword.png";
 import SubmitButtonForm from "../SubmitButtonForm/SubmitButtonForm";
 import classes from "../../FormStyle/FormStyle.module.css";
 import validateInfoEmailPassword from "../Validation/Validation";
@@ -17,7 +18,7 @@ const LoginForm = ({submitForm}) => {
     return (
         <form onSubmit={handleSubmit} autoComplete="off">
             <div>
-                <div className={classes.col_h}>
+                <div className={classes.col_h_Login + " " + classes.col_h}>
                     <h1>Вхід</h1>
                 </div>
                 <div className={classes.col_input}>
@@ -35,6 +36,7 @@ const LoginForm = ({submitForm}) => {
                                       style={{backgroundColor: BCEmail}}/>
                         </Tippy>
                     </div>
+                    <div className={classes.IconInput}/>
                 </div>
                 <div className={classes.col_input}>
                     <div className={classes.IMGContainer} style={{backgroundColor: BCPassword}}>
@@ -51,8 +53,15 @@ const LoginForm = ({submitForm}) => {
                                       style={{backgroundColor: BCPassword}}/>
                         </Tippy>
                     </div>
+                    <div className={classes.IconForgot}>
+                        <Tippy placement="right" content="Забули пароль?">
+                            <img className={classes.IconInput} src={ForgotPassword} alt="Забули пароль?"/>
+                        </Tippy>
+                    </div>
                 </div>
-                <SubmitButtonForm value={"УВІЙТИ"} />
+                <div className={classes.SubmitButtonFormLogin}>
+                    <SubmitButtonForm value={"УВІЙТИ"} />
+                </div>
             </div>
             <ToastContainer className={classes.toast}/>
         </form>

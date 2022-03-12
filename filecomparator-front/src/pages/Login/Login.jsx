@@ -21,7 +21,7 @@ const Login = () => {
                 <LogoName/>
                 <div>
                     {!isSubmitted ? <LoginForm submitForm={submitForm} /> : null}
-                    <div className={classes.alreadyReg}>
+                    <div className={classes.alreadyReg + " " + classes.alreadyRegLogin}>
                         <div>
                             <Link to="/registration" > <i>Ще не маєте акаунту?<br/>Давайте створимо :)</i></Link>
                         </div>
