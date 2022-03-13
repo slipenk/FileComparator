@@ -109,7 +109,8 @@ const useLoginForm = (callback, validateInfoEmailPassword) => {
             if(err.response.data) {
                 const object = JSON.stringify(err.response.data);
                 const message = object.split(":")[1];
-                if (message === "\"User is disabled\"") {
+
+                if (message.slice(0, -1) === "\"User is disabled\"") {
                     diffToast("Користувач неактивований. Причина: користувач не підтвердив свою електронну пошту");
                 } else if (message.slice(0, -1) === "\"Bad credentials\"") {
                     diffToast("Неправильний логін або пароль");

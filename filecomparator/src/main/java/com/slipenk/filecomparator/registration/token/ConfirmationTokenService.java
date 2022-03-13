@@ -26,7 +26,8 @@ public class ConfirmationTokenService {
     }
 
     public void deleteToken(String token) {
-        confirmationTokenRepository.deleteByToken(token);
+        Long id = confirmationTokenRepository.deleteByToken(token);
+        System.out.println("Кількість видалених записів " + id);
     }
 
     public void setConfirmedAt(String token) {
