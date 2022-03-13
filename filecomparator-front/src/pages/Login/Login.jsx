@@ -3,6 +3,7 @@ import classes from '../../FormStyle/FormStyle.module.css';
 import LogoName from "../../components/LogoName/LogoName";
 import LoginForm from "../../components/LoginForm/LoginForm";
 import { Link } from 'react-router-dom';
+import Logo from "../../icons/Berulia.png";
 
 const Login = () => {
     const [isSubmitted, setIsSubmitted] = useState(false);
@@ -19,7 +20,7 @@ const Login = () => {
         <div className={classes.MainDiv}>
             <div className={classes.flexDiv}>
                 {localStorage.setItem('IsMenu', 'false')}
-                <LogoName/>
+                <LogoName logo={Logo} value={"БЕРУЛЯ"}/>
                 <div>
                     {!isSubmitted ? <LoginForm submitForm={submitForm} /> : null}
                     <div className={classes.alreadyReg + " " + classes.alreadyRegLogin}>

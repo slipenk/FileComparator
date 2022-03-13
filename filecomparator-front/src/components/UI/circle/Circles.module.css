@@ -1,0 +1,18 @@
+.circle {
+    position: absolute;
+    background-color: #FFFBF2;
+    padding: 4vh;
+    box-sizing: border-box;
+    border-radius: 100%;
+    border: 0.6vh solid black;
+    height: 20vh;
+    width: 20vh;
+}
+.circleRight {
+    top: -4vh;
+    right: -4vh;
+}
+.circleLeft {
+    top: -4vh;
+    left: -4vh;
+}

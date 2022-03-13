@@ -4,6 +4,7 @@ import LogoName from "../../components/LogoName/LogoName";
 import RegistrationForm from "../../components/RegistrationForm/RegistrationForm";
 import RegistrationSuccess from "../RegistrationSuccess/RegistrationSuccess";
 import { Link } from 'react-router-dom';
+import Logo from "../../icons/Berulia.png";
 
 
 const Registration = () => {
@@ -21,7 +22,7 @@ const Registration = () => {
         <div className={classes.MainDiv}>
             <div className={classes.flexDiv}>
                 {localStorage.setItem('IsMenu', 'false')}
-                <LogoName/>
+                <LogoName logo={Logo} value={"БЕРУЛЯ"}/>
                 <div>
                     {!isSubmitted ? <RegistrationForm submitForm={submitForm} /> : <RegistrationSuccess/>}
                     <div className={classes.alreadyReg}>

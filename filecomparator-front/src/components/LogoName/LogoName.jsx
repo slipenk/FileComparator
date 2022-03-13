@@ -1,8 +1,8 @@
 import React, {useRef} from "react";
 import classes from './LogoName.module.css';
-import Logo from "../../icons/Berulia.png";
 
-const LogoName = () => {
+
+const LogoName = ({logo, value}) => {
     const inputEl = useRef(false);
 
     function setLogo() {
@@ -15,10 +15,10 @@ const LogoName = () => {
         <div className={classes.flexDivCol}>
             {setLogo()}
             <div className={classes.LogoDiv}>
-                <img className={inputEl.current ? classes.ImageDivSmall : classes.ImageDivBig} src={Logo} alt="БЕРУЛЯ"/>
+                <img className={inputEl.current ? classes.ImageDivSmall : classes.ImageDivBig} src={logo} alt={value}/>
             </div>
             <div className={inputEl.current ? classes.HBer + " " + classes.HBerSmall : classes.HBer + " " + classes.HBerBig}>
-                <h1>БЕРУЛЯ</h1>
+                <h1>{value}</h1>
             </div>
         </div>
     );

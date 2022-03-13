@@ -1,0 +1,16 @@
+.ColDiv {
+    width: 42.5vw;
+    height: 42vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.ImageDiv {
+    width: 10vw;
+}
+.HBer {
+    font-family: 'Amatic SC', cursive;
+    font-size: 1.5vw;
+    height: 3vh;
+}
