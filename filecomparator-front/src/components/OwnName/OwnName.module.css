@@ -10,20 +10,9 @@
     align-items: center;
     justify-content: center;
     font-family: 'Amatic SC', cursive;
-}
-.HBerBig {
-    font-size: 3vw;
-    height: 10vh;
-}
-.HBerSmall {
     font-size: 1vw;
     height: 5vh;
     margin-left: 0.3vw;
-}
-.ImageDivBig {
-    width: 15vw;
-    margin-right: 6vw;
-    margin-left: 6vw;
 }
 .ImageDivSmall {
     width: 4vw;

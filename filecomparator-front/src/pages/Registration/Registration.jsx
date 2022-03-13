@@ -12,13 +12,15 @@ const Registration = () => {
     function submitForm(value) {
         setIsSubmitted(value);
     }
+
     useEffect(() => {
         setIsSubmitted(isSubmitted);
     }, [isSubmitted]); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
-        <div className={classes.RegistrationDiv}>
+        <div className={classes.MainDiv}>
             <div className={classes.flexDiv}>
+                {localStorage.setItem('IsMenu', 'false')}
                 <LogoName/>
                 <div>
                     {!isSubmitted ? <RegistrationForm submitForm={submitForm} /> : <RegistrationSuccess/>}

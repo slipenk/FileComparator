@@ -16,8 +16,9 @@ const Login = () => {
     }, [isSubmitted]); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
-        <div className={classes.RegistrationDiv}>
+        <div className={classes.MainDiv}>
             <div className={classes.flexDiv}>
+                {localStorage.setItem('IsMenu', 'false')}
                 <LogoName/>
                 <div>
                     {!isSubmitted ? <LoginForm submitForm={submitForm} /> : null}
