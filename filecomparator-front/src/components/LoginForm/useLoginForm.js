@@ -6,7 +6,7 @@ import { useAuth } from "../../context/context";
 
 
 const useLoginForm = (callback, validateInfoEmailPassword) => {
-    const [auth, setAuth] = useAuth(useAuth);
+    const [, setAuth] = useAuth(useAuth);
     const [values, setValues] = useState({
         email: "slipenk92@gmail.com",
         password: "CERcer12_"
@@ -19,6 +19,7 @@ const useLoginForm = (callback, validateInfoEmailPassword) => {
     const [BCPassword, setBCPassword] = useState('#FFFCE2');
     const LOGIN_URL = "/login";
     const FORGOT_PASSWORD_URL = "/berulia/forgot";
+    const GET_USER = "/berulia/getUser";
 
     const handleChange = e => {
         const { name, value } = e.target;
@@ -41,7 +42,7 @@ const useLoginForm = (callback, validateInfoEmailPassword) => {
                 setBCEmail("#FFFCE2");
                 setBCPassword("#FFFCE2");
                 handleSubmitAfterValidation().then();
-                callback(auth);
+                callback(true);
             } else {
                 if (errors.email) {
                     setBCEmail("#FD8E90");
@@ -104,6 +105,7 @@ const useLoginForm = (callback, validateInfoEmailPassword) => {
             }
         }).then(() => {
             setAuth(true);
+            getUser();
         }
         ).catch((err) => {
             if(err.response.data) {
@@ -124,6 +126,29 @@ const useLoginForm = (callback, validateInfoEmailPassword) => {
             }
         })
 
+    }
+
+    const getUser = async () => {
+        axios({
+            url: GET_USER,
+            method: 'POST',
+            data: values.email,
+            dataType: 'json',
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            }
+        }).then((response) => {
+            localStorage.setItem('user', JSON.stringify(response.data));
+        }
+        ).catch((err) => {
+            if(err.response.data) {
+                const object = JSON.stringify(err.response.data);
+                const message = object.split(":")[1];
+                diffToast(message.slice(1, -2));
+            } else {
+                diffToast("Помилка при отриманні даних користувача");
+            }
+        })
     }
 
 
