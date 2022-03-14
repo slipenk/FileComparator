@@ -6,6 +6,7 @@ import {privateRoutes, publicRoutes} from "../router/router";
 const AppRouter = () => {
     const [auth] = useAuth(useAuth);
 
+
     return (
         auth
             ?

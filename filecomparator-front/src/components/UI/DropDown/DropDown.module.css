@@ -1,0 +1,22 @@
+.dropDown {
+    position: absolute;
+    top: 10vh;
+    width: 20vw;
+    transform: translateX(-45%);
+    background-color: #FFFBF2;
+    border: 0.6vh solid black;
+    border-radius: 10vh;
+    padding: 1rem;
+    overflow: hidden;
+}
+.dropDownItem {
+    height: 10vw;
+    display: flex;
+    align-items: center;
+    border-radius: 10vh;
+    transition: background 500ms;
+    padding: 0.5rem;
+}
+.dropDownItem:hover {
+    background-color: #FFFCE2;
+}

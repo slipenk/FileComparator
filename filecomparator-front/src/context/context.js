@@ -20,5 +20,10 @@ export const useAuth = () => {
     return context;
 };
 
-export default { AuthProvider, useAuth };
+const cont = {
+    AuthProvider,
+    useAuth,
+};
+
+export default cont;
 
