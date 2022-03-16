@@ -14,9 +14,11 @@ const LogoName = ({logo, value}) => {
         }
     }
 
-    function setMenu() {
+    const Dropdown = () => {
         if(logo === LogoU) {
             isActive.current = !isActive.current;
+            //onMouseEnter={Dropdown} onMouseLeave={Dropdown}
+            //{isActive.current && (<DropDown/>)}
         }
     }
 
@@ -25,12 +27,12 @@ const LogoName = ({logo, value}) => {
             {setLogo()}
             <div className={classes.LogoDiv}>
                 <img className={inputEl.current ? classes.ImageDivSmall : classes.ImageDivBig} src={logo} alt={value}
-                onClick={() => setMenu()}/>
+                     />
             </div>
-            {isActive.current && (<DropDown/>)}
             <div className={inputEl.current ? classes.HBer + " " + classes.HBerSmall : classes.HBer + " " + classes.HBerBig}>
                 <h1>{value}</h1>
             </div>
+            <DropDown/>
         </div>
     );
 

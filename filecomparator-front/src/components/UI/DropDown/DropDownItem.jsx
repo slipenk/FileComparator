@@ -4,9 +4,11 @@ import {Link} from "react-router-dom";
 
 const DropDownItem = ({link, value}) => {
     return (
-        <Link to={link} className={classes.dropDownItem}>
-            {value}
-        </Link>
+        <div>
+            <Link to={link} className={classes.dropDownItem}>
+                {value}
+            </Link>
+        </div>
     );
 };
 

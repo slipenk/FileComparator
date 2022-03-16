@@ -28,6 +28,7 @@
 .ImageDivSmall {
     width: 4vw;
     margin-left: 0.2vw;
+    cursor: pointer;
 }
 .LogoDiv {
     display: flex;
