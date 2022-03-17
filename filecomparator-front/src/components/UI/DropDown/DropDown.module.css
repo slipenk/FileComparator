@@ -10,9 +10,6 @@
     border-radius: 5vh;
     padding: 1rem;
 }
-.dropDown:hover {
-    display: block;
-}
 .dropDownItem {
     color: black;
     font-family: 'Kurale', serif;
@@ -22,12 +19,11 @@
     justify-content: center;
     text-align: center;
     border-radius: 5vh;
-    transition: background 500ms;
     padding: 0.5rem;
-
 }
-.dropdown:hover .dropdownContent {
-    display: block;
+.line {
+    width: 8vw;
+    border-top: 0.6vh solid black;
 }
 
 

@@ -22,7 +22,7 @@ const Login = () => {
                 {localStorage.setItem('IsMenu', 'false')}
                 <LogoName logo={Logo} value={"БЕРУЛЯ"}/>
                 <div>
-                    {!isSubmitted.current ? <LoginForm submitForm={submitForm} /> : null }
+                    <LoginForm submitForm={submitForm}/>
                     <div className={classes.alreadyReg + " " + classes.alreadyRegLogin}>
                         <div>
                             <Link to="/registration" > <i>Ще не маєте акаунту?<br/>Давайте створимо :)</i></Link>

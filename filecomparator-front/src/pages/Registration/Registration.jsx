@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import classes from '../../FormStyle/FormStyle.module.css';
 import LogoName from "../../components/LogoName/LogoName";
 import RegistrationForm from "../../components/RegistrationForm/RegistrationForm";
@@ -13,10 +13,6 @@ const Registration = () => {
     function submitForm(value) {
         setIsSubmitted(value);
     }
-
-    useEffect(() => {
-        setIsSubmitted(isSubmitted);
-    }, [isSubmitted]); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div className={classes.MainDiv}>

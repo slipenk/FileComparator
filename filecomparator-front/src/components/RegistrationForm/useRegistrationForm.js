@@ -81,7 +81,7 @@ const useRegistrationForm = (callback, validate) => {
     };
 
     useEffect(() => {
-            callback(isReg);
+        callback(isReg);
     }, [isReg]); // eslint-disable-line react-hooks/exhaustive-deps
 
 
@@ -96,7 +96,7 @@ const useRegistrationForm = (callback, validate) => {
             }
         }).then(() => {
                 setIsReg(true);
-        }
+            }
         ).catch((err) => {
             if(err.response.data) {
                 const object = JSON.stringify(err.response.data);
@@ -108,9 +108,9 @@ const useRegistrationForm = (callback, validate) => {
             }
         })
 
-           // const accessToken = response?.data?.accessToken;
-           // const roles = response?.data?.roles;
-           // setAuth(values.email, values.password, roles, accessToken)
+        // const accessToken = response?.data?.accessToken;
+        // const roles = response?.data?.roles;
+        // setAuth(values.email, values.password, roles, accessToken)
     }
 
 

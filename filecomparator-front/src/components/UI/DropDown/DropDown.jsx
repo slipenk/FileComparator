@@ -6,6 +6,7 @@ const DropDown = () => {
     return (
         <div className={classes.dropDown}>
             <DropDownItem value="Особистий кабінет" link="*"/>
+            <hr className={classes.line}/>
             <DropDownItem value="Вихід" link="/login"/>
         </div>
     );

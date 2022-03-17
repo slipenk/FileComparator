@@ -6,7 +6,7 @@ import { useAuth } from "../../context/context";
 
 
 const useLoginForm = (callback, validateInfoEmailPassword) => {
-    const [, setAuth] = useAuth(useAuth);
+    const [auth, setAuth] = useAuth(useAuth);
     const [values, setValues] = useState({
         email: "slipenk92@gmail.com",
         password: "CERcer12_"
@@ -42,7 +42,6 @@ const useLoginForm = (callback, validateInfoEmailPassword) => {
                 setBCEmail("#FFFCE2");
                 setBCPassword("#FFFCE2");
                 handleSubmitAfterValidation().then();
-                callback(true);
             } else {
                 if (errors.email) {
                     setBCEmail("#FD8E90");
@@ -62,6 +61,10 @@ const useLoginForm = (callback, validateInfoEmailPassword) => {
         setErrors(validateInfoEmailPassword(values, false));
         setIsSubmitting(true);
     };
+
+    useEffect(() => {
+        callback(auth);
+    }, [auth]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const handleForgotPassword = async () => {
         setErrors(validateInfoEmailPassword(values, true));

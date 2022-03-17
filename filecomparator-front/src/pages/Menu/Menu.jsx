@@ -10,6 +10,7 @@ import MenuIcons from "../../components/UI/menuIcons/MenuIcons";
 
 
 const Menu = () => {
+    window.history.replaceState(null, "", "/menu");
     return (
         <div className={classes.MainDiv}>
             <div className={classesM.flexDivMenu}>
