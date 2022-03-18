@@ -17,11 +17,11 @@ const Menu = () => {
                 <Circles/>
                 <div className={classesM.flexCol}>
                     <div className={classesM.flexRow}>
-                        <MenuIcons logo={CompareFirst} value={"Порівняння файлів"} border={'0.6vh solid black'}/>
-                        <MenuIcons logo={Document} value={"Перевірка коду на плагіат"} border={'0.6vh solid black'}/>
+                        <MenuIcons logo={CompareFirst} value={"Порівняння файлів"} border={'0.6vh solid black'} path={"/comparator"}/>
+                        <MenuIcons logo={Document} value={"Перевірка коду на плагіат"} border={'0.6vh solid black'} path={"*"}/>
                     </div>
                 <div className={classesM.RowDiv}>
-                    <MenuIcons logo={CompareSecond} value={"Останні порівняння"} border={null}/>
+                    <MenuIcons logo={CompareSecond} value={"Останні порівняння"} border={null} path={"*"}/>
                 </div>
                 </div>
             </div>

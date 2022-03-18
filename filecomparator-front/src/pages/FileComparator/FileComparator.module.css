@@ -1,0 +1,21 @@
+.flexDivRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.flexDivCol {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.firstDrop {
+    width: 42vw;
+}
+.secondDrop {
+    width: 42vw;
+}
+.FileImage {
+    width: 5vw;
+}
