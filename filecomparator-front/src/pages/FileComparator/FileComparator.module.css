@@ -19,3 +19,10 @@
 .FileImage {
     width: 5vw;
 }
+.tableStat {
+    border: 0.3vh solid black;
+    height: 20vw;
+}
+.overMainDiv {
+    border-radius: 0;
+}

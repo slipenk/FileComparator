@@ -1,8 +1,9 @@
 .opp {
     color: #888888;
-    background-color: rgba(0, 0, 0, 0.05);
-    margin: 0.1vw;
-
+    background-color: #FFFCE2;
+    margin-left: 0.22vw;
+    margin-bottom: 0.4vw;
+    border: 0.3vh solid black;
 }
 .opp:hover {
     color: #454444;
@@ -12,9 +13,20 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-
 }
 .textDiv {
     width: 42vw;
+    height: 25vw;
     border: 0.6vh solid black;
+    overflow-y: auto;
 }
+.alignEditor {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.alignEditorGlobal {
+
+}
+

@@ -4,11 +4,12 @@ import "./Dropzone.module.css";
 import axios from "../../API/axios";
 import diffToast from "../../Toast/Toast";
 
-export default function MyDropzone() {
+export default function MyDropzone(callback) {
     const UPLOAD_FILE_URL = "/berulia/uploadFile";
 
     const onDrop = useCallback(acceptedFiles => {
         const file = acceptedFiles[0];
+        callback(true);
 
         const formData = new FormData();
         formData.append("file", file);

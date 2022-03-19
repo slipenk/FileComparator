@@ -84,17 +84,19 @@ function App() {
     };
 
     return (
-        <div onClick={focusEditor}>
-            <div>
-                <BlockStyleControls onToggle={onBlockClick} />
-                <InlineStyleControls onToggle={onInlineClick} />
-            </div>
-            <div className={classes.textDiv}>
-                <Editor
-                    ref={editor}
-                    editorState={editorState}
-                    onChange={(editorState) => setEditorState(editorState)}
-                />
+        <div className={classes.alignEditorGlobal}>
+            <div className={classes.alignEditor} onClick={focusEditor}>
+                <div className={classes.alignItems}>
+                    <BlockStyleControls onToggle={onBlockClick} />
+                    <InlineStyleControls onToggle={onInlineClick} />
+                </div>
+                <div className={classes.textDiv}>
+                    <Editor
+                        ref={editor}
+                        editorState={editorState}
+                        onChange={(editorState) => setEditorState(editorState)}
+                    />
+                </div>
             </div>
         </div>
     );
