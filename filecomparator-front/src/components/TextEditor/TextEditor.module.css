@@ -1,0 +1,20 @@
+.opp {
+    color: #888888;
+    background-color: rgba(0, 0, 0, 0.05);
+    margin: 0.1vw;
+
+}
+.opp:hover {
+    color: #454444;
+}
+.alignItems {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+}
+.textDiv {
+    width: 42vw;
+    border: 0.6vh solid black;
+}

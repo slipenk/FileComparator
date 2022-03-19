@@ -1,4 +1,4 @@
-package com.slipenk.filecomparator.ForgotPassword;
+package com.slipenk.filecomparator.forgotPassword;
 
 import com.slipenk.filecomparator.email.EmailSender;
 import com.slipenk.filecomparator.registration.EmailValidator;

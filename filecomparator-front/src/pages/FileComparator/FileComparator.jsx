@@ -5,6 +5,7 @@ import classesF from "./FileComparator.module.css";
 import Circles from "../../components/UI/circle/Circles";
 import MyDropzone from "./Dropzone";
 import Logo from "../../icons/File.png";
+import TextEditor from "../../components/TextEditor/TextEditor";
 
 const FileComparator = () => {
 
@@ -22,6 +23,7 @@ const FileComparator = () => {
                             </div>
                             <div className={classesF.firstDrop} >
                                 <MyDropzone/>
+                                <TextEditor/>
                             </div>
                         </div>
                         <div className={classesF.flexDivCol}>
