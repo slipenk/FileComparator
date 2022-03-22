@@ -11,8 +11,7 @@ const FileComparator = () => {
 
     const [isUploadFile, SetIsUploadFile] = useState(false);
 
-    function isUpload(value) {
-        console.log("TEst")
+    const isUpload = (value) => {
         SetIsUploadFile(value);
     }
 

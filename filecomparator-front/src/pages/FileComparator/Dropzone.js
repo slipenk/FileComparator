@@ -4,12 +4,12 @@ import "./Dropzone.module.css";
 import axios from "../../API/axios";
 import diffToast from "../../Toast/Toast";
 
-export default function MyDropzone(callback) {
+
+export default function MyDropzone({isUpload}) {
     const UPLOAD_FILE_URL = "/berulia/uploadFile";
 
     const onDrop = useCallback(acceptedFiles => {
         const file = acceptedFiles[0];
-        callback(true);
 
         const formData = new FormData();
         formData.append("file", file);
@@ -23,9 +23,9 @@ export default function MyDropzone(callback) {
                 'Content-Type': 'multipart/form-data'
             }
         }).then(() => {
-                console.log("All ok");
-            }
-        ).catch((err) => {
+            isUpload(true);
+        }
+        ).catch(() => {
             /*if(err.response.data) {
                 const object = JSON.stringify(err.response.data);
                 const message = object.split(":")[1];
@@ -34,7 +34,7 @@ export default function MyDropzone(callback) {
                 diffToast("Неуспішна реєстрація");
            // }
         })
-
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
 

@@ -1,17 +1,30 @@
 import React, { useState, useEffect } from "react";
-
 import { Editor, EditorState, RichUtils } from "draft-js";
 import classes from "./TextEditor.module.css"
 import "draft-js/dist/Draft.css";
 
 
+
+
 function App() {
+
+    /*const sampleMarkup =
+        '<b>Bold text</b>, <i>Italic text</i><br/ ><br />' +
+        '<a href="http://www.facebook.com">Example link</a>'
+    const blocksFromHTML = convertFromHTML(sampleMarkup);
+    const state = ContentState.createFromBlockArray(
+        blocksFromHTML.contentBlocks,
+        blocksFromHTML.entityMap,
+    );   */
+
     const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
 
     const editor = React.useRef(null);
 
     function focusEditor() {
         editor.current.focus();
+        //setEditorState(EditorState.createWithContent(state));
     }
 
     useEffect(() => {
