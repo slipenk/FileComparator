@@ -13,6 +13,9 @@ const FileComparator = () => {
 
     const [isUploadFileFirst, SetIsUploadFileFirst] = useState(false);
     const [isUploadFileSecond, SetIsUploadFileSecond] = useState(false);
+    const [isCompared, setIsCompared] = useState(false);
+    const [leftFile, setLefFile] = useState("");
+    const [rightFile, setRightFile] = useState("");
 
     let counter = 0;
 
@@ -25,6 +28,18 @@ const FileComparator = () => {
             SetIsUploadFileSecond(value);
         }
     }
+
+    const setComparedFiles = (value) => {
+        counter++;
+        if(counter === 1)  {
+            setLefFile(value);
+        } else if(counter === 2) {
+            counter = 0;
+            setRightFile(value);
+            setIsCompared(true);
+        }
+    }
+
 
 
     return (
@@ -41,8 +56,9 @@ const FileComparator = () => {
                                 {isUploadFileFirst ? <div/> : <img className={classesF.FileImage} src={Logo} alt={"Файл"}/>}
                             </div>
                             <div className={classesF.firstDrop} >
-                                {isUploadFileFirst ? <div/> : <MyDropzone isUpload={isUpload}/>}
-                                {isUploadFileFirst ? <TextEditorLeft/> : <div/>}
+                                {isUploadFileFirst ? <div/> : <MyDropzone isUpload={isUpload} setComparedFiles={setComparedFiles}/>}
+                                {isUploadFileFirst && isCompared ? <TextEditorLeft file={leftFile}/> : <div/>}
+                                {isUploadFileFirst && !isCompared ? <div/> : <div/>}
                             </div>
                         </div>
                         <div className={classesF.flexDivCol}>
@@ -50,8 +66,9 @@ const FileComparator = () => {
                                 {isUploadFileSecond ? <div/> : <img className={classesF.FileImage} src={Logo} alt={"Файл"}/>}
                             </div>
                             <div className={classesF.secondDrop}>
-                                {isUploadFileSecond ? <div/> : <MyDropzone isUpload={isUpload}/>}
-                                {isUploadFileSecond ? <TextEditorRight/> : <div/>}
+                                {isUploadFileSecond ? <div/> : <MyDropzone isUpload={isUpload} setComparedFiles={setComparedFiles}/>}
+                                {isUploadFileSecond && isCompared ? <TextEditorRight file={rightFile}/> : <div/>}
+                                {isUploadFileSecond && !isCompared ? <div/> : <div/>}
                             </div>
                         </div>
                     </div>

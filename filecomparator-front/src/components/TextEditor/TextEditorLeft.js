@@ -7,12 +7,12 @@ import {convertFromHTML} from "draft-convert";
 
 
 
-function App() {
+function App({file}) {
 
     const sampleMarkup =
         '<b>Bold text</b>, <i>Italic text</i><br/ ><br />' +
         '<a href="http://www.facebook.com">Example link</a>'
-    const blocksFromHTML = convertFromHTML(sampleMarkup);
+    const blocksFromHTML = convertFromHTML(file);
    /* const state = ContentState.createFromBlockArray(
         blocksFromHTML.contentBlocks,
         blocksFromHTML.entityMap,
@@ -27,6 +27,7 @@ function App() {
 
     function focusEditor() {
         editor.current.focus();
+        console.log({file})
     }
 
     useEffect(() => {

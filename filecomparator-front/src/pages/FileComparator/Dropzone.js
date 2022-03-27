@@ -5,7 +5,7 @@ import axios from "../../API/axios";
 import diffToast from "../../Toast/Toast";
 
 
-export default function MyDropzone({isUpload}) {
+export default function MyDropzone({isUpload, setComparedFiles}) {
     const UPLOAD_FILE_URL = "/berulia/uploadFile";
     const BORDER = "End File1  bordeeeeeer Start File2";
 
@@ -26,11 +26,15 @@ export default function MyDropzone({isUpload}) {
         }).then((response) => {
             isUpload(true);
             if(response.data) {
+                console.log("I am here comparing files")
                 const object = JSON.stringify(response.data);
                 const files = object.split(BORDER);
+                setComparedFiles(files[0]);
+                setComparedFiles(files[1]);
             }
         }
-        ).catch(() => {
+        ).catch((err) => {
+            console.log(err.response.data)
             /*if(err.response.data) {
                 const object = JSON.stringify(err.response.data);
                 const message = object.split(":")[1];

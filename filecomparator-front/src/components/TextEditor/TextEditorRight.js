@@ -1,23 +1,33 @@
 import React, { useState, useEffect } from "react";
-import { Editor, EditorState, RichUtils } from "draft-js";
+import { Editor, EditorState, RichUtils, ContentState } from "draft-js";
 import classes from "./TextEditor.module.css"
 import "draft-js/dist/Draft.css";
 import {convertFromHTML} from "draft-convert";
+import htmlToDraft from 'html-to-draftjs';
+
+import {stateFromHTML} from 'draft-js-import-html';
 
 
-function App() {
+function App({file}) {
 
     const sampleMarkup =
-        '<b>Bold text</b>, <i>Italic text</i><br/ ><br />' +
-        '<a href="http://www.facebook.com">Example link</a>'
-    const blocksFromHTML = convertFromHTML(sampleMarkup);
+        '<p style="color:red">This is a paragraph.</p>'
+    const blocksFromHTML = htmlToDraft(sampleMarkup);
+    const contentState = ContentState.createFromBlockArray(
+        blocksFromHTML.contentBlocks,
+        blocksFromHTML.entityMap
+    );
+    //const contentState = ContentState.createFromBlockArray(blocksFromHTML.contentBlocks);
+   // const contentState = ContentState.createFromBlockArray(contentBlocks, entityMap);
+    //let contentState1 = stateFromHTML(sampleMarkup);
+
     /* const state = ContentState.createFromBlockArray(
          blocksFromHTML.contentBlocks,
          blocksFromHTML.entityMap,
      );    */
 
     const [editorState, setEditorState] = useState(EditorState.createWithContent(
-        blocksFromHTML
+        contentState
     ));
 
 
