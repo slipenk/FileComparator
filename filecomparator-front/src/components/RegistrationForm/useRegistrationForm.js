@@ -107,12 +107,7 @@ const useRegistrationForm = (callback, validate) => {
                 diffToast("Неуспішна реєстрація");
             }
         })
-
-        // const accessToken = response?.data?.accessToken;
-        // const roles = response?.data?.roles;
-        // setAuth(values.email, values.password, roles, accessToken)
     }
-
 
     return { handleChange, handleSubmit, values, errors,
         BCUsername, BCEmail, BCPassword, BCPasswordR, isToolTipUsername,

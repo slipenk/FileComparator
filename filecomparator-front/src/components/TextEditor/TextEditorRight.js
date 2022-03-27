@@ -2,10 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Editor, EditorState, RichUtils } from "draft-js";
 import classes from "./TextEditor.module.css"
 import "draft-js/dist/Draft.css";
-import ContentState from "draft-js/lib/ContentState";
 import {convertFromHTML} from "draft-convert";
-
-
 
 
 function App() {
@@ -14,10 +11,10 @@ function App() {
         '<b>Bold text</b>, <i>Italic text</i><br/ ><br />' +
         '<a href="http://www.facebook.com">Example link</a>'
     const blocksFromHTML = convertFromHTML(sampleMarkup);
-   /* const state = ContentState.createFromBlockArray(
-        blocksFromHTML.contentBlocks,
-        blocksFromHTML.entityMap,
-    );    */
+    /* const state = ContentState.createFromBlockArray(
+         blocksFromHTML.contentBlocks,
+         blocksFromHTML.entityMap,
+     );    */
 
     const [editorState, setEditorState] = useState(EditorState.createWithContent(
         blocksFromHTML
@@ -28,7 +25,6 @@ function App() {
 
     function focusEditor() {
         editor.current.focus();
-        //setEditorState(EditorState.createWithContent(state));
     }
 
     useEffect(() => {
@@ -101,7 +97,7 @@ function App() {
     };
 
     return (
-        <div className={classes.alignEditorGlobal}>
+        <div>
             <div className={classes.alignEditor} onClick={focusEditor}>
                 <div className={classes.alignItems}>
                     <BlockStyleControls onToggle={onBlockClick} />

@@ -7,6 +7,7 @@ import diffToast from "../../Toast/Toast";
 
 export default function MyDropzone({isUpload}) {
     const UPLOAD_FILE_URL = "/berulia/uploadFile";
+    const BORDER = "End File1  bordeeeeeer Start File2";
 
     const onDrop = useCallback(acceptedFiles => {
         const file = acceptedFiles[0];
@@ -22,8 +23,12 @@ export default function MyDropzone({isUpload}) {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
-        }).then(() => {
+        }).then((response) => {
             isUpload(true);
+            if(response.data) {
+                const object = JSON.stringify(response.data);
+                const files = object.split(BORDER);
+            }
         }
         ).catch(() => {
             /*if(err.response.data) {
@@ -31,7 +36,7 @@ export default function MyDropzone({isUpload}) {
                 const message = object.split(":")[1];
                 diffToast(message.slice(1, -2));
             } else { */
-                diffToast("Неуспішна реєстрація");
+                diffToast("Помилка при порівнянні файлів");
            // }
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps

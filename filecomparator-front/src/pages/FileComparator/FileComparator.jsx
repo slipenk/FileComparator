@@ -5,15 +5,27 @@ import classesF from "./FileComparator.module.css";
 import Circles from "../../components/UI/circle/Circles";
 import MyDropzone from "./Dropzone";
 import Logo from "../../icons/File.png";
-import TextEditor from "../../components/TextEditor/TextEditor";
+import {ToastContainer} from "react-toastify";
+import TextEditorLeft from "../../components/TextEditor/TextEditorLeft";
+import TextEditorRight from "../../components/TextEditor/TextEditorRight";
 
 const FileComparator = () => {
 
-    const [isUploadFile, SetIsUploadFile] = useState(false);
+    const [isUploadFileFirst, SetIsUploadFileFirst] = useState(false);
+    const [isUploadFileSecond, SetIsUploadFileSecond] = useState(false);
+
+    let counter = 0;
 
     const isUpload = (value) => {
-        SetIsUploadFile(value);
+        counter++;
+        if(counter === 1)  {
+            SetIsUploadFileFirst(value);
+        } else if(counter === 2) {
+            counter = 0;
+            SetIsUploadFileSecond(value);
+        }
     }
+
 
     return (
         <div>
@@ -26,24 +38,26 @@ const FileComparator = () => {
 
                             </div>
                             <div>
-                                {isUploadFile ? <div/> : <img className={classesF.FileImage} src={Logo} alt={"Файл"}/>}
+                                {isUploadFileFirst ? <div/> : <img className={classesF.FileImage} src={Logo} alt={"Файл"}/>}
                             </div>
                             <div className={classesF.firstDrop} >
-                                {isUploadFile ? <div/> : <MyDropzone isUpload={isUpload}/>}
-                                {isUploadFile ? <TextEditor/> : <div/>}
+                                {isUploadFileFirst ? <div/> : <MyDropzone isUpload={isUpload}/>}
+                                {isUploadFileFirst ? <TextEditorLeft/> : <div/>}
                             </div>
                         </div>
                         <div className={classesF.flexDivCol}>
                             <div>
-                                <img className={classesF.FileImage} src={Logo} alt={"Файл"}/>
+                                {isUploadFileSecond ? <div/> : <img className={classesF.FileImage} src={Logo} alt={"Файл"}/>}
                             </div>
                             <div className={classesF.secondDrop}>
-                                <MyDropzone/>
+                                {isUploadFileSecond ? <div/> : <MyDropzone isUpload={isUpload}/>}
+                                {isUploadFileSecond ? <TextEditorRight/> : <div/>}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <ToastContainer className={classes.toast}/>
         </div>
     );
 };
