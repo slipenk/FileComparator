@@ -11,12 +11,61 @@ import {stateFromHTML} from 'draft-js-import-html';
 function App({file}) {
 
     const sampleMarkup =
-        '<p style="color:red">This is a paragraph.</p>'
-    const blocksFromHTML = htmlToDraft(sampleMarkup);
+        '<span style="color: #2a00ff;">This is a paragraph.</span>'
+   /* const blocksFromHTML = htmlToDraft(sampleMarkup);
     const contentState = ContentState.createFromBlockArray(
         blocksFromHTML.contentBlocks,
         blocksFromHTML.entityMap
-    );
+    );*/
+
+    const colorStyleMap: any = {
+        'ORANGE': {
+            color: 'rgb(242, 113, 28)'
+        },
+        'RED': {
+            color: 'rgb(255, 0, 0)'
+        },
+        'BLACK': {
+            color: 'rgb(27, 28, 29)'
+        }
+    }
+
+    const importHtmlOptions = {
+        "customInlineFn": (element, {Style}) => {
+            if (element.tagName === 'SPAN') {
+                const color = element.style.color
+
+                const customStyle = Object.keys(colorStyleMap).find((styleKey: string) => colorStyleMap[styleKey].color === color)
+
+                if (customStyle) {
+                    return Style(customStyle)
+                }
+            }
+        }
+    }
+
+    const options1 = {
+        customInlineFn: (element, { Style }) => {
+            if (element.style.color) {
+                console.log(element.style.color)
+                return Style('color-' + element.style.color); // this one
+            }
+        }
+    };
+
+    const options2 = {
+        customInlineFn: (element, { Style, Entity }) => {
+            if (element.style.color) {
+                return Style('CUSTOM_COLOR_' + element.style.color); // this one
+            } } };
+
+
+
+    const content = stateFromHTML(sampleMarkup, options1);
+    const contentState = EditorState.createWithContent(content)
+
+
+
     //const contentState = ContentState.createFromBlockArray(blocksFromHTML.contentBlocks);
    // const contentState = ContentState.createFromBlockArray(contentBlocks, entityMap);
     //let contentState1 = stateFromHTML(sampleMarkup);
@@ -27,7 +76,7 @@ function App({file}) {
      );    */
 
     const [editorState, setEditorState] = useState(EditorState.createWithContent(
-        contentState
+        content
     ));
 
 
