@@ -26,7 +26,6 @@ export default function MyDropzone({isUpload, setComparedFiles}) {
         }).then((response) => {
             isUpload(true);
             if(response.data) {
-                console.log("I am here comparing files")
                 const object = JSON.stringify(response.data);
                 const files = object.split(BORDER);
                 setComparedFiles(files[0]);

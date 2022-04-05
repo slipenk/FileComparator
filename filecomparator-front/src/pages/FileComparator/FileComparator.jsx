@@ -6,8 +6,8 @@ import Circles from "../../components/UI/circle/Circles";
 import MyDropzone from "./Dropzone";
 import Logo from "../../icons/File.png";
 import {ToastContainer} from "react-toastify";
-import TextEditorLeft from "../../components/TextEditor/TextEditorLeft";
-import TextEditorRight from "../../components/TextEditor/TextEditorRight";
+import EditorRight from "../../components/TextEditor/TextEditorRight";
+import EditorLeft from "../../components/TextEditor/TextEditorLeft";
 
 const FileComparator = () => {
 
@@ -57,7 +57,7 @@ const FileComparator = () => {
                             </div>
                             <div className={classesF.firstDrop} >
                                 {isUploadFileFirst ? <div/> : <MyDropzone isUpload={isUpload} setComparedFiles={setComparedFiles}/>}
-                                {isUploadFileFirst && isCompared ? <TextEditorLeft file={leftFile}/> : <div/>}
+                                {isUploadFileFirst && isCompared ? <EditorLeft file={leftFile}/> : <div/>}
                                 {isUploadFileFirst && !isCompared ? <div/> : <div/>}
                             </div>
                         </div>
@@ -67,7 +67,7 @@ const FileComparator = () => {
                             </div>
                             <div className={classesF.secondDrop}>
                                 {isUploadFileSecond ? <div/> : <MyDropzone isUpload={isUpload} setComparedFiles={setComparedFiles}/>}
-                                {isUploadFileSecond && isCompared ? <TextEditorRight file={rightFile}/> : <div/>}
+                                {isUploadFileSecond && isCompared ? <EditorRight file={rightFile}/> : <div/>}
                                 {isUploadFileSecond && !isCompared ? <div/> : <div/>}
                             </div>
                         </div>
