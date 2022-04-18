@@ -25,7 +25,7 @@ class EditorRight extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            text: '<span style="background-color: #45EA85"> </span>'
+            text: this.props.file
         };
     }
 
@@ -35,7 +35,6 @@ class EditorRight extends React.Component {
                 <ReactQuill
                     value={this.state.text}
                     onChange={(val) => {
-                        console.log(this.props.file)
                         this.setState({
                             text: val
                         });

@@ -13,23 +13,29 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.util.List;
 
+import static com.slipenk.filecomparator.Constants.*;
+
 
 @RestController
-@RequestMapping("berulia")
+@RequestMapping(BERULIA)
 @AllArgsConstructor
 public class ComparingFilesController {
 
     public static final String DIR = "src/main/resources/filesToCompare";
     private static final String BORDER = "End File1  bordeeeeeer Start File2";
+    private static final String PATH = "uploadFile";
+    private static final String PARAM = "file";
+    private static final String FILE_NAME = "compare.txt";
+
 
     ComparingFilesService comparingFilesService;
 
-    @PostMapping(path = "uploadFile",
+    @PostMapping(path = PATH,
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<byte[]> uploadFile(@RequestParam("file") MultipartFile multipartFile) {
+    public ResponseEntity<byte[]> uploadFile(@RequestParam(PARAM) MultipartFile multipartFile) {
         try {
-            File convFile = new File(DIR + "/" + multipartFile.getOriginalFilename());
+            File convFile = new File(DIR + SLASH + multipartFile.getOriginalFilename());
             try(InputStream is = multipartFile.getInputStream()) {
                 Files.copy(is, convFile.toPath());
             }
@@ -39,7 +45,7 @@ public class ComparingFilesController {
             if(!filesList.isEmpty()) {
                 HttpHeaders httpHeaders = new HttpHeaders();
                 httpHeaders.set(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_OCTET_STREAM_VALUE);
-                httpHeaders.set(HttpHeaders.CONTENT_DISPOSITION, ContentDisposition.attachment().filename("compare.txt").build().toString());
+                httpHeaders.set(HttpHeaders.CONTENT_DISPOSITION, ContentDisposition.attachment().filename(FILE_NAME).build().toString());
 
                 byte[] bytes1 = FileUtils.readFileToByteArray(filesList.get(0));
                 byte[] bytes2 = FileUtils.readFileToByteArray(filesList.get(1));
@@ -58,7 +64,7 @@ public class ComparingFilesController {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return ResponseEntity.ok().body("".getBytes());
+        return ResponseEntity.ok().body(EMPTY_STRING.getBytes());
     }
 
     void clearDirectory() {

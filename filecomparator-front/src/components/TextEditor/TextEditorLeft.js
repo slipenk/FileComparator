@@ -2,6 +2,7 @@ import React from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "./StyleSize.css";
+import classes from "./TextEditor.module.css";
 
 
 const modules = {
@@ -25,7 +26,7 @@ class EditorLeft extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            text: '<span style="background-color: red;">test</span>'
+            text: this.props.file
         };
     }
 
@@ -35,7 +36,7 @@ class EditorLeft extends React.Component {
 
     render() {
         return (
-            <div data-text-editor="form-editor">
+            <div className={classes.textDiv} data-text-editor="form-editor">
                 <ReactQuill
                     value={this.state.text}
                     onChange={(val) => {
@@ -45,7 +46,11 @@ class EditorLeft extends React.Component {
                     }}
                     bounds={`[data-text-editor="form-editor"]`}
                     modules={modules}
-                />
+                >
+                <div className={classes.quillText} >
+
+                </div>
+                </ReactQuill>
             </div>
         );
     }

@@ -32,10 +32,10 @@ const FileComparator = () => {
     const setComparedFiles = (value) => {
         counter++;
         if(counter === 1)  {
-            setLefFile(value);
+            setLefFile(value.replace(/`/g, '"'));
         } else if(counter === 2) {
             counter = 0;
-            setRightFile(value);
+            setRightFile(value.replace(/`/g, '"'));
             setIsCompared(true);
         }
     }
