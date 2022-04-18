@@ -1,6 +1,6 @@
 import React, {useCallback} from "react";
 import {useDropzone} from "react-dropzone";
-import "./Dropzone.module.css";
+import classes from "./Dropzone.module.css";
 import axios from "../../API/axios";
 import diffToast from "../../Toast/Toast";
 
@@ -51,8 +51,8 @@ export default function MyDropzone({isUpload, setComparedFiles}) {
             <input {...getInputProps()} />
             {
                 isDragActive ?
-                    <p>Перетягніть файл сюди ...</p> :
-                    <p>Перетягніть ваш документ<br/> сюди або натисність на<br/> іконку, щоб вибрати файл</p>
+                    <p className={classes.DropZoneItem}>Перетягніть файл сюди ...</p> :
+                    <p className={classes.DropZoneItem}>Перетягніть ваш документ<br/> сюди або натисність на<br/> іконку, щоб вибрати файл</p>
             }
         </div>
     )

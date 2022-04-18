@@ -1,9 +1,9 @@
-p {
+.DropZoneItem {
     color: #888888;
     text-align: center;
     font-size: 1.5vw;
 }
 
-p:hover {
+.DropZoneItem:hover {
    color: #454444;
 }

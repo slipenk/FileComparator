@@ -1,20 +1,3 @@
-.opp {
-    color: #888888;
-    background-color: #FFFCE2;
-    margin-left: 0.22vw;
-    margin-bottom: 0.4vw;
-    border: 0.3vh solid black;
-    font-size: 1vw;
-}
-.opp:hover {
-    color: #454444;
-}
-.alignItems {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
 .textDiv {
     width: 42vw;
     height: 25vw;
@@ -33,4 +16,8 @@
     border: 0.6vh solid black;
     overflow-y: auto;
     font-size: 1vw;
+    color: black;
+    text-align: justify;
 }
+
+

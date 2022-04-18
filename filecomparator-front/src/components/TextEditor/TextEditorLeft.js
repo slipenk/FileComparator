@@ -30,10 +30,6 @@ class EditorLeft extends React.Component {
         };
     }
 
-    handleChange(value) {
-        this.setState({ text: value });
-    }
-
     render() {
         return (
             <div className={classes.textDiv} data-text-editor="form-editor">
