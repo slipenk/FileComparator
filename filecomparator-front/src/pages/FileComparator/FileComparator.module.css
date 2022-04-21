@@ -12,9 +12,22 @@
 }
 .firstDrop {
     width: 42vw;
+    position: absolute;
+    bottom: 0;
+    left: -0.1vw;
+}
+.image {
+    width: 42vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20vh;
 }
 .secondDrop {
     width: 42vw;
+    position: absolute;
+    bottom: 0;
+    right: 0.5vw;
 }
 .FileImage {
     width: 5vw;

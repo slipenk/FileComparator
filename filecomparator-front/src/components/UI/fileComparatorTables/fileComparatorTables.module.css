@@ -1,0 +1,56 @@
+.tableRow {
+    height: 1vh;
+}
+.tableTable {
+    border: 0.3vh solid black;
+    width: 42.6vw;
+    font-size: 1vw;
+}
+.iconTable {
+    width: 1.5vw;
+}
+.thFirst {
+    width: 4vw;
+    border-right: 0.3vh solid black;
+}
+.thFirstTopTable {
+    width: 42.1vw;
+    border-right: 0.5vh solid black;
+}
+.thFirstUp {
+    width: 14vw;
+    border-right: 0.3vh solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: right;
+}
+.thSecond {
+    width: 33vw;
+    border-right: 0.3vh solid black;
+}
+.thThird {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.tableTableLeft {
+    position: absolute;
+    top: 14.7vh;
+    left: -0.05vw;
+}
+.tableTableRight {
+    position: absolute;
+    top: 14.7vh;
+    right: -0.15vw;
+}
+.unionTable {
+    position: absolute;
+    top: 0;
+}
+.tableTableUnion {
+    border: 0.3vh solid black;
+    width: 85.3vw;
+    height: 15vh;
+    font-size: 1vw;
+}
