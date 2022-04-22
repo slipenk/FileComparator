@@ -9,7 +9,7 @@ const fileComparatorTables = ({value}) => {
                 <tr className={classes.tableRow}>
                     <th className={classes.thFirst}>300 слів</th>
                     <th className={classes.thFirst}>300 розділових знаків</th>
-                    <th className={classes.thFirst}>300 абзаців</th>
+                    <th className={classes.thFirst}>300 символів</th>
                     <th className={classes.thFirst}>300 паліндромів</th>
                     <th>Зберегти</th>
                 </tr>

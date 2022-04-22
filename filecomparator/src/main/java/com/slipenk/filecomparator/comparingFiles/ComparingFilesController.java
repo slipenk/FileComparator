@@ -27,8 +27,7 @@ public class ComparingFilesController {
     private static final String PARAM = "file";
     private static final String FILE_NAME = "compare.txt";
 
-
-    ComparingFilesService comparingFilesService;
+    private ComparingFilesService comparingFilesService;
 
     @PostMapping(path = PATH,
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
