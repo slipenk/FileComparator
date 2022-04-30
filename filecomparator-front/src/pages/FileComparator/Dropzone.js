@@ -32,15 +32,8 @@ export default function MyDropzone({isUpload, setComparedFiles}) {
                 setComparedFiles(files[1]);
             }
         }
-        ).catch((err) => {
-            console.log(err.response.data)
-            /*if(err.response.data) {
-                const object = JSON.stringify(err.response.data);
-                const message = object.split(":")[1];
-                diffToast(message.slice(1, -2));
-            } else { */
-                diffToast("Помилка при порівнянні файлів");
-           // }
+        ).catch(() => {
+            diffToast("Помилка при порівнянні файлів");
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])

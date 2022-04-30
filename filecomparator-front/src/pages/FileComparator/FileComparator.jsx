@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import classes from "../../FormStyle/FormStyle.module.css";
 import classesM from "../Menu/Menu.module.css";
 import classesF from "./FileComparator.module.css";
@@ -11,39 +11,13 @@ import EditorLeft from "../../components/TextEditor/TextEditorLeft";
 import FileComparatorTables from "../../components/UI/fileComparatorTables/fileComparatorTables";
 import classesT from "../../components/UI/fileComparatorTables/fileComparatorTables.module.css"
 import UnionTable from "../../components/UI/fileComparatorTables/UnionTable";
+import useFileComparator from "./useFileComparator";
+
+
 
 const FileComparator = () => {
 
-    const [isUploadFileFirst, SetIsUploadFileFirst] = useState(false);
-    const [isUploadFileSecond, SetIsUploadFileSecond] = useState(false);
-    const [isCompared, setIsCompared] = useState(false);
-    const [leftFile, setLefFile] = useState("");
-    const [rightFile, setRightFile] = useState("");
-
-    let counter = 0;
-
-    const isUpload = (value) => {
-        counter++;
-        if(counter === 1)  {
-            SetIsUploadFileFirst(value);
-        } else if(counter === 2) {
-            counter = 0;
-            SetIsUploadFileSecond(value);
-        }
-    }
-
-    const setComparedFiles = (value) => {
-        counter++;
-        if(counter === 1)  {
-            setLefFile(value.replace(/`/g, '"'));
-        } else if(counter === 2) {
-            counter = 0;
-            setRightFile(value.replace(/`/g, '"'));
-            setIsCompared(true);
-        }
-    }
-
-
+    const {isCompared, leftFile, rightFile, isUploadFileFirst, isUploadFileSecond, isUpload, setComparedFiles} = useFileComparator();
 
     return (
         <div>

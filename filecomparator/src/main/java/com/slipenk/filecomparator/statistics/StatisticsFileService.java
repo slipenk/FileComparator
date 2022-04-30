@@ -11,10 +11,10 @@ import java.util.Scanner;
 
 @Service
 @AllArgsConstructor
-public class StatisticsService {
+public class StatisticsFileService {
 
-    public void getStatisticsFile_1(File file) {
-        List<Integer> listStatistics = countStatistics(file);
+    public List<Integer> getStatisticsFile(File file) {
+        return countStatistics(file);
     }
 
     private List<Integer> countStatistics(File file) {
@@ -23,8 +23,12 @@ public class StatisticsService {
             List<Integer> listStatistics = new ArrayList<>();
             int wordCount = 0;
             int punctuationCount = 0;
+            int charactersCount = 0;
+            int palindromeCount = 0;
+
             while (input.hasNextLine()) {
                 String nextLine = input.nextLine();
+                charactersCount += nextLine.length();
 
                 punctuationCount += nextLine.chars().filter(ch -> ch == '-' | ch == '.' | ch == ',' | ch == ';' | ch == ':'
                         | ch == '–' | ch == '—' | ch == '…' | ch == '!' | ch == '?' | ch == '‘' | ch == '’' | ch == '«'
@@ -37,17 +41,40 @@ public class StatisticsService {
 
                 while(word.hasNext()) {
                     wordCount++;
-                    word.next();
+                    String wordForPalindrome = word.next();
+                    if(isPalindrome(wordForPalindrome)) {
+                        ++palindromeCount;
+                    }
                 }
                 word.close();
             }
             input.close();
             listStatistics.add(wordCount);
             listStatistics.add(punctuationCount);
+            listStatistics.add(charactersCount);
+            listStatistics.add(palindromeCount);
             return listStatistics;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return Collections.emptyList();
         }
     }
+
+    private boolean isPalindrome(String str)
+    {
+        int i = 0, j = str.length() - 1;
+
+        while (i < j) {
+
+            if (str.charAt(i) != str.charAt(j)) {
+                return false;
+            }
+
+            ++i;
+            --j;
+        }
+
+        return true;
+    }
+
 }
