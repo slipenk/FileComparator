@@ -10,28 +10,43 @@ const useFileComparator = () => {
     const [isCompared, setIsCompared] = useState(false);
     const [leftFile, setLefFile] = useState("");
     const [rightFile, setRightFile] = useState("");
+    const [leftFileName, setLefFileName] = useState("");
+    const [rightFileName, setRightFileName] = useState("");
+    const [statistics, setStatistics] = useState([]);
 
-    let counter = 0;
+    let counterIsUpload = 0;
+    let counterSetComparedFiles = 0;
+    let counterSetFileName = 0;
 
     const isUpload = (value) => {
-        counter++;
-        if(counter === 1)  {
+        counterIsUpload++;
+        if(counterIsUpload === 1)  {
             SetIsUploadFileFirst(value);
-        } else if(counter === 2) {
-            counter = 0;
+        } else if(counterIsUpload === 2) {
+            counterIsUpload = 0;
             SetIsUploadFileSecond(value);
         }
     }
 
     const setComparedFiles = (value) => {
-        counter++;
-        if(counter === 1)  {
+        counterSetComparedFiles++;
+        if(counterSetComparedFiles === 1)  {
             setLefFile(value.replace(/`/g, '"'));
-        } else if(counter === 2) {
-            counter = 0;
+        } else if(counterSetComparedFiles === 2) {
+            counterSetComparedFiles = 0;
             setRightFile(value.replace(/`/g, '"'));
             setIsCompared(true);
             getStatistics();
+        }
+    }
+
+    const setFileName = (value) => {
+        counterSetFileName++;
+        if(counterSetFileName === 1)  {
+            setLefFileName(value);
+        } else if(counterSetFileName === 2) {
+            counterSetFileName = 0;
+            setRightFileName(value);
         }
     }
 
@@ -43,17 +58,17 @@ const useFileComparator = () => {
             method: 'GET',
         }).then((response) => {
                 if(response.data) {
-                    console.log("response.data  " + response.data);
+                    setStatistics(response.data);
                 }
             }
-        ).catch((err) => {
-            console.log(err)
+        ).catch(() => {
             diffToast("Помилка при отриманні статистики");
         })
     }
 
 
-    return { isCompared, leftFile, rightFile, isUploadFileFirst, isUploadFileSecond, isUpload, setComparedFiles};
+    return { isCompared, leftFile, rightFile, isUploadFileFirst, isUploadFileSecond, isUpload, setComparedFiles, setFileName, statistics,
+        leftFileName, rightFileName};
 
 }
 

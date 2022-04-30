@@ -5,12 +5,14 @@ import axios from "../../API/axios";
 import diffToast from "../../Toast/Toast";
 
 
-export default function MyDropzone({isUpload, setComparedFiles}) {
+export default function MyDropzone({isUpload, setComparedFiles, setFileName}) {
     const UPLOAD_FILE_URL = "/berulia/uploadFile";
     const BORDER = "End File1  bordeeeeeer Start File2";
 
     const onDrop = useCallback(acceptedFiles => {
         const file = acceptedFiles[0];
+
+        setFileName(file.path);
 
         const formData = new FormData();
         formData.append("file", file);

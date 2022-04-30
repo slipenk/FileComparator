@@ -17,7 +17,7 @@ import useFileComparator from "./useFileComparator";
 
 const FileComparator = () => {
 
-    const {isCompared, leftFile, rightFile, isUploadFileFirst, isUploadFileSecond, isUpload, setComparedFiles} = useFileComparator();
+    const {isCompared, leftFile, rightFile, isUploadFileFirst, isUploadFileSecond, isUpload, setComparedFiles, setFileName, statistics, leftFileName, rightFileName} = useFileComparator();
 
     return (
         <div>
@@ -26,12 +26,12 @@ const FileComparator = () => {
                     <div className={classesF.flexDivRow}>
                         <UnionTable/>
                         <div className={classesF.flexDivCol}>
-                            <FileComparatorTables value={classesT.tableTableLeft}/>
+                            <FileComparatorTables value={classesT.tableTableLeft} statistics={statistics} isFirstFile={true} fileName={leftFileName}/>
                             <div className={classesF.flexDivCol}>
                                 <div className={classesF.image}>
                                     {isUploadFileFirst ? <div/> : <img className={classesF.FileImage} src={Logo} alt={"Файл"}/>}
                                 </div>
-                                {isUploadFileFirst ? <div/> : <MyDropzone isUpload={isUpload} setComparedFiles={setComparedFiles}/>}
+                                {isUploadFileFirst ? <div/> : <MyDropzone isUpload={isUpload} setComparedFiles={setComparedFiles} setFileName={setFileName}/>}
                                 <div className={classesF.firstDrop} >
                                     {isUploadFileFirst && isCompared ? <EditorLeft file={leftFile}/> : <div/>}
                                     {isUploadFileFirst && !isCompared ? <div/> : <div/>}
@@ -39,12 +39,12 @@ const FileComparator = () => {
                             </div>
                         </div>
                         <div className={classesF.flexDivCol}>
-                            <FileComparatorTables value={classesT.tableTableRight}/>
+                            <FileComparatorTables value={classesT.tableTableRight} statistics={statistics} isFirstFile={false} fileName={rightFileName}/>
                             <div className={classesF.flexDivCol}>
                                 <div className={classesF.image}>
                                  {isUploadFileSecond ? <div/> : <img className={classesF.FileImage} src={Logo} alt={"Файл"}/>}
                                 </div>
-                                {isUploadFileSecond ? <div/> : <MyDropzone isUpload={isUpload} setComparedFiles={setComparedFiles}/>}
+                                {isUploadFileSecond ? <div/> : <MyDropzone isUpload={isUpload} setComparedFiles={setComparedFiles} setFileName={setFileName}/>}
                                 <div className={classesF.secondDrop}>
                                     {isUploadFileSecond && isCompared ? <EditorRight file={rightFile}/> : <div/>}
                                     {isUploadFileSecond && !isCompared ? <div/> : <div/>}

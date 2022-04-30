@@ -6,7 +6,7 @@ const UnionTable = () => {
         <div className={classesT.unionTable}>
             <table className={classesT.tableTableUnion}>
                 <tbody>
-                    <tr className={classesT.tableRow}>
+                    <tr>
                         <th className={classesT.thFirstTopTable}>300 змін</th>
                         <th>Однаково - 70%; зміни - 20%</th>
                     </tr>
