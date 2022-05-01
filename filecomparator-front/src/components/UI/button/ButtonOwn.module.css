@@ -4,11 +4,11 @@
     font-size: 1.5vw;
     font-family: 'Kurale', serif;
     background: rgba(142, 255, 139, 47);
-    border: 0.6vh solid black;
+    border: 0.2925vw solid black;
     cursor: pointer;
-    border-radius: 10vh;
+    border-radius: 4.875vw;
     width: 20vw;
-    height: 9vh;
+    height: 4.375vw;
 }
 .myBtn:hover {
     background: rgba(198, 255, 197, 30);

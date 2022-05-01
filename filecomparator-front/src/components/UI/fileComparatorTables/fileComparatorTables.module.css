@@ -1,39 +1,39 @@
 .tableTable {
-    border: 0.3vh solid black;
+    border: 0.14625vw solid black;
     width: 42.6vw;
     font-size: 1vw;
 }
 .tableTableStat_1 {
-    height: 9vh;
+    height: 4.3875vw;
 }
 .tableTableStat_2 {
-    height: 4vh;
+    height: 1.95vw;
 }
 .iconTable {
     width: 1.5vw;
 }
 .thFirst {
     width: 4vw;
-    border-right: 0.3vh solid black;
+    border-right: 0.14625vw solid black;
 }
 .thFirstStat {
     width: 7vw;
-    border-right: 0.3vh solid black;
+    border-right: 0.14625vw solid black;
 }
 .thFirstTopTable {
     width: 42.1vw;
-    border-right: 0.5vh solid black;
+    border-right: 0.24375vw solid black;
 }
 .thFirstUp {
     width: 14vw;
-    border-right: 0.3vh solid black;
+    border-right: 0.14625vw solid black;
     display: flex;
     flex-direction: column;
     justify-content: right;
 }
 .thSecond {
     width: 33vw;
-    border-right: 0.3vh solid black;
+    border-right: 0.14625vw solid black;
 }
 .thThird {
     display: flex;
@@ -43,21 +43,21 @@
 }
 .tableTableLeft {
     position: absolute;
-    top: 14.5vh;
+    top: 7.06875vw;
     left: -0.05vw;
 }
 .tableTableRight {
     position: absolute;
-    top: 14.5vh;
+    top: 7.06875vw;
     right: -0.15vw;
 }
 .unionTable {
     position: absolute;
-    top: -0.1vh;
+    top: -0.04875000000000001vw;
 }
 .tableTableUnion {
-    border: 0.3vh solid black;
+    border: 0.14625vw solid black;
     width: 85.3vw;
-    height: 15.1vh;
+    height: 7.36125vw;
     font-size: 1vw;
 }

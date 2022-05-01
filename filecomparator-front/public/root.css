@@ -1,7 +1,8 @@
 body {
     margin: 0;
     padding: 0;
-    height: 100vh;
+    height: 720px;
+    overflow-y: scroll;
     background: linear-gradient(
             -45deg,
             rgba(255, 116, 116, 0.82) 0%,

@@ -1,7 +1,7 @@
 .textDiv {
     width: 42vw;
-    height: 56vh;
-    border: 0.6vh solid black;
+    height: 26.5vw;
+    border: 0.2925vw solid black;
     overflow-y: auto;
     font-size: 1vw;
 }
@@ -12,8 +12,8 @@
     align-items: center;
 }
 .quillText {
-    height: 50vh;
-    border: 0.6vh solid black;
+    height: 24.375vw;
+    border: 0.2925vw solid black;
     overflow-y: auto;
     font-size: 1vw;
     color: black;

@@ -3,7 +3,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    height: 85vh;
+    height: 41.4375vw;
     width: 85vw;
 }
 .flexCol {
@@ -17,10 +17,10 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    border-bottom: 0.6vh solid black;
+    border-bottom: 0.2925vw solid black;
 }
 .RowDiv {
-    height: 43vh;
+    height: 20.9625vw;
     display: flex;
     align-items: center;
     justify-content: center;
