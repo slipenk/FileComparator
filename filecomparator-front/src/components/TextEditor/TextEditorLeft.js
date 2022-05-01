@@ -5,6 +5,7 @@ import "./StyleSize.css";
 import classes from "./TextEditor.module.css";
 
 
+
 const modules = {
     clipboard: {
         matchVisual: false
@@ -30,16 +31,21 @@ class EditorLeft extends React.Component {
         };
     }
 
+     handleChange (value) {
+        setTimeout(() => {
+            this.setState({
+                text: value
+            });
+            }
+        )
+    }
+
     render() {
         return (
             <div className={classes.textDiv} data-text-editor="form-editor">
                 <ReactQuill
-                    value={this.state.text}
-                    onChange={(val) => {
-                        this.setState({
-                            text: val
-                        });
-                    }}
+                    defaultValue={this.state.text}
+                    onChange={this.handleChange.bind(this)}
                     bounds={`[data-text-editor="form-editor"]`}
                     modules={modules}
                 >
