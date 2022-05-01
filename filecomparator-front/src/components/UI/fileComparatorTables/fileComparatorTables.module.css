@@ -21,8 +21,14 @@
     border-right: 0.14625vw solid black;
 }
 .thFirstTopTable {
-    width: 42.1vw;
-    border-right: 0.24375vw solid black;
+    width: 7vw;
+    border-right: 0.14625vw solid black;
+}
+.thFirstCol {
+    padding-left: 2vw;
+}
+.thLastCol {
+    padding-right: 2.3vw;
 }
 .thFirstUp {
     width: 14vw;

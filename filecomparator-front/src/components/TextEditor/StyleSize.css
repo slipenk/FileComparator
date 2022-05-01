@@ -42,5 +42,25 @@
     white-space: pre-wrap;
     word-wrap: break-word;
 }
+.ql-snow.ql-toolbar button,
+.ql-snow .ql-toolbar button {
+    height: 1.875vw;
+    width: 2.1875vw;
+}
+.ql-snow .ql-picker {
+    font-size: 1.09375vw;
+    height: 1.875vw;
+}
+.ql-snow .ql-picker-label::before {
+    line-height: 1.71875vw
+}
+.ql-snow .ql-color-picker,
+.ql-snow .ql-icon-picker {
+    width: 2.1875vw;
+}
+.ql-snow .ql-icon-picker .ql-picker-item {
+    height: 1.875vw;
+    width: 1.875vw;
+}
 
 

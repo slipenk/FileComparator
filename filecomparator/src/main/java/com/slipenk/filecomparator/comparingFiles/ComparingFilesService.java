@@ -5,9 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.stereotype.Service;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
+
+import static com.slipenk.filecomparator.comparingFiles.FileCommandsVisitor.countChanges;
 
 @Service
 @AllArgsConstructor
@@ -32,7 +35,16 @@ public class ComparingFilesService {
 
         try {
             listFiles.clear();
-            return fileDifference.FileDiff(fileLeft, fileRight);
+
+            List<File> files = fileDifference.FileDiff(fileLeft, fileRight);
+
+            List<Integer> unionStatistics = new ArrayList<>();
+            unionStatistics.add(countChanges);
+            countChanges = 0;
+
+
+
+            return files;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return Collections.emptyList();

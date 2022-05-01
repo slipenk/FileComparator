@@ -24,6 +24,7 @@ public class FileCommandsVisitor implements CommandVisitor<Character> {
 
     private String left = "";
     private String right = "";
+    public static int countChanges = 0;
 
     @Override
     public void visitKeepCommand(Character c) {
@@ -36,12 +37,14 @@ public class FileCommandsVisitor implements CommandVisitor<Character> {
     public void visitInsertCommand(Character c) {
         String append = NEW_ROW.equals(EMPTY_STRING + c) ? BR_ROW : EMPTY_STRING + c;
         right = right + INSERT_CHARS.replace(REPLACEMENT, EMPTY_STRING + append);
+        ++countChanges;
     }
 
     @Override
     public void visitDeleteCommand(Character c) {
         String toAppend = NEW_ROW.equals(EMPTY_STRING + c) ? BR_ROW : EMPTY_STRING + c;
         left = left + DELETE_CHARS.replace(REPLACEMENT, EMPTY_STRING + toAppend);
+        ++countChanges;
     }
 
     public List<File> generateTextInHTML() throws IOException {

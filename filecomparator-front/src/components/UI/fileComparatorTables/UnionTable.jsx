@@ -7,8 +7,10 @@ const UnionTable = () => {
             <table className={classesT.tableTableUnion}>
                 <tbody>
                     <tr>
-                        <th className={classesT.thFirstTopTable}>300 змін</th>
-                        <th>Однаково - 70%; зміни - 20%</th>
+                        <th className={classesT.thFirstTopTable + " " + classesT.thFirstCol}>Кількість змін:<br/> 300</th>
+                        <th className={classesT.thFirstTopTable}>Кількість видалень:<br/> 300</th>
+                        <th className={classesT.thFirstTopTable}>Кількість додавань:<br/> 300</th>
+                        <th className={classesT.thFirstTopTable + " " + classesT.thLastCol}>Однакових символів:<br/> 300</th>
                     </tr>
                 </tbody>
             </table>
