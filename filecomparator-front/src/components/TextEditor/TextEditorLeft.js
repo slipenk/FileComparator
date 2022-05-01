@@ -31,13 +31,10 @@ class EditorLeft extends React.Component {
         };
     }
 
-     handleChange (value) {
-        setTimeout(() => {
-            this.setState({
-                text: value
-            });
-            }
-        )
+    handleChange (value) {
+        this.setState({
+            text: value
+        });
     }
 
     render() {
