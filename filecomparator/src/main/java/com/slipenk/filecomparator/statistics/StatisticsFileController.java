@@ -1,7 +1,5 @@
 package com.slipenk.filecomparator.statistics;
 
-
-import com.slipenk.filecomparator.comparingFiles.ComparingFilesService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,12 +16,12 @@ import static com.slipenk.filecomparator.Constants.CONSUMES_PRODUCES;
 public class StatisticsFileController {
 
     private static final String PATH = "statistics_file";
-    private final ComparingFilesService comparingFilesService;
+    private final StatisticsFileService statisticsFileService;
 
 
     @GetMapping(path = PATH,
             produces = CONSUMES_PRODUCES)
     public ResponseEntity<List<Integer>> getStatisticsFiles() {
-        return ResponseEntity.ok().body(comparingFilesService.getListStatisticsTwoFiles());
+        return ResponseEntity.ok().body(statisticsFileService.getListStatisticsTwoFiles());
     }
 }

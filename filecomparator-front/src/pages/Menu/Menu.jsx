@@ -3,7 +3,6 @@ import classes from "../../FormStyle/FormStyle.module.css";
 import classesM from "./Menu.module.css";
 import CompareFirst from "../../icons/CompareFirst.png";
 import CompareSecond from "../../icons/CompareSecond.png";
-import Document from "../../icons/Documents.png";
 import Circles from "../../components/UI/circle/Circles";
 import MenuIcons from "../../components/UI/menuIcons/MenuIcons";
 
@@ -18,11 +17,8 @@ const Menu = () => {
                 <div className={classesM.flexCol}>
                     <div className={classesM.flexRow}>
                         <MenuIcons logo={CompareFirst} value={"Порівняння файлів"} border={'0.6vh solid black'} path={"/comparator"}/>
-                        <MenuIcons logo={Document} value={"Перевірка коду на плагіат"} border={'0.6vh solid black'} path={"*"}/>
+                        <MenuIcons logo={CompareSecond} value={"Останні порівняння"} border={null} path={"*"}/>
                     </div>
-                <div className={classesM.RowDiv}>
-                    <MenuIcons logo={CompareSecond} value={"Останні порівняння"} border={null} path={"*"}/>
-                </div>
                 </div>
             </div>
 

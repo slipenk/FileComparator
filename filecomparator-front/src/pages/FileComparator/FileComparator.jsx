@@ -24,7 +24,7 @@ const FileComparator = () => {
             <div className={classes.MainDiv + " " + classesF.overMainDiv}>
                 <div className={classesM.flexDivMenu}>
                     <div className={classesF.flexDivRow}>
-                        <UnionTable/>
+                        <UnionTable statistics={statistics}/>
                         <div className={classesF.flexDivCol}>
                             <FileComparatorTables value={classesT.tableTableLeft} statistics={statistics} isFirstFile={true} fileName={leftFileName}/>
                             <div className={classesF.flexDivCol}>

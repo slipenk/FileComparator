@@ -24,13 +24,19 @@ public class FileCommandsVisitor implements CommandVisitor<Character> {
 
     private String left = "";
     private String right = "";
-    public static int countChanges = 0;
+    private int countChanges = 0;
+    private int countDeletions = 0;
+    private int countAdditions = 0;
+    private int countSimilarSymbols = 0;
 
     @Override
     public void visitKeepCommand(Character c) {
         String append = NEW_ROW.equals(EMPTY_STRING + c) ? BR_ROW : EMPTY_STRING + c;
         left = left + append;
         right = right + append;
+        if (append.equals(EMPTY_STRING + c)) {
+            ++countSimilarSymbols;
+        }
     }
 
     @Override
@@ -38,6 +44,7 @@ public class FileCommandsVisitor implements CommandVisitor<Character> {
         String append = NEW_ROW.equals(EMPTY_STRING + c) ? BR_ROW : EMPTY_STRING + c;
         right = right + INSERT_CHARS.replace(REPLACEMENT, EMPTY_STRING + append);
         ++countChanges;
+        ++countAdditions;
     }
 
     @Override
@@ -45,9 +52,10 @@ public class FileCommandsVisitor implements CommandVisitor<Character> {
         String toAppend = NEW_ROW.equals(EMPTY_STRING + c) ? BR_ROW : EMPTY_STRING + c;
         left = left + DELETE_CHARS.replace(REPLACEMENT, EMPTY_STRING + toAppend);
         ++countChanges;
+        ++countDeletions;
     }
 
-    public List<File> generateTextInHTML() throws IOException {
+    public List<File> createComparedFiles() throws IOException {
         File tmpFileLeft = new File(DIR + SLASH + LEFT_FILE);
         File tmpFileRight = new File(DIR + SLASH + RIGHT_FILE);
         FileWriter writerLeft = new FileWriter(tmpFileLeft);
@@ -64,5 +72,20 @@ public class FileCommandsVisitor implements CommandVisitor<Character> {
         listFiles.add(tmpFileLeft);
         listFiles.add(tmpFileRight);
         return listFiles;
+    }
+
+    public List<Integer> getStatisticsOfComparing() {
+        List<Integer> listStatistics = new ArrayList<>();
+
+        listStatistics.add(countChanges);
+        countChanges = 0;
+        listStatistics.add(countDeletions);
+        countDeletions = 0;
+        listStatistics.add(countAdditions);
+        countAdditions = 0;
+        listStatistics.add(countSimilarSymbols);
+        countSimilarSymbols = 0;
+
+        return listStatistics;
     }
 }

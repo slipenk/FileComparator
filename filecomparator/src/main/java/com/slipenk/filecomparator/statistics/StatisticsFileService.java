@@ -1,6 +1,8 @@
 package com.slipenk.filecomparator.statistics;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -11,7 +13,11 @@ import java.util.Scanner;
 
 @Service
 @AllArgsConstructor
+@Getter
+@Setter
 public class StatisticsFileService {
+
+    private List<Integer> listStatisticsTwoFiles;
 
     public List<Integer> getStatisticsFile(File file) {
         return countStatistics(file);

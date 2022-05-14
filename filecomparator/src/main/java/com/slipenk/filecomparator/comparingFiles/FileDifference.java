@@ -40,6 +40,10 @@ public class FileDifference {
             }
         }
 
-       return fileCommandsVisitor.generateTextInHTML();
+       return fileCommandsVisitor.createComparedFiles();
+    }
+
+    public List<Integer> getStatisticsOfComparing() {
+            return fileCommandsVisitor.getStatisticsOfComparing();
     }
 }

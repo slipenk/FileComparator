@@ -1,16 +1,16 @@
 import React from "react";
 import classesT from "./fileComparatorTables.module.css";
 
-const UnionTable = () => {
+const UnionTable = ({statistics}) => {
     return (
         <div className={classesT.unionTable}>
             <table className={classesT.tableTableUnion}>
                 <tbody>
                     <tr>
-                        <th className={classesT.thFirstTopTable + " " + classesT.thFirstCol}>Кількість змін:<br/> 300</th>
-                        <th className={classesT.thFirstTopTable}>Кількість видалень:<br/> 300</th>
-                        <th className={classesT.thFirstTopTable}>Кількість додавань:<br/> 300</th>
-                        <th className={classesT.thFirstTopTable + " " + classesT.thLastCol}>Однакових символів:<br/> 300</th>
+                        <th className={classesT.thFirstTopTable + " " + classesT.thFirstCol}>{typeof(statistics) === 'undefined' ? <div> </div> : <div>Кількість змін:<br/> {statistics[8]}</div>}</th>
+                        <th className={classesT.thFirstTopTable}>{typeof(statistics) === 'undefined' ? <div> </div> : <div>Кількість видалень:<br/> {statistics[9]}</div>}</th>
+                        <th className={classesT.thFirstTopTable}>{typeof(statistics) === 'undefined' ? <div> </div> : <div>Кількість додавань:<br/> {statistics[10]}</div>}</th>
+                        <th className={classesT.thFirstTopTable + " " + classesT.thLastCol}>{typeof(statistics) === 'undefined' ? <div> </div> : <div>Однакових символів:<br/> {statistics[11]}</div>}</th>
                     </tr>
                 </tbody>
             </table>
