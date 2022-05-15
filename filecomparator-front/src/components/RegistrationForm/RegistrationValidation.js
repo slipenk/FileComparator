@@ -2,7 +2,7 @@ import validateInfoEmailPassword from "../Validation/Validation";
 
 export default function validateInfo(values) {
 
-    let errors = validateInfoEmailPassword(values)
+    let errors = validateInfoEmailPassword(values, false)
 
     if (!values.username.trim()) {
         errors.username = "Потрібно ввести ваше прізвисько"

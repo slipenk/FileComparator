@@ -10,10 +10,11 @@ export default function validateInfoEmailPassword(values, isForgotPass) {
     }
 
     if (!isForgotPass) {
+        console.log(values.password)
         if (!values.password) {
             errors.password = "Потрібно ввести ваш пароль"
-        } else if (!/^[A-z][A-z\d-_]{3,23}$/i.test(values.password)) {
-            errors.password = "Перевірте правильність написання пароля. Вимоги (мінімум): одна велика літера, одна маленька літера, одна цифра, один спеціальний символ. Довжина пароля: від 8 до 24 символів (лише латиниця)"
+        } else if (!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[\da-zA-Z]{8,}$/.test(values.password)) {
+            errors.password = "Перевірте правильність написання пароля. Вимоги (мінімум): одна велика літера, одна маленька літера, одна цифра. Довжина пароля: від 8 (лише латиниця)"
         }
     }
 

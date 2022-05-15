@@ -13,17 +13,25 @@ import 'tippy.js/dist/tippy.css'
 import { ToastContainer } from "react-toastify";
 
 
-const RegistrationForm = ({submitForm}) => {
+const RegistrationForm = ({submitForm, isRegistration}) => {
     const {handleChange, handleSubmit, values, errors, BCUsername, BCEmail, BCPassword, BCPasswordR, isToolTipUsername,
-        isToolTipEmail, isToolTipPassword, isToolTipPasswordR} = useRegistrationForm(submitForm, validate);
+        isToolTipEmail, isToolTipPassword, isToolTipPasswordR} = useRegistrationForm(submitForm, validate, isRegistration);
 
     return (
         <form onSubmit={handleSubmit} autoComplete="off">
             <div>
                 <div className={classes.col_h}>
-                    <h1>Реєстрація</h1>
+                    <div className={classes.divRow}>
+                        {isRegistration ? <div></div> : <div className={classes.alignButton}></div>}
+                        <h1>{isRegistration ? <div>Реєстрація</div> : <div>Особистий кабінет</div>}</h1>
+                    </div>
+                </div>
+                <div className={classes.divRow}>
+                    {isRegistration ? <div></div> : <div className={classes.alignTexts}></div>}
+                    {isRegistration ? <div></div> : <div className={classes.namesForPersonalAcc}>Змінення облікових даних</div>}
                 </div>
                 <div className={classes.col_input}>
+                    {isRegistration ? <div></div> : <div className={classes.namesForPersonalAcc}>Прізвисько:</div>}
                     <div className={classes.IMGContainer} style={{backgroundColor: BCUsername}}>
                         <div className={classes.alignCenterIMG} >
                             <img className={classes.IconInput} src={NameInput} alt="Прізвисько"/>
@@ -40,22 +48,25 @@ const RegistrationForm = ({submitForm}) => {
                     </div>
                 </div>
                 <div className={classes.col_input}>
+                    {isRegistration ? <div></div> :
+                        <div className={classes.namesForPersonalAcc}>Електронна пошта:</div>}
                     <div className={classes.IMGContainer} style={{backgroundColor: BCEmail}}>
                         <div className={classes.alignCenterIMG}>
                             <img className={classes.IconInput} src={EmailInput} alt="Електронна пошта"/>
                         </div>
                         <Tippy content={errors.email ? errors.email : ""} enabled={isToolTipEmail}>
                             <InputOwn type="text"
-                              placeholder="Електронна пошта"
-                              name="email"
-                              value={values.email}
-                              onChange={handleChange}
-                              autoComplete="off"
-                              style={{backgroundColor: BCEmail}}/>
+                                      placeholder="Електронна пошта"
+                                      name="email"
+                                      value={values.email}
+                                      onChange={handleChange}
+                                      autoComplete="off"
+                                      style={{backgroundColor: BCEmail}}/>
                         </Tippy>
                     </div>
                 </div>
                 <div className={classes.col_input}>
+                    {isRegistration ? <div></div> : <div className={classes.namesForPersonalAcc}>Пароль:</div>}
                     <div className={classes.IMGContainer} style={{backgroundColor: BCPassword}}>
                         <div className={classes.alignCenterIMG}>
                             <img className={classes.IconInput} src={PasswordInput} alt="Пароль"/>
@@ -72,6 +83,7 @@ const RegistrationForm = ({submitForm}) => {
                     </div>
                 </div>
                 <div className={classes.col_input}>
+                    {isRegistration ? <div></div> : <div className={classes.namesForPersonalAcc}>Повторіть пароль:</div>}
                     <div className={classes.IMGContainer} style={{backgroundColor: BCPasswordR}}>
                         <div className={classes.alignCenterIMG}>
                             <img className={classes.IconInput} src={RPasswordInput} alt="Повторіть пароль"/>
@@ -87,7 +99,10 @@ const RegistrationForm = ({submitForm}) => {
                         </Tippy>
                     </div>
                 </div>
-                <SubmitButtonForm value={"ЗАРЕЄСТРУВАТИСЯ"} />
+                <div className={classes.divRow}>
+                    {isRegistration ? <div></div> : <div className={classes.alignButton}></div> }
+                    {isRegistration ? <SubmitButtonForm value={"ЗАРЕЄСТРУВАТИСЯ"} /> : <SubmitButtonForm value={"ЗМІНИТИ"} />}
+                </div>
             </div>
             <ToastContainer className={classes.toast}/>
         </form>

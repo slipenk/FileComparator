@@ -94,4 +94,17 @@ public class UserService implements UserDetailsService {
     public void enableUser(String email) {
         userRepository.enableUser(email);
     }
+
+    public void updateUserData(UpdateDataRequest updateDataRequest) {
+        if(!updateDataRequest.getUsernameOld().equals(updateDataRequest.getUsernameNew())) {
+            userRepository.updateUsername(updateDataRequest.getID(), updateDataRequest.getUsernameNew());
+        }
+        if(!bCryptPasswordEncoder.matches(updateDataRequest.getPasswordNew(), updateDataRequest.getPasswordOld())) {
+            String encodedPassword = bCryptPasswordEncoder.encode(updateDataRequest.getPasswordNew());
+            userRepository.updatePassword(updateDataRequest.getID(), encodedPassword);
+        }
+        if(!updateDataRequest.getEmailOld().equals(updateDataRequest.getEmailNew())) {
+            userRepository.updateEmail(updateDataRequest.getID(), updateDataRequest.getEmailNew());
+        }
+    }
 }

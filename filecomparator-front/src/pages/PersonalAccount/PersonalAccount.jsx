@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import classes from '../../FormStyle/FormStyle.module.css';
 import classesM from "../Menu/Menu.module.css";
 import classesF from "./PersonalAccount.module.css";
@@ -8,10 +8,10 @@ import Circles from "../../components/UI/circle/Circles";
 
 
 const PersonalAccount = () => {
-    //const [isSubmitted, setIsSubmitted] = useState(false);
+    const [, setIsSubmitted] = useState(false);
 
     function submitForm(value) {
-        //setIsSubmitted(value);
+        setIsSubmitted(value);
     }
 
     return (
@@ -19,7 +19,7 @@ const PersonalAccount = () => {
             <div className={classesM.flexDivMenu}>
                 <Circles/>
                 <div className={classesF.alignForm}>
-                    <RegistrationForm submitForm={submitForm} />
+                    <RegistrationForm submitForm={submitForm} isRegistration={false} />
                 </div>
                 <div>
                     <img className={classesF.ImageDiv} src={InfoLogo} alt={"Логотип особистого акаунту"}/>

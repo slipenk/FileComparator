@@ -20,7 +20,7 @@ const Registration = () => {
                 {localStorage.setItem('IsMenu', 'false')}
                 <LogoName logo={Logo} value={"БЕРУЛЯ"}/>
                 <div>
-                    {!isSubmitted ? <RegistrationForm submitForm={submitForm} /> : <RegistrationSuccess/>}
+                    {!isSubmitted ? <RegistrationForm submitForm={submitForm} isRegistration={true} /> : <RegistrationSuccess/>}
                     <div className={classes.alreadyReg}>
                         Вже маєте акаунт?
                         <div>

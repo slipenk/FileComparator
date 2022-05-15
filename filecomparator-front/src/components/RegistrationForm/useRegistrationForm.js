@@ -2,13 +2,14 @@ import {useState, useEffect} from 'react';
 import axios from "../../API/axios";
 import diffToast from "../../Toast/Toast";
 import "react-toastify/dist/ReactToastify.css";
+import diffToastSuccess from "../../Toast/ToastSuccess";
 
-const useRegistrationForm = (callback, validate) => {
+const useRegistrationForm = (callback, validate, isRegistration) => {
     const [values, setValues] = useState({
-        username: "slipenk",
-        email: "slipenk92@gmail.com",
-        password: "CERcer12_",
-        passwordR: "CERcer12_"
+        username: "",
+        email: "",
+        password: "",
+        passwordR: ""
     });
     const [errors, setErrors] = useState({});
     const [isReg, setIsReg] = useState(false);
@@ -22,6 +23,7 @@ const useRegistrationForm = (callback, validate) => {
     const [BCPassword, setBCPassword] = useState('#FFFCE2');
     const [BCPasswordR, setBCPasswordR] = useState('#FFFCE2');
     const REGISTRATION_URL = "/berulia/registration/register";
+    const UPDATE_USER_DATA_URL = "/berulia/update";
 
     const handleChange = e => {
         const { name, value } = e.target;
@@ -47,11 +49,16 @@ const useRegistrationForm = (callback, validate) => {
     useEffect(
         () => {
             if (Object.keys(errors).length === 0 && isSubmitting) {
+                console.log("Mane")
                 setBCUsername("#FFFCE2");
                 setBCEmail("#FFFCE2");
                 setBCPassword("#FFFCE2");
                 setBCPasswordR("#FFFCE2");
-                handleSubmitAfterValidation().then();
+                if(isRegistration) {
+                    handleSubmitAfterValidation().then();
+                } else {
+                    updateUserData().then();
+                }
             } else {
                 if (errors.username) {
                     setBCUsername("#FD8E90");
@@ -107,6 +114,33 @@ const useRegistrationForm = (callback, validate) => {
                 diffToast("Неуспішна реєстрація");
             }
         })
+    }
+
+    const updateUserData = async () => {
+       const text  = localStorage.getItem('user');
+       const object = JSON.parse(text);
+
+       console.log("dys")
+
+        axios({
+            url: UPDATE_USER_DATA_URL,
+            method: 'POST',
+            data: JSON.stringify({emailNew: values.email, usernameNew: values.username, passwordNew: values.password, usernameOld: object.username, passwordOld: object.password, emailOld: object.email, ID: object.id}),
+            dataType: 'json',
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            }
+        }).then((response) => {
+            if(response.data === "SUCCESS") {
+                diffToastSuccess("Дані успішно оновлені");
+            } else {
+                diffToast("Проблема з оновленням даних");
+            }
+        }
+        ).catch(() => {
+            diffToast("Проблема з оновленням даних");
+        })
+
     }
 
     return { handleChange, handleSubmit, values, errors,

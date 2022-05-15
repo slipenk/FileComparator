@@ -16,6 +16,26 @@
     align-items: center;
     height: 530px;
 }
+.namesForPersonalAcc {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-right: 4vw;
+    font-size: 2vw;
+}
+.alignButton {
+    width: 23vw;
+}
+.alignTexts {
+    width: 24vw;
+}
+.divRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
 .alreadyReg {
     display: flex;
     flex-direction: column;

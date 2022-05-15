@@ -1,7 +1,7 @@
 import {toast} from "react-toastify";
 
-export default function diffToast (message) {
-    toast.error(message, {
+export default function diffToastSuccess (message) {
+    toast.success(message, {
         position: "top-center",
         theme: "colored",
         autoClose: 5000,
