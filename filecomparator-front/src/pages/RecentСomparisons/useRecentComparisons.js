@@ -8,15 +8,9 @@ const useRecentComparisons = () => {
     const GET_RECENT_COMPARISONS_URL = "/berulia/recentComparisons";
 
     const [recentComparisons, setRecentComparisons] = useState([]);
-    let i = 0;
 
     useEffect(() => {
-        ++i
-        if(i === 1) {
-            getRecentComparisons();
-        } else {
-            i = 0;
-        }
+        getRecentComparisons();
     }, []);
 
     const getRecentComparisons = () => {
