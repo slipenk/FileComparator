@@ -25,6 +25,7 @@ public class ComparingFilesController {
     private static final String BORDER = "End File1  bordeeeeeer Start File2";
     private static final String PATH = "uploadFile";
     private static final String PARAM = "file";
+    private static final String USER_EMAIL = "userEmail";
     private static final String FILE_NAME = "compare.txt";
 
     private ComparingFilesService comparingFilesService;
@@ -32,14 +33,14 @@ public class ComparingFilesController {
     @PostMapping(path = PATH,
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<byte[]> uploadFile(@RequestParam(PARAM) MultipartFile multipartFile) {
+    public ResponseEntity<byte[]> uploadFile(@RequestParam(PARAM) MultipartFile multipartFile, @RequestParam(USER_EMAIL) String email) {
         try {
             File convFile = new File(DIR + SLASH + multipartFile.getOriginalFilename());
             try(InputStream is = multipartFile.getInputStream()) {
                 Files.copy(is, convFile.toPath());
             }
 
-            List<File> filesList = comparingFilesService.compareFile(convFile);
+            List<File> filesList = comparingFilesService.compareFile(convFile, email);
 
             if(!filesList.isEmpty()) {
                 HttpHeaders httpHeaders = new HttpHeaders();

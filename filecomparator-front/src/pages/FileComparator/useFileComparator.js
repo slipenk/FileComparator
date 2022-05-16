@@ -18,6 +18,8 @@ const useFileComparator = () => {
     let counterSetComparedFiles = 0;
     let counterSetFileName = 0;
 
+    const GET_STATISTICS_URL = "/berulia/statistics_file";
+
     const isUpload = (value) => {
         counterIsUpload++;
         if(counterIsUpload === 1)  {
@@ -51,7 +53,6 @@ const useFileComparator = () => {
     }
 
     const getStatistics = () => {
-        const GET_STATISTICS_URL = "/berulia/statistics_file";
 
         axios({
             url: GET_STATISTICS_URL,

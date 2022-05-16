@@ -1,21 +1,24 @@
 package com.slipenk.filecomparator.statistics;
 
+import com.slipenk.filecomparator.user.User;
+import com.slipenk.filecomparator.user.UserService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
 @Getter
 @Setter
 public class StatisticsFileService {
+
+    private StatisticsFileRepository statisticsFileRepository;
+    private UserService userService;
 
     private List<Integer> listStatisticsTwoFiles;
 
@@ -81,6 +84,30 @@ public class StatisticsFileService {
         }
 
         return true;
+    }
+
+    public void saveStatistics(String firstFile, String secondFile, String email) {
+
+        User user = userService.getUserByEmail(email);
+
+        StatisticsOfComparing statisticsOfComparing = new StatisticsOfComparing(
+                firstFile,
+                secondFile,
+                listStatisticsTwoFiles.get(8),
+                listStatisticsTwoFiles.get(9),
+                listStatisticsTwoFiles.get(10),
+                listStatisticsTwoFiles.get(11),
+                LocalDateTime.now(),
+                user
+        );
+
+        statisticsFileRepository.save(statisticsOfComparing);
+    }
+
+    public List<StatisticsOfComparing> getStatistics(Long ID) {
+
+        return statisticsFileRepository.findByUserID(ID);
+
     }
 
 }

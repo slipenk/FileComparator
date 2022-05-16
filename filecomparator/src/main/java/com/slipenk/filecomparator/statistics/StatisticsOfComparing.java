@@ -29,10 +29,10 @@ public class StatisticsOfComparing {
     private Long ID;
     private String firstFile;
     private String secondFile;
-    private Long countOfChanges;
-    private Long countOfDeletions;
-    private Long countOfAdditions;
-    private Long countOfSimilarSymbols;
+    private Integer countOfChanges;
+    private Integer countOfDeletions;
+    private Integer countOfAdditions;
+    private Integer countOfSimilarSymbols;
     private LocalDateTime dateTimeComparing;
 
     @ManyToOne
@@ -42,7 +42,7 @@ public class StatisticsOfComparing {
     )
     private User user;
 
-    public StatisticsOfComparing(String firstFile, String secondFile, Long countOfChanges, Long countOfDeletions, Long countOfAdditions, Long countOfSimilarSymbols, LocalDateTime dateTimeComparing) {
+    public StatisticsOfComparing(String firstFile, String secondFile, Integer countOfChanges, Integer countOfDeletions, Integer countOfAdditions, Integer countOfSimilarSymbols, LocalDateTime dateTimeComparing, User user) {
         this.firstFile = firstFile;
         this.secondFile = secondFile;
         this.countOfChanges = countOfChanges;
@@ -50,5 +50,6 @@ public class StatisticsOfComparing {
         this.countOfAdditions = countOfAdditions;
         this.countOfSimilarSymbols = countOfSimilarSymbols;
         this.dateTimeComparing = dateTimeComparing;
+        this.user = user;
     }
 }

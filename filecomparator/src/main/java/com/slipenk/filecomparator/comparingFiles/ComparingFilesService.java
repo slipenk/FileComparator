@@ -20,15 +20,15 @@ public class ComparingFilesService {
     private StatisticsFileService statisticsFileService;
     private List<Integer> listStatisticsTwoFiles;
 
-    public List<File> compareFile(File file) {
+    public List<File> compareFile(File file, String email) {
         listFiles.add(file);
         if(listFiles.size() == 2) {
-            return compareFiles(listFiles.get(0), listFiles.get(1));
+            return compareFiles(listFiles.get(0), listFiles.get(1), email);
         }
         return Collections.emptyList();
     }
 
-    private List<File> compareFiles(File fileLeft, File fileRight) {
+    private List<File> compareFiles(File fileLeft, File fileRight, String email) {
         getStatisticsFiles(fileLeft, fileRight);
 
         try {
@@ -39,6 +39,8 @@ public class ComparingFilesService {
             List<Integer> listStatistics = fileDifference.getStatisticsOfComparing();
             listStatisticsTwoFiles = Stream.concat(listStatisticsTwoFiles.stream(), listStatistics.stream()).toList();
             statisticsFileService.setListStatisticsTwoFiles(listStatisticsTwoFiles);
+
+            statisticsFileService.saveStatistics(fileLeft.getName(), fileRight.getName(), email);
 
             return files;
         } catch (Exception e) {

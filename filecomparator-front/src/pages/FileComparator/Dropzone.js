@@ -14,8 +14,12 @@ export default function MyDropzone({isUpload, setComparedFiles, setFileName}) {
 
         setFileName(file.path);
 
+        const text  = localStorage.getItem('user');
+        const object = JSON.parse(text);
+
         const formData = new FormData();
         formData.append("file", file);
+        formData.append("userEmail", object.email);
 
         axios({
             url: UPLOAD_FILE_URL,
