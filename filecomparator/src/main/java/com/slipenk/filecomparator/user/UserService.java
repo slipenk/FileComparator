@@ -19,6 +19,7 @@ public class UserService implements UserDetailsService {
 
     private static final String EMPTY_STRING = "";
     private static final String MESSAGE_USER_NOT_FOUND = "Користувач з електронною поштою %s відсутній у системі";
+    private static final String ID_USER_NOT_FOUND = "Користувач з ID %s відсутній у системі";
     private static final String USER_EXISTS = "Користувач з електронною поштою %s вже існує в системі";
     private static final String CONFIRM_EMAIL = "Термін дії токена ще не минув, будь ласка, підтвердіть вашу електронну пошту";
     private final UserRepository userRepository;
@@ -55,6 +56,11 @@ public class UserService implements UserDetailsService {
     public User getUserByEmail(String email) {
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException(String.format(MESSAGE_USER_NOT_FOUND, email)));
+    }
+
+    public User getUserByID(Long ID) {
+        return userRepository.findByID(ID)
+                .orElseThrow(() -> new UsernameNotFoundException(String.format(ID_USER_NOT_FOUND, ID)));
     }
 
     private boolean checkUserPresence(User user) {

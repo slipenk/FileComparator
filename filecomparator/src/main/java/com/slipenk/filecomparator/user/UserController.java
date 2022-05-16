@@ -13,12 +13,19 @@ import static com.slipenk.filecomparator.Constants.*;
 public class UserController {
 
     private final UserService userService;
-    private static final String PATH = "getUser";
+    private static final String GET_USER_BY_EMAIL = "getUser";
+    private static final String GET_USER_BY_ID = "getUserByID";
 
-    @PostMapping(path = PATH,
+    @PostMapping(path = GET_USER_BY_EMAIL,
             consumes = CONSUMES_PRODUCES)
-    public User getUser(@RequestBody String email) {
+    public User getUserByEmail(@RequestBody String email) {
         return userService.getUserByEmail(email);
+    }
+
+    @PostMapping(path = GET_USER_BY_ID,
+            consumes = CONSUMES_PRODUCES)
+    public User getUserByID(@RequestBody IDRequest idRequest) {
+        return userService.getUserByID(idRequest.getID());
     }
 
     @PostMapping(path = BERULIA_UPDATE_USER_DATA,

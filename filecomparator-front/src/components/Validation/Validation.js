@@ -10,7 +10,6 @@ export default function validateInfoEmailPassword(values, isForgotPass) {
     }
 
     if (!isForgotPass) {
-        console.log(values.password)
         if (!values.password) {
             errors.password = "Потрібно ввести ваш пароль"
         } else if (!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[\da-zA-Z]{8,}$/.test(values.password)) {

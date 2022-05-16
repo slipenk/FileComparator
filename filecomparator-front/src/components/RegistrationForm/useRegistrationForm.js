@@ -23,6 +23,7 @@ const useRegistrationForm = (callback, validate, isRegistration) => {
     const [BCPassword, setBCPassword] = useState('#FFFCE2');
     const [BCPasswordR, setBCPasswordR] = useState('#FFFCE2');
     const REGISTRATION_URL = "/berulia/registration/register";
+    const GET_USER_BY_ID = "/berulia/getUserByID";
     const UPDATE_USER_DATA_URL = "/berulia/update";
 
     const handleChange = e => {
@@ -49,7 +50,6 @@ const useRegistrationForm = (callback, validate, isRegistration) => {
     useEffect(
         () => {
             if (Object.keys(errors).length === 0 && isSubmitting) {
-                console.log("Mane")
                 setBCUsername("#FFFCE2");
                 setBCEmail("#FFFCE2");
                 setBCPassword("#FFFCE2");
@@ -116,31 +116,57 @@ const useRegistrationForm = (callback, validate, isRegistration) => {
         })
     }
 
-    const updateUserData = async () => {
-       const text  = localStorage.getItem('user');
-       const object = JSON.parse(text);
+    const getUserByID = async () => {
+        const text  = localStorage.getItem('user');
+        const object = JSON.parse(text);
 
-       console.log("dys")
 
         axios({
-            url: UPDATE_USER_DATA_URL,
+            url: GET_USER_BY_ID,
             method: 'POST',
-            data: JSON.stringify({emailNew: values.email, usernameNew: values.username, passwordNew: values.password, usernameOld: object.username, passwordOld: object.password, emailOld: object.email, ID: object.id}),
+            data: JSON.stringify({email: object.email, ID: object.id}),
             dataType: 'json',
             headers: {
                 'Content-Type': 'application/json; charset=utf-8'
             }
         }).then((response) => {
-            if(response.data === "SUCCESS") {
-                diffToastSuccess("Дані успішно оновлені");
-            } else {
-                diffToast("Проблема з оновленням даних");
+                localStorage.setItem('user', JSON.stringify(response.data));
             }
-        }
-        ).catch(() => {
-            diffToast("Проблема з оновленням даних");
+        ).catch((err) => {
+            if(err.response.data) {
+                const object = JSON.stringify(err.response.data);
+                const message = object.split(":")[1];
+                diffToast(message.slice(1, -2));
+            } else {
+                diffToast("Помилка при отриманні даних користувача");
+            }
         })
+    }
 
+    const updateUserData = async () => {
+        await getUserByID();
+        const text  = localStorage.getItem('user');
+        const object = JSON.parse(text);
+
+
+         axios({
+             url: UPDATE_USER_DATA_URL,
+             method: 'POST',
+             data: JSON.stringify({emailNew: values.email, usernameNew: values.username, passwordNew: values.password, usernameOld: object.username, passwordOld: object.password, emailOld: object.email, ID: object.id}),
+             dataType: 'json',
+             headers: {
+                 'Content-Type': 'application/json; charset=utf-8'
+             }
+         }).then((response) => {
+             if(response.data === "SUCCESS") {
+                 diffToastSuccess("Дані успішно оновлені");
+             } else {
+                 diffToast("Проблема з оновленням даних");
+             }
+         }
+         ).catch(() => {
+             diffToast("Проблема з оновленням даних");
+         })
     }
 
     return { handleChange, handleSubmit, values, errors,
