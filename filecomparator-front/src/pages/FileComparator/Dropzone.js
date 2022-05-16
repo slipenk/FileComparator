@@ -2,7 +2,7 @@ import React, {useCallback} from "react";
 import {useDropzone} from "react-dropzone";
 import classes from "./Dropzone.module.css";
 import axios from "../../API/axios";
-import diffToast from "../../Toast/Toast";
+import diffToastError from "../../Toast/ToastError";
 
 
 export default function MyDropzone({isUpload, setComparedFiles, setFileName}) {
@@ -35,7 +35,7 @@ export default function MyDropzone({isUpload, setComparedFiles, setFileName}) {
             }
         }
         ).catch(() => {
-            diffToast("Помилка при порівнянні файлів");
+            diffToastError("Помилка при порівнянні файлів");
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])

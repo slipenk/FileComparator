@@ -21,7 +21,7 @@ public class RegistrationService {
     private static final String EMAIL_ALREADY_CONFIRMED = "Електронна пошта вже підтверджена";
     private static final String TOKEN_EXPIRED = "Термін дії токена закінчився";
     private static final String CONFIRMED = "Електронна пошта підтверджена";
-    private static final String CONFIRMATION_LINK = "http://localhost:8080/berulia/registration/confirm?token=";
+    public static final String CONFIRMATION_LINK = "http://localhost:8080/berulia/registration/confirm?token=";
     private final UserService userService;
     private EmailValidator emailValidator;
     private final ConfirmationTokenService confirmationTokenService;
@@ -65,7 +65,7 @@ public class RegistrationService {
         return CONFIRMED;
     }
 
-    private String buildEmail(String name, String link) {
+    public static String buildEmail(String name, String link) {
         return "<div style=\"font-family:Helvetica,Arial,sans-serif;font-size:16px;margin:0;color:#0b0c0c\">\n" +
                 "\n" +
                 "<span style=\"display:none;font-size:1px;color:#fff;max-height:0\"></span>\n" +

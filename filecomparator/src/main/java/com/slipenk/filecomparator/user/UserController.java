@@ -32,10 +32,9 @@ public class UserController {
             consumes = CONSUMES_PRODUCES)
     public String updateUserData(@RequestBody UpdateDataRequest updateDataRequest) {
         try {
-            userService.updateUserData(updateDataRequest);
+            return userService.updateUserData(updateDataRequest);
         } catch (Exception e) {
             return e.getMessage();
         }
-        return SUCCESS;
     }
 }

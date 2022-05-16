@@ -1,6 +1,6 @@
 import { useState, useEffect} from 'react';
 import axios from "../../API/axios"
-import diffToast from "../../Toast/Toast";
+import diffToastError from "../../Toast/ToastError";
 import "react-toastify/dist/ReactToastify.css";
 import { useAuth } from "../../context/context";
 
@@ -79,15 +79,15 @@ const useLoginForm = (callback, validateInfoEmailPassword) => {
                 }
 
             }).then(() => {
-                diffToast("На вашу електронну пошту надійшов лист з новим паролем. Будь ласка, перегляньте вашу електронну скриньку");
+                diffToastError("На вашу електронну пошту надійшов лист з новим паролем. Будь ласка, перегляньте вашу електронну скриньку");
             }
             ).catch((err) => {
                 if(err.response.data) {
                     const object = JSON.stringify(err.response.data);
                     const message = object.split(":")[1];
-                    diffToast(message.slice(1, -2));
+                    diffToastError(message.slice(1, -2));
                 } else {
-                    diffToast("Проблема з надсиланням запиту");
+                    diffToastError("Проблема з надсиланням запиту");
                 }
             })
         }
@@ -116,16 +116,16 @@ const useLoginForm = (callback, validateInfoEmailPassword) => {
                 const message = object.split(":")[1];
 
                 if (message.slice(0, -1) === "\"User is disabled\"") {
-                    diffToast("Користувач неактивований. Причина: користувач не підтвердив свою електронну пошту");
+                    diffToastError("Користувач неактивований. Причина: користувач не підтвердив свою електронну пошту");
                 } else if (message.slice(0, -1) === "\"Bad credentials\"") {
-                    diffToast("Неправильний логін або пароль");
+                    diffToastError("Неправильний логін або пароль");
                 }
                 else {
-                    diffToast("Неуспішна авторизація");
+                    diffToastError("Неуспішна авторизація");
                 }
                 setAuth(false);
             } else {
-                diffToast("Неуспішна авторизація");
+                diffToastError("Неуспішна авторизація");
             }
         })
 
@@ -147,9 +147,9 @@ const useLoginForm = (callback, validateInfoEmailPassword) => {
             if(err.response.data) {
                 const object = JSON.stringify(err.response.data);
                 const message = object.split(":")[1];
-                diffToast(message.slice(1, -2));
+                diffToastError(message.slice(1, -2));
             } else {
-                diffToast("Помилка при отриманні даних користувача");
+                diffToastError("Помилка при отриманні даних користувача");
             }
         })
     }

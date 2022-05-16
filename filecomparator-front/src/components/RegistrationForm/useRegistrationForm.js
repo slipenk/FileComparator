@@ -1,8 +1,9 @@
 import {useState, useEffect} from 'react';
 import axios from "../../API/axios";
-import diffToast from "../../Toast/Toast";
+import diffToastError from "../../Toast/ToastError";
 import "react-toastify/dist/ReactToastify.css";
 import diffToastSuccess from "../../Toast/ToastSuccess";
+import diffToastInfo from "../../Toast/ToastInfo";
 
 const useRegistrationForm = (callback, validate, isRegistration) => {
     const [values, setValues] = useState({
@@ -109,9 +110,9 @@ const useRegistrationForm = (callback, validate, isRegistration) => {
                 const object = JSON.stringify(err.response.data);
                 const message = object.split(":")[1];
                 setIsReg(false);
-                diffToast(message.slice(1, -2));
+                diffToastError(message.slice(1, -2));
             } else {
-                diffToast("Неуспішна реєстрація");
+                diffToastError("Неуспішна реєстрація");
             }
         })
     }
@@ -136,9 +137,9 @@ const useRegistrationForm = (callback, validate, isRegistration) => {
             if(err.response.data) {
                 const object = JSON.stringify(err.response.data);
                 const message = object.split(":")[1];
-                diffToast(message.slice(1, -2));
+                diffToastError(message.slice(1, -2));
             } else {
-                diffToast("Помилка при отриманні даних користувача");
+                diffToastError("Помилка при отриманні даних користувача");
             }
         })
     }
@@ -160,12 +161,17 @@ const useRegistrationForm = (callback, validate, isRegistration) => {
          }).then((response) => {
              if(response.data === "SUCCESS") {
                  diffToastSuccess("Дані успішно оновлені");
-             } else {
-                 diffToast("Проблема з оновленням даних");
+             } else if(response.data === "NEED_VERIFY_EMAIL") {
+                 diffToastInfo("Ви змінили електронну пошту. Будь ласка, підтвердіть лист, що надійшов на вашу електронну поштову скриньку");
+             } else if(response.data === "Користувач з електронною поштою slipenk@gmail.com вже існує в системі") {
+                 diffToastError("Користувач з електронною поштою slipenk@gmail.com вже існує в системі");
+             }
+             else {
+                 diffToastError("Проблема з оновленням даних");
              }
          }
          ).catch(() => {
-             diffToast("Проблема з оновленням даних");
+             diffToastError("Проблема з оновленням даних");
          })
     }
 

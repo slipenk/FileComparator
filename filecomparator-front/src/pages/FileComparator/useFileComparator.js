@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import axios from "../../API/axios";
-import diffToast from "../../Toast/Toast";
+import diffToastError from "../../Toast/ToastError";
 
 
 const useFileComparator = () => {
@@ -62,7 +62,7 @@ const useFileComparator = () => {
                 }
             }
         ).catch(() => {
-            diffToast("Помилка при отриманні статистики");
+            diffToastError("Помилка при отриманні статистики");
         })
     }
 

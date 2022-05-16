@@ -1,6 +1,6 @@
 import {toast} from "react-toastify";
 
-export default function diffToast (message) {
+export default function diffToastError (message) {
     toast.error(message, {
         position: "top-center",
         theme: "colored",

@@ -7,6 +7,7 @@ public class Constants {
     public static final String NEW_ROW = "\n";
     public static final String SLASH = "/";
     public static final String SUCCESS = "SUCCESS";
+    public static final String VERIFY_EMAIL = "NEED_VERIFY_EMAIL";
     public static final String BERULIA = "berulia";
     public static final String BERULIA_REG = "berulia/registration";
     public static final String BERULIA_UPDATE_USER_DATA = "update";
