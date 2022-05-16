@@ -1,0 +1,33 @@
+.table  {
+    border: 0.2vw solid black;
+}
+.secondTableRow {
+    height: 25vw;
+}
+.namePage {
+    font-size: 3vw;
+}
+.AlignItems {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+.tableRow {
+    border: 0.14625vw solid black;
+    height: 2vw;
+    font-size: 1vw;
+}
+.tableCol {
+    border: 0.3vw solid black;
+    background-color: #FFFCE2;
+}
+.firstCol {
+    width: 9.5vw;
+}
+.secondCol {
+    width: 24.5vw;
+}
+.otherCol {
+    width: 10.5vw;
+}

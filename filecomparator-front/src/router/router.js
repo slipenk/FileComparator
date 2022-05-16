@@ -4,11 +4,13 @@ import Menu from "../pages/Menu/Menu";
 import NoPageFound from "../pages/NoPageFound/NoPageFound";
 import FileComparator from "../pages/FileComparator/FileComparator";
 import PersonalAccount from "../pages/PersonalAccount/PersonalAccount";
+import RecentComparisons from "../pages/RecentСomparisons/RecentСomparisons";
 
 export const privateRoutes = [
     {path: '/menu', element: <Menu/>, exact: true},
     {path: '/comparator', element: <FileComparator/>, exact: true},
-    {path: '/personalaccount', element: <PersonalAccount/>, exact: true},
+    {path: '/personalAccount', element: <PersonalAccount/>, exact: true},
+    {path: '/recentComparisons', element: <RecentComparisons/>, exact: true},
     {path: '*', element: <Menu/>, exact: true}
 
 ]

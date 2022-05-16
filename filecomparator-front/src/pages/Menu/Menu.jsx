@@ -17,7 +17,7 @@ const Menu = () => {
                 <div className={classesM.flexCol}>
                     <div className={classesM.flexRow}>
                         <MenuIcons logo={CompareFirst} value={"Порівняння файлів"} border={'0.6vh solid black'} path={"/comparator"}/>
-                        <MenuIcons logo={CompareSecond} value={"Останні порівняння"} border={null} path={"*"}/>
+                        <MenuIcons logo={CompareSecond} value={"Останні порівняння"} border={null} path={"/recentComparisons"}/>
                     </div>
                 </div>
             </div>
