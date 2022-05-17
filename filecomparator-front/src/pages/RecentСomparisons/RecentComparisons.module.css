@@ -1,8 +1,17 @@
-.table  {
-    border: 0.2vw solid black;
+table  {
+    border: 0.3vw solid black;
+}
+table, th, td {
+    border-collapse: collapse;
+}
+.scrollableTable {
+    overflow: scroll;
+    height: 31vw;
 }
 .secondTableRow {
-    height: 25vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 .namePage {
     font-size: 3vw;
@@ -14,20 +23,45 @@
     height: 100%;
 }
 .tableRow {
-    border: 0.14625vw solid black;
-    height: 2vw;
+    height: 4vw;
     font-size: 1vw;
+    display: flex;
+    justify-content: center;
 }
 .tableCol {
+    border-bottom: 0.3vw solid black;
+    border-left: 0.3vw solid black;
+    background-color: #FFFCE2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 11vw;
+}
+.tdStyles {
     border: 0.3vw solid black;
     background-color: #FFFCE2;
+    height: 4vw;
+    width: 9vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4.875vw;
+    margin-top: 1vw;
+    font-size: 1vw;
+    text-align: center;
 }
-.firstCol {
-    width: 9.5vw;
+.tdStylesM {
+    margin-left: 1.7vw;
+    margin-bottom: 1vw;
 }
-.secondCol {
-    width: 12.5vw;
+.tdStylesMLast {
+    border-right: none
 }
-.otherCol {
-    width: 10.5vw;
+.tdStylesF {
+    margin-left: 1vw;
+    margin-bottom: 1vw;
+}
+.tdStylesMFirst {
+    border-left: none
 }

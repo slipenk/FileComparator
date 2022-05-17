@@ -10,7 +10,21 @@ import {ToastContainer} from "react-toastify";
 const RecentComparisons = () => {
     const {recentComparisons} = useRecentComparisons();
 
-    const renderedOutput = recentComparisons.map(item => <td key={item.id}> {item.firstFile} </td> )
+
+    const renderedOutput = recentComparisons.map(item => {
+            return (
+                <tr className={classes.secondTableRow} key={item.id}>
+                    <td className={classes.tdStyles + " " + classes.tdStylesF}> {item.dateTimeComparing.slice(0, 19).replace(/T/g, " : ")} </td>
+                    <td className={classes.tdStyles + " " + classes.tdStylesM}> {item.firstFile.slice(0, 19)} </td>
+                    <td className={classes.tdStyles + " " + classes.tdStylesM}> {item.secondFile.slice(0, 19)} </td>
+                    <td className={classes.tdStyles + " " + classes.tdStylesM}> {item.countOfChanges} </td>
+                    <td className={classes.tdStyles + " " + classes.tdStylesM}> {item.countOfDeletions} </td>
+                    <td className={classes.tdStyles + " " + classes.tdStylesM}> {item.countOfAdditions} </td>
+                    <td className={classes.tdStyles + " " + classes.tdStylesM}> {item.countOfSimilarSymbols} </td>
+                </tr>
+        )
+        }
+    )
 
     return (
         <div className={classesF.MainDiv}>
@@ -20,21 +34,19 @@ const RecentComparisons = () => {
                     <div>
                         <h1 className={classes.namePage}>Останні порівняння</h1>
                     </div>
-                    <div>
-                        <table className={classes.table}>
+                    <div className={classes.scrollableTable}>
+                        <table>
                             <tbody>
                             <tr className={classes.tableRow}>
-                                <th className={classes.tableCol + " " + classes.firstCol}>Дата та час порівняння</th>
-                                <th className={classes.tableCol + " " + classes.secondCol}>Назва 1 файлу</th>
-                                <th className={classes.tableCol + " " + classes.secondCol}>Назва 2 файлу</th>
-                                <th className={classes.tableCol + " " + classes.otherCol}>Кількість змін</th>
-                                <th className={classes.tableCol  + " " + classes.otherCol}>Кількість видалень</th>
-                                <th className={classes.tableCol  + " " + classes.otherCol}>Кількість додавань</th>
-                                <th className={classes.tableCol  + " " + classes.otherCol}>К-сть однакових символів</th>
+                                <td className={classes.tableCol + " " + classes.tdStylesMFirst}>Дата та час порівняння</td>
+                                <td className={classes.tableCol}>Назва 1 файлу</td>
+                                <td className={classes.tableCol}>Назва 2 файлу</td>
+                                <td className={classes.tableCol}>Кількість змін</td>
+                                <td className={classes.tableCol}>Кількість видалень</td>
+                                <td className={classes.tableCol}>Кількість додавань</td>
+                                <td className={classes.tableCol + " " + classes.tdStylesMLast}>К-сть однакових символів</td>
                             </tr>
-                            <tr className={classes.secondTableRow}>
-                                {renderedOutput}
-                            </tr>
+                            {renderedOutput}
                             </tbody>
                          </table>
                     </div>
