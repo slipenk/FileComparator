@@ -2,7 +2,13 @@ import React from "react";
 import classes from "./fileComparatorTables.module.css"
 import Replace from "../../../icons/Replace.png";
 
-const fileComparatorTables = ({value, statistics, isFirstFile, fileName}) => {
+const fileComparatorTables = ({value, statistics, isFirstFile, fileName, isUpload, setComparedFalse}) => {
+
+    const replaceFile = () => {
+        isUpload(false);
+        isUpload(false);
+        setComparedFalse(false);
+    }
     return (
         <div className={value}>
             <table className={classes.tableTable + " " + classes.tableTableStat_1}>
@@ -23,7 +29,7 @@ const fileComparatorTables = ({value, statistics, isFirstFile, fileName}) => {
                         <th className={classes.thSecond}>{typeof(fileName) === 'undefined' ? <div> </div> : <div>Назва документа: {fileName} </div>}</th>
                         <th>
                             <div className={classes.thThird}>
-                                <img className={classes.iconTable} src={Replace} alt={"Замінити"}/>
+                                <img onClick={replaceFile} className={classes.iconTable} src={Replace} alt={"Замінити"}/>
                             </div>
                         </th>
                     </tr>

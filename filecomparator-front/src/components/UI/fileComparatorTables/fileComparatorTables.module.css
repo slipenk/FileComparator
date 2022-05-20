@@ -11,6 +11,7 @@
 }
 .iconTable {
     width: 1.5vw;
+    cursor: pointer;
 }
 .thFirst {
     width: 4vw;

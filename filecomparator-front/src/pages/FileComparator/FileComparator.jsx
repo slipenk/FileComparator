@@ -17,7 +17,7 @@ import useFileComparator from "./useFileComparator";
 
 const FileComparator = () => {
 
-    const {isCompared, leftFile, rightFile, isUploadFileFirst, isUploadFileSecond, isUpload, setComparedFiles, setFileName, statistics, leftFileName, rightFileName} = useFileComparator();
+    const {isCompared, leftFile, rightFile, isUploadFileFirst, isUploadFileSecond, isUpload, setComparedFiles, setFileName, statistics, leftFileName, rightFileName, setComparedFalse, leftFileOr, rightFileOr, setOriginalFilesLeft, setOriginalFilesRight} = useFileComparator();
 
     return (
         <div>
@@ -26,14 +26,14 @@ const FileComparator = () => {
                     <div className={classesF.flexDivRow}>
                         <UnionTable statistics={statistics}/>
                         <div className={classesF.flexDivCol}>
-                            <FileComparatorTables value={classesT.tableTableLeft} statistics={statistics} isFirstFile={true} fileName={leftFileName}/>
+                            <FileComparatorTables value={classesT.tableTableLeft} statistics={statistics} isFirstFile={true} fileName={leftFileName} isUpload={isUpload} setComparedFalse={setComparedFalse}/>
                             <div className={classesF.flexDivCol}>
                                 <div className={classesF.image}>
                                     {isUploadFileFirst ? <div/> : <img className={classesF.FileImage} src={Logo} alt={"Файл"}/>}
                                 </div>
-                                {isUploadFileFirst ? <div/> : <MyDropzone isUpload={isUpload} setComparedFiles={setComparedFiles} setFileName={setFileName}/>}
+                                {isUploadFileFirst ? <div/> : <MyDropzone isUpload={isUpload} setComparedFiles={setComparedFiles} setFileName={setFileName} setOriginalFiles={setOriginalFilesLeft} />}
                                 <div className={classesF.firstDrop} >
-                                    {isUploadFileFirst && isCompared ? <EditorLeft file={leftFile}/> : <div/>}
+                                    {isUploadFileFirst && isCompared ? <EditorLeft file={leftFile} fileOr={leftFileOr}/> : <div/>}
                                     {isUploadFileFirst && !isCompared ? <div/> : <div/>}
                                 </div>
                             </div>
@@ -44,9 +44,9 @@ const FileComparator = () => {
                                 <div className={classesF.image}>
                                  {isUploadFileSecond ? <div/> : <img className={classesF.FileImage} src={Logo} alt={"Файл"}/>}
                                 </div>
-                                {isUploadFileSecond ? <div/> : <MyDropzone isUpload={isUpload} setComparedFiles={setComparedFiles} setFileName={setFileName}/>}
+                                {isUploadFileSecond ? <div/> : <MyDropzone isUpload={isUpload} setComparedFiles={setComparedFiles} setFileName={setFileName} setOriginalFiles={setOriginalFilesRight} />}
                                 <div className={classesF.secondDrop}>
-                                    {isUploadFileSecond && isCompared ? <EditorRight file={rightFile}/> : <div/>}
+                                    {isUploadFileSecond && isCompared ? <EditorRight file={rightFile} fileOr={rightFileOr}/> : <div/>}
                                     {isUploadFileSecond && !isCompared ? <div/> : <div/>}
                                 </div>
                             </div>

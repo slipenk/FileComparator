@@ -10,6 +10,8 @@ const useFileComparator = () => {
     const [isCompared, setIsCompared] = useState(false);
     const [leftFile, setLefFile] = useState("");
     const [rightFile, setRightFile] = useState("");
+    const [leftFileOr, setLeftFileOr] = useState("");
+    const [rightFileOr, setRightFileOR] = useState("");
     const [leftFileName, setLefFileName] = useState("");
     const [rightFileName, setRightFileName] = useState("");
     const [statistics, setStatistics] = useState([]);
@@ -28,6 +30,18 @@ const useFileComparator = () => {
             counterIsUpload = 0;
             SetIsUploadFileSecond(value);
         }
+    }
+
+    const setComparedFalse = (value) => {
+        setIsCompared(value);
+    }
+
+    const setOriginalFilesLeft = (leftFile) => {
+        setLeftFileOr(leftFile);
+    }
+
+    const setOriginalFilesRight = (rightFile) => {
+        setRightFileOR(rightFile);
     }
 
     const setComparedFiles = (value) => {
@@ -69,7 +83,7 @@ const useFileComparator = () => {
 
 
     return { isCompared, leftFile, rightFile, isUploadFileFirst, isUploadFileSecond, isUpload, setComparedFiles, setFileName, statistics,
-        leftFileName, rightFileName};
+        leftFileName, rightFileName, setComparedFalse, leftFileOr, rightFileOr, setOriginalFilesLeft, setOriginalFilesRight};
 
 }
 

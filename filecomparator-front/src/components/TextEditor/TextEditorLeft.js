@@ -32,6 +32,13 @@ class EditorLeft extends React.Component {
     }
 
     handleChange (value) {
+       // console.log(this.state.text)
+       /* if(this.state.text.includes("style")) {
+            console.log(this.props.fileOr)
+            this.setState({
+                text: this.props.fileOr
+            });
+        }*/
         this.setState({
             text: value
         });
