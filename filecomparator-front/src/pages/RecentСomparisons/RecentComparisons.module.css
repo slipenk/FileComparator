@@ -1,12 +1,14 @@
 table  {
-    border: 0.3vw solid black;
+    border-top: 0.3vw solid black;
+    border-left: 0.3vw solid black;
+    border-right: 0.3vw solid black;
 }
 table, th, td {
     border-collapse: collapse;
 }
 .scrollableTable {
     overflow: scroll;
-    height: 31vw;
+    height: 29vw;
 }
 .secondTableRow {
     display: flex;
@@ -39,29 +41,34 @@ table, th, td {
     width: 11vw;
 }
 .tdStyles {
-    border: 0.3vw solid black;
+    border-top: 0.3vw solid black;
+    border-bottom: 0.3vw solid black;
+    border-left: 0.3vw solid black;
     background-color: #FFFCE2;
     height: 4vw;
-    width: 9vw;
+    width: 11vw;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 4.875vw;
     margin-top: 1vw;
     font-size: 1vw;
     text-align: center;
-}
-.tdStylesM {
-    margin-left: 1.7vw;
-    margin-bottom: 1vw;
+    overflow: scroll;
 }
 .tdStylesMLast {
     border-right: none
 }
 .tdStylesF {
-    margin-left: 1vw;
-    margin-bottom: 1vw;
+    border-left: none
 }
 .tdStylesMFirst {
     border-left: none
+}
+.searchField {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1vw;
+    margin-top: -3.5vw;
+    margin-right: 13vw;
 }
