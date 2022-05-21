@@ -12,7 +12,7 @@ const modules = {
     },
     toolbar: [
         [
-            { size: ["0.75em", "1em", "1.5em", "2.5em"] },
+            { size: ["small", false, "large", "huge"] },
             "bold",
             "italic",
             "underline",
@@ -29,7 +29,6 @@ const EditorLeft = ({file, fileOr})  => {
     const [counter, setCounter] = useState(0);
 
     const handleChange = (content) => {
-        console.log(counter, "counter")
         if(text.includes("style") && counter === 1) {
             setText(fileOr);
         } else {

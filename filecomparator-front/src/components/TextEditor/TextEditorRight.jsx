@@ -10,7 +10,7 @@ const modules = {
     },
     toolbar: [
         [
-            { size: ["0.75em", "1em", "1.5em", "2.5em"] },
+            { size: ["small", false, "large", "huge"] },
             "bold",
             "italic",
             "underline",
