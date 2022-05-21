@@ -2,10 +2,14 @@ package com.slipenk.filecomparator.comparingFiles;
 
 
 import org.apache.commons.text.diff.CommandVisitor;
+import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.springframework.stereotype.Service;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+
+import java.io.*;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,6 +73,39 @@ public class FileCommandsVisitor implements CommandVisitor<Character> {
         writerRight.close();
 
         List<File> listFiles = new ArrayList<>();
+        listFiles.add(tmpFileLeft);
+        listFiles.add(tmpFileRight);
+        return listFiles;
+    }
+
+    public List<XWPFDocument> createComparedFilesDOCX() throws IOException {
+        XWPFDocument tmpFileLeft = new XWPFDocument() ;
+        XWPFDocument tmpFileRight = new XWPFDocument() ;
+        XWPFParagraph pLeft = tmpFileLeft.createParagraph();
+        XWPFParagraph pRight = tmpFileRight.createParagraph();
+        pLeft.setAlignment(ParagraphAlignment.LEFT);
+        pRight.setAlignment(ParagraphAlignment.LEFT);
+
+        XWPFRun rLeft = pLeft.createRun();
+        XWPFRun rRight = pRight.createRun();
+        rLeft.setText(left);
+        rRight.setText(right);
+        left = EMPTY_STRING;
+        right = EMPTY_STRING;
+
+        try (FileOutputStream out = new FileOutputStream(DIR + SLASH + "LeftFile.docx")) {
+            tmpFileLeft.write(out);
+        }
+        try (FileOutputStream out = new FileOutputStream(DIR + SLASH + "RightFile.docx")) {
+            tmpFileRight.write(out);
+        }
+
+       // InputStream file1 = getClass().getClassLoader().getResourceAsStream(DIR + SLASH + "LeftFile.docx");
+
+       // File leftFile = new File(file1);
+       // File rightFile = new File(DIR + SLASH + "RightFile.docx");
+
+        List<XWPFDocument> listFiles = new ArrayList<>();
         listFiles.add(tmpFileLeft);
         listFiles.add(tmpFileRight);
         return listFiles;
