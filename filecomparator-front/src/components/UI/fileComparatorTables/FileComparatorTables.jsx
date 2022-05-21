@@ -1,14 +1,26 @@
-import React from "react";
+import React, {useState} from "react";
 import classes from "./fileComparatorTables.module.css"
 import Replace from "../../../icons/Replace.png";
+import DropDownForSave from "./DropDownForSave";
 
-const fileComparatorTables = ({value, statistics, isFirstFile, fileName, isUpload, setComparedFalse}) => {
+const FileComparatorTables = ({value, statistics, isFirstFile, fileName, isUpload, setComparedFalse}) => {
+
+    const [show, setShow] = useState(false);
 
     const replaceFile = () => {
         isUpload(false);
         isUpload(false);
         setComparedFalse(false);
     }
+
+    const DropdownEnter = () => {
+        setShow(!show)
+    }
+
+    const DropdownLeave = () => {
+        setShow(false)
+    }
+
     return (
         <div className={value}>
             <table className={classes.tableTable + " " + classes.tableTableStat_1}>
@@ -18,7 +30,9 @@ const fileComparatorTables = ({value, statistics, isFirstFile, fileName, isUploa
                         <th className={classes.thFirstStat}>{typeof(statistics) === 'undefined' ? <div> </div> : <div>К-сть розд. знаків:<br/> {isFirstFile ? statistics[1] : statistics[5]} </div>}</th>
                         <th className={classes.thFirstStat}>{typeof(statistics) === 'undefined' ? <div> </div> : <div>К-сть символів:<br/> {isFirstFile ? statistics[2] : statistics[6]} </div>}</th>
                         <th className={classes.thFirstStat}>{typeof(statistics) === 'undefined' ? <div> </div> : <div>К-сть паліндромів:<br/> {isFirstFile ? statistics[3] : statistics[7]} </div>}</th>
-                        <th>Зберегти</th>
+                        <th onMouseEnter={DropdownEnter} onMouseLeave={DropdownLeave}><span className={classes.spanStyle}>Зберегти</span>
+                            {show && (<DropDownForSave isFirstFile={isFirstFile}/>)}
+                        </th>
                     </tr>
                 </tbody>
             </table>
@@ -39,4 +53,4 @@ const fileComparatorTables = ({value, statistics, isFirstFile, fileName, isUploa
     );
 };
 
-export default fileComparatorTables;
+export default FileComparatorTables;

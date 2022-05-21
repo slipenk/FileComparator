@@ -8,7 +8,7 @@ import Logo from "../../icons/File.png";
 import {ToastContainer} from "react-toastify";
 import EditorRight from "../../components/TextEditor/TextEditorRight";
 import EditorLeft from "../../components/TextEditor/TextEditorLeft";
-import FileComparatorTables from "../../components/UI/fileComparatorTables/fileComparatorTables";
+import FileComparatorTables from "../../components/UI/fileComparatorTables/FileComparatorTables";
 import classesT from "../../components/UI/fileComparatorTables/fileComparatorTables.module.css"
 import UnionTable from "../../components/UI/fileComparatorTables/UnionTable";
 import useFileComparator from "./useFileComparator";

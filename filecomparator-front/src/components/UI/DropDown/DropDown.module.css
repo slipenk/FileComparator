@@ -26,6 +26,26 @@
     width: 8vw;
     border-top: 0.2925vw solid black;
 }
+.dropDownSave {
+    overflow: visible !important;
+    z-index: 9999;
+    position: absolute;
+    white-space: nowrap;
+    width: 6vw;
+    top: 50%;
+    left: 78%;
+}
+.spanStyle:hover {
+    color: rgba(169, 139, 255, 47);
+    cursor: pointer;
+}
+.spanStyle {
+    font-size: 1vw;
+}
+.lineSave {
+    width: 6vw;
+    border-top: 0.2925vw solid black;
+}
 
 
 

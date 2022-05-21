@@ -29,14 +29,15 @@ const EditorLeft = ({file, fileOr})  => {
     const [counter, setCounter] = useState(0);
 
     const handleChange = (content) => {
+        console.log(counter, "counter")
         if(text.includes("style") && counter === 1) {
             setText(fileOr);
         } else {
             setText(content);
             setCounter(0);
-            return;
         }
         setCounter(counter + 1);
+        localStorage.setItem('leftEditor', content);
     }
     return (
         <div className={classes.textDiv} data-text-editor="form-editor">

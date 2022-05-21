@@ -68,3 +68,7 @@
     height: 7.36125vw;
     font-size: 1vw;
 }
+.spanStyle:hover {
+    color: rgba(169, 139, 255, 47);
+    cursor: pointer;
+}
