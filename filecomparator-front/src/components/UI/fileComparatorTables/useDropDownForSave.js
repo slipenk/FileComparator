@@ -16,7 +16,7 @@ const useDropDownForSave = (isFirstFile) => {
             const text = htmlToText(file, {
                 wordwrap: 130
             });
-            saveFile('yourFile.' + item, text, 'text/plain')
+            saveFile('yourFile.' + item, text, type)
         }
     }
 

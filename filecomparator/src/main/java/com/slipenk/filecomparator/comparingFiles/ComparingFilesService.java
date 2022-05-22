@@ -3,13 +3,11 @@ package com.slipenk.filecomparator.comparingFiles;
 import com.slipenk.filecomparator.statistics.StatisticsFileService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.apache.commons.io.FilenameUtils;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.springframework.stereotype.Service;
 import java.io.File;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Stream;
 
 

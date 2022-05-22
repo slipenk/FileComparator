@@ -3,6 +3,8 @@ import classes from "./fileComparatorTables.module.css"
 import Replace from "../../../icons/Replace.png";
 import Ukraine from "../../../icons/Ukraine.png";
 import DropDownForSave from "./DropDownForSave";
+import Tippy from "@tippy.js/react";
+import 'tippy.js/dist/tippy.css'
 
 const FileComparatorTables = ({value, statistics, isFirstFile, fileName, isUpload, setComparedFalse, zeroStatistics}) => {
 
@@ -42,15 +44,19 @@ const FileComparatorTables = ({value, statistics, isFirstFile, fileName, isUploa
                 <tbody>
                     <tr>
                         <th className={classes.thFirst}>
-                            <div className={classes.thThird}>
-                                <img className={classes.iconTable} src={Ukraine} alt={"Україна"}/>
-                            </div>
+                            <Tippy placement="bottom" content={"Слава Україні!"}>
+                                <div className={classes.thThird}>
+                                    <img className={classes.iconTable} src={Ukraine} alt={"Україна"}/>
+                                </div>
+                            </Tippy>
                         </th>
-                        <th className={classes.thSecond}>{typeof(fileName) === 'undefined' ? <div> </div> : <div>Назва документа: {fileName} </div>}</th>
+                        <th className={classes.thSecond}>{typeof(fileName) === 'undefined' ? <div> </div> : <div className={classes.fileName}>Назва документа: {fileName} </div>}</th>
                         <th>
-                            <div className={classes.thThird}>
-                                <img onClick={replaceFile} className={classes.iconTable} src={Replace} alt={"Замінити"}/>
-                            </div>
+                            <Tippy placement="bottom" content={"Замінити документи"}>
+                                <div className={classes.thThird}>
+                                    <img onClick={replaceFile} className={classes.iconTable} src={Replace} alt={"Замінити"}/>
+                                </div>
+                            </Tippy>
                         </th>
                     </tr>
                 </tbody>

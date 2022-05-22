@@ -72,3 +72,6 @@
     color: rgba(169, 139, 255, 47);
     cursor: pointer;
 }
+.fileName {
+    overflow: scroll;
+}
