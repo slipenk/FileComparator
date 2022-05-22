@@ -41,9 +41,9 @@ public class FileDifference {
             if (comparator.getScript().getLCSLength() > (Integer.max(left.length(), right.length()) * 0.4)) {
                 comparator.getScript().visit(fileCommandsVisitor);
             } else {
-                StringsComparator leftComparator = new StringsComparator(left, NEW_ROW);
+                StringsComparator leftComparator = new StringsComparator(left, EMPTY_STRING);
                 leftComparator.getScript().visit(fileCommandsVisitor);
-                StringsComparator rightComparator = new StringsComparator(NEW_ROW, right);
+                StringsComparator rightComparator = new StringsComparator(EMPTY_STRING, right);
                 rightComparator.getScript().visit(fileCommandsVisitor);
             }
         }

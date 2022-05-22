@@ -19,11 +19,13 @@
 }
 .thFirstStat {
     width: 7vw;
+    overflow: scroll;
     border-right: 0.14625vw solid black;
 }
 .thFirstTopTable {
     width: 7vw;
     border-right: 0.14625vw solid black;
+    overflow: scroll;
 }
 .thFirstCol {
     padding-left: 3vw;
@@ -40,6 +42,7 @@
 }
 .thSecond {
     width: 33vw;
+    overflow: scroll;
     border-right: 0.14625vw solid black;
 }
 .thThird {
@@ -71,7 +74,4 @@
 .spanStyle:hover {
     color: rgba(169, 139, 255, 47);
     cursor: pointer;
-}
-.fileName {
-    overflow: scroll;
 }

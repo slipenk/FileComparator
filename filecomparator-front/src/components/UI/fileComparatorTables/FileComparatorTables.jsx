@@ -50,7 +50,7 @@ const FileComparatorTables = ({value, statistics, isFirstFile, fileName, isUploa
                                 </div>
                             </Tippy>
                         </th>
-                        <th className={classes.thSecond}>{typeof(fileName) === 'undefined' ? <div> </div> : <div className={classes.fileName}>Назва документа: {fileName} </div>}</th>
+                        <th className={classes.thSecond}>{typeof(fileName) === 'undefined' ? <div> </div> : <div>Назва документа: {fileName} </div>}</th>
                         <th>
                             <Tippy placement="bottom" content={"Замінити документи"}>
                                 <div className={classes.thThird}>
