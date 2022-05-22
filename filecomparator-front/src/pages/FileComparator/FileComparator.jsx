@@ -17,7 +17,7 @@ import useFileComparator from "./useFileComparator";
 
 const FileComparator = () => {
 
-    const {isCompared, leftFile, rightFile, isUploadFileFirst, isUploadFileSecond, isUpload, setComparedFiles, setFileName, statistics, leftFileName, rightFileName, setComparedFalse, leftFileOr, rightFileOr, setOriginalFilesLeft, setOriginalFilesRight} = useFileComparator();
+    const {isCompared, leftFile, rightFile, isUploadFileFirst, isUploadFileSecond, isUpload, setComparedFiles, setFileName, statistics, leftFileName, rightFileName, setComparedFalse, leftFileOr, rightFileOr, setOriginalFilesLeft, setOriginalFilesRight, zeroStatistics} = useFileComparator();
 
     return (
         <div>
@@ -26,7 +26,7 @@ const FileComparator = () => {
                     <div className={classesF.flexDivRow}>
                         <UnionTable statistics={statistics}/>
                         <div className={classesF.flexDivCol}>
-                            <FileComparatorTables value={classesT.tableTableLeft} statistics={statistics} isFirstFile={true} fileName={leftFileName} isUpload={isUpload} setComparedFalse={setComparedFalse}/>
+                            <FileComparatorTables value={classesT.tableTableLeft} statistics={statistics} isFirstFile={true} fileName={leftFileName} isUpload={isUpload} setComparedFalse={setComparedFalse} zeroStatistics={zeroStatistics}/>
                             <div className={classesF.flexDivCol}>
                                 <div className={classesF.image}>
                                     {isUploadFileFirst ? <div/> : <img className={classesF.FileImage} src={Logo} alt={"Файл"}/>}

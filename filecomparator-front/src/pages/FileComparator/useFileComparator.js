@@ -81,9 +81,15 @@ const useFileComparator = () => {
         })
     }
 
+    const zeroStatistics = () => {
+        setStatistics([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+        setLefFileName("");
+        setRightFileName("");
+    }
+
 
     return { isCompared, leftFile, rightFile, isUploadFileFirst, isUploadFileSecond, isUpload, setComparedFiles, setFileName, statistics,
-        leftFileName, rightFileName, setComparedFalse, leftFileOr, rightFileOr, setOriginalFilesLeft, setOriginalFilesRight};
+        leftFileName, rightFileName, setComparedFalse, leftFileOr, rightFileOr, setOriginalFilesLeft, setOriginalFilesRight, zeroStatistics};
 
 }
 

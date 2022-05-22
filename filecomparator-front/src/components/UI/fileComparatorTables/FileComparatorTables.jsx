@@ -1,9 +1,10 @@
 import React, {useState} from "react";
 import classes from "./fileComparatorTables.module.css"
 import Replace from "../../../icons/Replace.png";
+import Ukraine from "../../../icons/Ukraine.png";
 import DropDownForSave from "./DropDownForSave";
 
-const FileComparatorTables = ({value, statistics, isFirstFile, fileName, isUpload, setComparedFalse}) => {
+const FileComparatorTables = ({value, statistics, isFirstFile, fileName, isUpload, setComparedFalse, zeroStatistics}) => {
 
     const [show, setShow] = useState(false);
 
@@ -11,6 +12,7 @@ const FileComparatorTables = ({value, statistics, isFirstFile, fileName, isUploa
         isUpload(false);
         isUpload(false);
         setComparedFalse(false);
+        zeroStatistics();
     }
 
     const DropdownEnter = () => {
@@ -39,7 +41,11 @@ const FileComparatorTables = ({value, statistics, isFirstFile, fileName, isUploa
             <table className={classes.tableTable + " " + classes.tableTableStat_2}>
                 <tbody>
                     <tr>
-                        <th className={classes.thFirst}>1/1</th>
+                        <th className={classes.thFirst}>
+                            <div className={classes.thThird}>
+                                <img className={classes.iconTable} src={Ukraine} alt={"Україна"}/>
+                            </div>
+                        </th>
                         <th className={classes.thSecond}>{typeof(fileName) === 'undefined' ? <div> </div> : <div>Назва документа: {fileName} </div>}</th>
                         <th>
                             <div className={classes.thThird}>
