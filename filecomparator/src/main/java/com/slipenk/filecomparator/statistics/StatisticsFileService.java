@@ -5,9 +5,13 @@ import com.slipenk.filecomparator.user.UserService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -23,10 +27,57 @@ public class StatisticsFileService {
     private List<Integer> listStatisticsTwoFiles;
 
     public List<Integer> getStatisticsFile(File file) {
-        return countStatistics(file);
+        if (Objects.equals(FilenameUtils.getExtension(file.getAbsolutePath()), "docx")) {
+            return countStatisticsDOCX(file);
+        } else if (Objects.equals(FilenameUtils.getExtension(file.getAbsolutePath()), "txt")) {
+            return countStatisticsTXT(file);
+        } else {
+            return Collections.emptyList();
+        }
+    }
+    private List<Integer> countStatisticsDOCX(File file) {
+        try {
+            List<Integer> listStatistics = new ArrayList<>();
+            int wordCount = 0;
+            int punctuationCount = 0;
+            int charactersCount = 0;
+            int palindromeCount = 0;
+            FileInputStream fis1 = new FileInputStream(file.getAbsolutePath());
+            XWPFDocument document1 = new XWPFDocument(fis1);
+            List<XWPFParagraph> paragraphs1 = document1.getParagraphs();
+            for (XWPFParagraph xwpfParagraph : paragraphs1) {
+                String text = xwpfParagraph.getParagraphText();
+                charactersCount += text.length();
+                punctuationCount += text.chars().filter(ch -> ch == '-' | ch == '.' | ch == ',' | ch == ';' | ch == ':'
+                        | ch == '–' | ch == '—' | ch == '…' | ch == '!' | ch == '?' | ch == '‘' | ch == '’' | ch == '«'
+                        | ch == '»' | ch == '"' | ch == '[' | ch == ']' | ch == '(' | ch == ')'
+                        | ch == '{' | ch == '}' | ch == '/' | ch == ' ').count();
+                text = text.replaceAll("[^A-Za-zА-ЩЬЮЯҐЄІЇа-щьюяґєії'`’ʼ\\d]"," ");
+
+                Scanner word = new Scanner(text);
+
+                while(word.hasNext()) {
+                    wordCount++;
+                    String wordForPalindrome = word.next();
+                    if(isPalindrome(wordForPalindrome)) {
+                        ++palindromeCount;
+                    }
+                }
+                word.close();
+            }
+
+            listStatistics.add(wordCount);
+            listStatistics.add(punctuationCount);
+            listStatistics.add(charactersCount);
+            listStatistics.add(palindromeCount);
+            return listStatistics;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return Collections.emptyList();
+        }
     }
 
-    private List<Integer> countStatistics(File file) {
+    private List<Integer> countStatisticsTXT(File file) {
         try {
             Scanner input = new Scanner(file);
             List<Integer> listStatistics = new ArrayList<>();

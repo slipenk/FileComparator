@@ -30,7 +30,7 @@ public class FileDifference {
 
     private final FileCommandsVisitor fileCommandsVisitor;
 
-    public List<File> FileDiff(File file1, File file2) throws IOException {
+    public List<File> FileDiffTXT(File file1, File file2) throws IOException {
 
         LineIterator fileLeft = FileUtils.lineIterator(file1);
         LineIterator fileRight = FileUtils.lineIterator(file2);
@@ -51,7 +51,7 @@ public class FileDifference {
             }
         }
 
-      return fileCommandsVisitor.createComparedFiles();
+      return fileCommandsVisitor.createComparedFilesTXT();
     }
 
     public List<XWPFDocument> FileDiffDOCX(File file1, File file2) throws IOException {
@@ -62,7 +62,6 @@ public class FileDifference {
 
                 XWPFDocument document1 = new XWPFDocument(fis1);
                 XWPFDocument document2 = new XWPFDocument(fis2);
-
 
                 List<XWPFParagraph> paragraphs1 = document1.getParagraphs();
                 List<XWPFParagraph> paragraphs2 = document2.getParagraphs();

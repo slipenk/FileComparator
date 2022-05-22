@@ -3,11 +3,13 @@ package com.slipenk.filecomparator.comparingFiles;
 import com.slipenk.filecomparator.statistics.StatisticsFileService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.springframework.stereotype.Service;
 import java.io.File;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 
@@ -38,18 +40,18 @@ public class ComparingFilesService {
     }
 
     private List<File> compareFiles(File fileLeft, File fileRight, String email) {
-        //getStatisticsFiles(fileLeft, fileRight);
+        getStatisticsFiles(fileLeft, fileRight);
 
         try {
             listFiles.clear();
 
-            List<File> files = fileDifference.FileDiff(fileLeft, fileRight);
+            List<File> files = fileDifference.FileDiffTXT(fileLeft, fileRight);
 
-            //List<Integer> listStatistics = fileDifference.getStatisticsOfComparing();
-           // listStatisticsTwoFiles = Stream.concat(listStatisticsTwoFiles.stream(), listStatistics.stream()).toList();
-            //statisticsFileService.setListStatisticsTwoFiles(listStatisticsTwoFiles);
+            List<Integer> listStatistics = fileDifference.getStatisticsOfComparing();
+            listStatisticsTwoFiles = Stream.concat(listStatisticsTwoFiles.stream(), listStatistics.stream()).toList();
+            statisticsFileService.setListStatisticsTwoFiles(listStatisticsTwoFiles);
 
-            //statisticsFileService.saveStatistics(fileLeft.getName(), fileRight.getName(), email);
+            statisticsFileService.saveStatistics(fileLeft.getName(), fileRight.getName(), email);
 
             return files;
         } catch (Exception e) {
@@ -59,18 +61,18 @@ public class ComparingFilesService {
     }
 
     private List<XWPFDocument> compareFilesDOCX(File fileLeft, File fileRight, String email) {
-        //getStatisticsFiles(fileLeft, fileRight);
+        getStatisticsFiles(fileLeft, fileRight);
 
         try {
             listFiles.clear();
 
             List<XWPFDocument> files = fileDifference.FileDiffDOCX(fileLeft, fileRight);
 
-            //List<Integer> listStatistics = fileDifference.getStatisticsOfComparing();
-            // listStatisticsTwoFiles = Stream.concat(listStatisticsTwoFiles.stream(), listStatistics.stream()).toList();
-            //statisticsFileService.setListStatisticsTwoFiles(listStatisticsTwoFiles);
+            List<Integer> listStatistics = fileDifference.getStatisticsOfComparing();
+            listStatisticsTwoFiles = Stream.concat(listStatisticsTwoFiles.stream(), listStatistics.stream()).toList();
+            statisticsFileService.setListStatisticsTwoFiles(listStatisticsTwoFiles);
 
-            //statisticsFileService.saveStatistics(fileLeft.getName(), fileRight.getName(), email);
+            statisticsFileService.saveStatistics(fileLeft.getName(), fileRight.getName(), email);
 
             return files;
         } catch (Exception e) {

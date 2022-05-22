@@ -9,7 +9,6 @@ import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,8 +22,10 @@ public class FileCommandsVisitor implements CommandVisitor<Character> {
     private static final String INSERT_CHARS = "<span style=`background-color: #45EA85`>${text}</span>";
     private static final String BR_ROW = "<br/>";
     private static final String REPLACEMENT = "${text}";
-    private static final String LEFT_FILE = "LeftFile.txt";
-    private static final String RIGHT_FILE = "RightFile.txt";
+    private static final String LEFT_FILE_TXT = "LeftFile.txt";
+    private static final String RIGHT_FILE_TXT = "RightFile.txt";
+    private static final String LEFT_FILE_DOCX = "LeftFile.docx";
+    private static final String RIGHT_FILE_DOCX = "RightFile.docx";
 
     private String left = "";
     private String right = "";
@@ -59,9 +60,9 @@ public class FileCommandsVisitor implements CommandVisitor<Character> {
         ++countDeletions;
     }
 
-    public List<File> createComparedFiles() throws IOException {
-        File tmpFileLeft = new File(DIR + SLASH + LEFT_FILE);
-        File tmpFileRight = new File(DIR + SLASH + RIGHT_FILE);
+    public List<File> createComparedFilesTXT() throws IOException {
+        File tmpFileLeft = new File(DIR + SLASH + LEFT_FILE_TXT);
+        File tmpFileRight = new File(DIR + SLASH + RIGHT_FILE_TXT);
         FileWriter writerLeft = new FileWriter(tmpFileLeft);
         FileWriter writerRight = new FileWriter(tmpFileRight);
         writerLeft.write(left);
@@ -93,17 +94,12 @@ public class FileCommandsVisitor implements CommandVisitor<Character> {
         left = EMPTY_STRING;
         right = EMPTY_STRING;
 
-        try (FileOutputStream out = new FileOutputStream(DIR + SLASH + "LeftFile.docx")) {
+        try (FileOutputStream out = new FileOutputStream(DIR + SLASH + LEFT_FILE_DOCX)) {
             tmpFileLeft.write(out);
         }
-        try (FileOutputStream out = new FileOutputStream(DIR + SLASH + "RightFile.docx")) {
+        try (FileOutputStream out = new FileOutputStream(DIR + SLASH + RIGHT_FILE_DOCX)) {
             tmpFileRight.write(out);
         }
-
-       // InputStream file1 = getClass().getClassLoader().getResourceAsStream(DIR + SLASH + "LeftFile.docx");
-
-       // File leftFile = new File(file1);
-       // File rightFile = new File(DIR + SLASH + "RightFile.docx");
 
         List<XWPFDocument> listFiles = new ArrayList<>();
         listFiles.add(tmpFileLeft);

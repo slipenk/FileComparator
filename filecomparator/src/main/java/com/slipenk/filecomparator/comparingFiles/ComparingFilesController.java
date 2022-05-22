@@ -2,6 +2,7 @@ package com.slipenk.filecomparator.comparingFiles;
 
 import lombok.AllArgsConstructor;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.springframework.http.ContentDisposition;
@@ -11,11 +12,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.util.List;
+import java.util.Objects;
 
 import static com.slipenk.filecomparator.Constants.*;
 
@@ -33,6 +34,10 @@ public class ComparingFilesController {
     private static final String FILE_NAME = "compare.txt";
 
     private ComparingFilesService comparingFilesService;
+    private List<XWPFDocument> filesListDOCX;
+    private List<File> filesListTXT;
+    private byte[] bytes1;
+    private byte[] bytes2;
 
     @PostMapping(path = PATH,
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
@@ -44,41 +49,46 @@ public class ComparingFilesController {
                 Files.copy(is, convFile.toPath());
             }
 
-            //List<File> filesList = comparingFilesService.compareFile(convFile, email);
-            List<XWPFDocument> filesList = comparingFilesService.compareFileDOCX(convFile, email);
+            if (Objects.equals(FilenameUtils.getExtension(convFile.getAbsolutePath()), "docx")) {
+                filesListDOCX = comparingFilesService.compareFileDOCX(convFile, email);
+            } else if (Objects.equals(FilenameUtils.getExtension(convFile.getAbsolutePath()), "txt")) {
+                filesListTXT = comparingFilesService.compareFile(convFile, email);
+            } else {
+                clearDirectory();
+                return ResponseEntity.ok().body(EMPTY_STRING.getBytes());
+            }
 
 
-            if(!filesList.isEmpty()) {
+            if(!filesListDOCX.isEmpty() || !filesListTXT.isEmpty()) {
                 HttpHeaders httpHeaders = new HttpHeaders();
                 httpHeaders.set(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_OCTET_STREAM_VALUE);
                 httpHeaders.set(HttpHeaders.CONTENT_DISPOSITION, ContentDisposition.attachment().filename(FILE_NAME).build().toString());
 
 
-                List<XWPFParagraph> paragraphs1 = filesList.get(0).getParagraphs();
-                List<XWPFParagraph> paragraphs2 = filesList.get(1).getParagraphs();
-                String file1 = "", file2 = "";
+                if (!filesListDOCX.isEmpty()) {
+                    List<XWPFParagraph> paragraphs1 = filesListDOCX.get(0).getParagraphs();
+                    List<XWPFParagraph> paragraphs2 = filesListDOCX.get(1).getParagraphs();
+                    StringBuilder file1 = new StringBuilder(EMPTY_STRING);
+                    StringBuilder file2 = new StringBuilder(EMPTY_STRING);
 
-                for(XWPFParagraph par : paragraphs1) {
-                    file1 += par.getParagraphText();
+                    for(XWPFParagraph par : paragraphs1) {
+                        file1.append(par.getParagraphText());
+                    }
+                    for(XWPFParagraph par : paragraphs2) {
+                        file2.append(par.getParagraphText());
+                    }
+                    bytes1 = file1.toString().getBytes();
+                    bytes2 = file2.toString().getBytes();
+                    filesListDOCX.clear();
+                } else if (!filesListTXT.isEmpty()) {
+                    bytes1 = FileUtils.readFileToByteArray(filesListTXT.get(0));
+                    bytes2 = FileUtils.readFileToByteArray(filesListTXT.get(1));
+                    filesListTXT.clear();
+                } else {
+                    clearDirectory();
+                    return ResponseEntity.ok().body(EMPTY_STRING.getBytes());
                 }
-                for(XWPFParagraph par : paragraphs2) {
-                    file2 += par.getParagraphText();
-                }
-                byte[] bytes1 = file1.getBytes();
-                byte[] bytes2 = file2.getBytes();
 
-                /*ByteArrayOutputStream out1 = new ByteArrayOutputStream();
-                ByteArrayOutputStream out2 = new ByteArrayOutputStream();
-                filesList.get(0).write(out1);
-                filesList.get(1).write(out2);
-                out1.close();
-                out2.close();
-                byte[] bytes1 = out1.toByteArray();
-                byte[] bytes2 = out2.toByteArray();*/
-
-
-                //byte[] bytes1 = FileUtils.readFileToByteArray(filesList.get(0));
-                //byte[] bytes2 = FileUtils.readFileToByteArray(filesList.get(1));
                 byte[] combined = new byte[bytes1.length + bytes2.length + BORDER.length()];
 
                 System.arraycopy(bytes1,0, combined,0, bytes1.length);
