@@ -12,7 +12,6 @@ export const privateRoutes = [
     {path: '/personalAccount', element: <PersonalAccount/>, exact: true},
     {path: '/recentComparisons', element: <RecentComparisons/>, exact: true},
     {path: '*', element: <Menu/>, exact: true}
-
 ]
 
 export const publicRoutes = [

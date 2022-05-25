@@ -3,11 +3,13 @@ package com.slipenk.filecomparator.comparingFiles;
 import com.slipenk.filecomparator.statistics.StatisticsFileService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.springframework.stereotype.Service;
 import java.io.File;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 
@@ -21,10 +23,14 @@ public class ComparingFilesService {
     private StatisticsFileService statisticsFileService;
     private List<Integer> listStatisticsTwoFiles;
 
-    public List<File> compareFile(File file, String email) {
+    public List<File> compareFileTXT(File file, String email) {
         listFiles.add(file);
         if(listFiles.size() == 2) {
-            return compareFiles(listFiles.get(0), listFiles.get(1), email);
+            if (Objects.equals(FilenameUtils.getExtension(listFiles.get(0).getAbsolutePath()), "txt") && Objects.equals(FilenameUtils.getExtension(listFiles.get(1).getAbsolutePath()), "txt")) {
+                return compareFilesTXT(listFiles.get(0), listFiles.get(1), email);
+            } else  {
+                return Collections.emptyList();
+            }
         }
         return Collections.emptyList();
     }
@@ -32,12 +38,16 @@ public class ComparingFilesService {
     public List<XWPFDocument> compareFileDOCX(File file, String email) {
         listFiles.add(file);
         if(listFiles.size() == 2) {
-            return compareFilesDOCX(listFiles.get(0), listFiles.get(1), email);
+            if (Objects.equals(FilenameUtils.getExtension(listFiles.get(0).getAbsolutePath()), "docx") && Objects.equals(FilenameUtils.getExtension(listFiles.get(1).getAbsolutePath()), "docx")) {
+                return compareFilesDOCX(listFiles.get(0), listFiles.get(1), email);
+            } else  {
+                return Collections.emptyList();
+            }
         }
         return Collections.emptyList();
     }
 
-    private List<File> compareFiles(File fileLeft, File fileRight, String email) {
+    private List<File> compareFilesTXT(File fileLeft, File fileRight, String email) {
         getStatisticsFiles(fileLeft, fileRight);
 
         try {

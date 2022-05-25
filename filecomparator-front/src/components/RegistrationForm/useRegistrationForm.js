@@ -161,13 +161,11 @@ const useRegistrationForm = (callback, validate, isRegistration) => {
          }).then((response) => {
              if(response.data === "SUCCESS") {
                  diffToastSuccess("Дані успішно оновлені");
+                 getUserByID();
              } else if(response.data === "NEED_VERIFY_EMAIL") {
                  diffToastInfo("Ви змінили електронну пошту. Будь ласка, підтвердіть лист, що надійшов на вашу електронну поштову скриньку");
-             } else if(response.data === "Користувач з електронною поштою slipenk@gmail.com вже існує в системі") {
-                 diffToastError("Користувач з електронною поштою slipenk@gmail.com вже існує в системі");
-             }
-             else {
-                 diffToastError("Проблема з оновленням даних");
+             } else {
+                 diffToastError("Проблема з оновленням даних. Ймовірна причина - користувач з такою електронною поштою вже існує в системі");
              }
          }
          ).catch(() => {

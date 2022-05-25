@@ -52,7 +52,7 @@ public class ComparingFilesController {
             if (Objects.equals(FilenameUtils.getExtension(convFile.getAbsolutePath()), "docx")) {
                 filesListDOCX = comparingFilesService.compareFileDOCX(convFile, email);
             } else if (Objects.equals(FilenameUtils.getExtension(convFile.getAbsolutePath()), "txt")) {
-                filesListTXT = comparingFilesService.compareFile(convFile, email);
+                filesListTXT = comparingFilesService.compareFileTXT(convFile, email);
             } else {
                 clearDirectory();
                 return ResponseEntity.ok().body(EMPTY_STRING.getBytes());

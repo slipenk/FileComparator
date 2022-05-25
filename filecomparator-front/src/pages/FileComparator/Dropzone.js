@@ -7,13 +7,15 @@ import Tippy from "@tippy.js/react";
 import 'tippy.js/dist/tippy.css'
 
 
-export default function MyDropzone({isUpload, setComparedFiles, setFileName, setOriginalFiles}) {
+export default function MyDropzone({isUpload, setComparedFiles, setFileName, setOriginalFiles, isLeftFile}) {
     const UPLOAD_FILE_URL = "/berulia/uploadFile";
     const BORDER = "End File1  bordeeeeeer Start File2";
     const reader = new FileReader();
 
+
     const onDropCallback = useCallback(acceptedFiles => {
         const file = acceptedFiles[0];
+
 
         reader.readAsText(acceptedFiles[0], "UTF-8")
         reader.onload = () => {
@@ -46,6 +48,8 @@ export default function MyDropzone({isUpload, setComparedFiles, setFileName, set
                 const files = object.slice(1, -1).split(BORDER);
                 setComparedFiles(files[0]);
                 setComparedFiles(files[1]);
+            } else if(!response.data && !isLeftFile) {
+                diffToastError("Помилка при порівнянні файлів. Формати обох файлів повинні бути однаковими");
             }
         }
         ).catch(() => {
@@ -61,6 +65,7 @@ export default function MyDropzone({isUpload, setComparedFiles, setFileName, set
         maxFiles: 1,
         onDrop: onDropCallback
     })
+
 
     return (
         <Tippy placement="bottom" content="Підтримувані формати файлів - TXT, DOCX">

@@ -18,7 +18,7 @@ const Circles = () => {
             {getUsername()}
             <div className={classesM.circle + " " + classesM.circleRight}>
                 {localStorage.setItem('IsMenu', 'true')}
-                <div className={classesM.overDiv}>
+                <div>
                     <LogoName logo={LogoU} value={username.current}/>
                 </div>
             </div>

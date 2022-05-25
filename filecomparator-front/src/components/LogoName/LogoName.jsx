@@ -2,11 +2,13 @@ import React, {useRef, useState} from "react";
 import classes from './LogoName.module.css';
 import DropDown from "../UI/DropDown/DropDown";
 import LogoU from "../../icons/User.png";
+import {useNavigate} from "react-router-dom";
 
 
 const LogoName = ({logo, value}) => {
     const inputEl = useRef(false);
     const [show, setShow] = useState(false);
+    const navigate = useNavigate();
 
     function setLogo() {
         if(localStorage.getItem('IsMenu')) {
@@ -26,15 +28,21 @@ const LogoName = ({logo, value}) => {
         }
     }
 
+    function goToMenu() {
+        if(value === "БЕРУЛЯ") {
+            navigate("/menu");
+        }
+    }
+
     return (
         <div className={classes.flexDivCol}>
             <div onMouseLeave={DropdownLeave}>
                 {setLogo()}
                 <div className={classes.LogoDiv} onMouseEnter={DropdownEnter}>
-                    <img className={inputEl.current ? classes.ImageDivSmall : classes.ImageDivBig} src={logo} alt={value}/>
+                    <img className={inputEl.current ? classes.ImageDivSmall : classes.ImageDivBig} onClick={() => goToMenu()} src={logo} alt={value}/>
                 </div>
                 <div className={inputEl.current ? classes.HBer + " " + classes.HBerSmall : classes.HBer + " " + classes.HBerBig}>
-                    <h1>{value}</h1>
+                    <h1 className={classes.overDiv}>{value}</h1>
                 </div>
                 {show && (<DropDown/>)}
             </div>

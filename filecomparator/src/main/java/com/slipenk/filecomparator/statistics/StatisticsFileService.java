@@ -59,7 +59,7 @@ public class StatisticsFileService {
                 while(word.hasNext()) {
                     wordCount++;
                     String wordForPalindrome = word.next();
-                    if(isPalindrome(wordForPalindrome)) {
+                    if(isPalindrome(wordForPalindrome.toLowerCase())) {
                         ++palindromeCount;
                     }
                 }
@@ -102,7 +102,7 @@ public class StatisticsFileService {
                 while(word.hasNext()) {
                     wordCount++;
                     String wordForPalindrome = word.next();
-                    if(isPalindrome(wordForPalindrome)) {
+                    if(isPalindrome(wordForPalindrome.toLowerCase())) {
                         ++palindromeCount;
                     }
                 }
@@ -122,7 +122,12 @@ public class StatisticsFileService {
 
     private boolean isPalindrome(String str)
     {
+
         int i = 0, j = str.length() - 1;
+
+        if(j == 0){
+            return false;
+        }
 
         while (i < j) {
 
@@ -133,7 +138,7 @@ public class StatisticsFileService {
             ++i;
             --j;
         }
-
+        System.out.println(str);
         return true;
     }
 
@@ -156,9 +161,7 @@ public class StatisticsFileService {
     }
 
     public List<StatisticsOfComparing> getStatistics(Long ID) {
-
         return statisticsFileRepository.findByUserID(ID);
-
     }
 
 }
