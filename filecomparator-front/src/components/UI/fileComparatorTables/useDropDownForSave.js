@@ -5,18 +5,24 @@ const useDropDownForSave = (isFirstFile) => {
 
     const saveFileFromEditors = (item, type) => {
 
-        if(isFirstFile) {
+        if(isFirstFile && item === "html") {
+            const file = localStorage.getItem('leftEditor');
+            saveFile('yourFile.' + item, file, type);
+        } else if(!isFirstFile && item === "html") {
+            const file = localStorage.getItem('rightEditor');
+            saveFile('yourFile.' + item, file, type);
+        } else if(isFirstFile) {
             const file = localStorage.getItem('leftEditor');
             const text = htmlToText(file, {
                 wordwrap: 130
             });
-            saveFile('yourFile.' + item, text, type)
-        }  else {
+            saveFile('yourFile.' + item, text, type);
+        }  else if(!isFirstFile) {
             const file = localStorage.getItem('rightEditor');
             const text = htmlToText(file, {
                 wordwrap: 130
             });
-            saveFile('yourFile.' + item, text, type)
+            saveFile('yourFile.' + item, text, type);
         }
     }
 
