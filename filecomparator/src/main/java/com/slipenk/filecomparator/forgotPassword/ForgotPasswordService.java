@@ -23,8 +23,7 @@ public class ForgotPasswordService {
             throw new IllegalStateException(INVALID_EMAIL);
         }
         String randomPassword = generateRandomPassword(5, 97, 122)
-        + generateRandomPassword(5, 65, 90) + generateRandomPassword(5, 48, 57) +
-                generateRandomPassword(5, 91, 96);
+        + generateRandomPassword(5, 65, 90) + generateRandomPassword(5, 48, 57);
         User user = userService.getUserByEmail(email);
         emailSender.send(email, buildEmail(randomPassword));
         userService.changeForgottenPassword(randomPassword, user.getEmail());

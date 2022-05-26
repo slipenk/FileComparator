@@ -67,7 +67,7 @@ const useLoginForm = (callback, validateInfoEmailPassword) => {
         callback(auth);
     }, [auth]); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const handleForgotPassword = async () => {
+    const handleForgotPassword = () => {
         setErrors(validateInfoEmailPassword(values, true));
         if (Object.keys(errors).length === 0) {
             axios({
