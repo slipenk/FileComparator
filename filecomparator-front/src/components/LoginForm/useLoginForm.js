@@ -3,13 +3,14 @@ import axios from "../../API/axios"
 import diffToastError from "../../Toast/ToastError";
 import "react-toastify/dist/ReactToastify.css";
 import { useAuth } from "../../context/context";
+import diffToastInfo from "../../Toast/ToastInfo";
 
 
 const useLoginForm = (callback, validateInfoEmailPassword) => {
     const [auth, setAuth] = useAuth(useAuth);
     const [values, setValues] = useState({
-        email: "slipenk92@gmail.com",
-        password: "CERcer12_"
+        email: "",
+        password: ""
     });
     const [errors, setErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -79,7 +80,7 @@ const useLoginForm = (callback, validateInfoEmailPassword) => {
                 }
 
             }).then(() => {
-                diffToastError("На вашу електронну пошту надійшов лист з новим паролем. Будь ласка, перегляньте вашу електронну скриньку");
+                diffToastInfo("На вашу електронну пошту надійшов лист з новим паролем. Будь ласка, перегляньте вашу електронну скриньку");
             }
             ).catch((err) => {
                 if(err.response.data) {
