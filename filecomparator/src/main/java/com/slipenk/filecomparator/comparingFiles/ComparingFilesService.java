@@ -18,7 +18,7 @@ import java.util.stream.Stream;
 @Getter
 public class ComparingFilesService {
 
-    private List<File> listFiles;
+    public List<File> listFiles;
     private final FileDifference fileDifference;
     private StatisticsFileService statisticsFileService;
     private List<Integer> listStatisticsTwoFiles;

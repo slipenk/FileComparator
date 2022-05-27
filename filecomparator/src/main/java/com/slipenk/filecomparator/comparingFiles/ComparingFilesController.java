@@ -38,6 +38,7 @@ public class ComparingFilesController {
     private List<File> filesListTXT;
     private byte[] bytes1;
     private byte[] bytes2;
+    private static int counter;
 
     @PostMapping(path = PATH,
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
@@ -48,18 +49,21 @@ public class ComparingFilesController {
             try(InputStream is = multipartFile.getInputStream()) {
                 Files.copy(is, convFile.toPath());
             }
+            ++counter;
 
             if (Objects.equals(FilenameUtils.getExtension(convFile.getAbsolutePath()), "docx")) {
                 filesListDOCX = comparingFilesService.compareFileDOCX(convFile, email);
             } else if (Objects.equals(FilenameUtils.getExtension(convFile.getAbsolutePath()), "txt")) {
                 filesListTXT = comparingFilesService.compareFileTXT(convFile, email);
             } else {
+                counter = 0;
                 clearDirectory();
                 return ResponseEntity.ok().body(EMPTY_STRING.getBytes());
             }
 
 
             if(!filesListDOCX.isEmpty() || !filesListTXT.isEmpty()) {
+                counter = 0;
                 HttpHeaders httpHeaders = new HttpHeaders();
                 httpHeaders.set(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_OCTET_STREAM_VALUE);
                 httpHeaders.set(HttpHeaders.CONTENT_DISPOSITION, ContentDisposition.attachment().filename(FILE_NAME).build().toString());
@@ -98,6 +102,10 @@ public class ComparingFilesController {
                 clearDirectory();
 
                 return ResponseEntity.ok().headers(httpHeaders).body(combined);
+            } else if(counter == 2) {
+                comparingFilesService.listFiles.clear();
+                clearDirectory();
+                counter = 0;
             }
 
 
