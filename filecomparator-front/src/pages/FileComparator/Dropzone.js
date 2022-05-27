@@ -49,7 +49,7 @@ export default function MyDropzone({isUpload, setComparedFiles, setFileName, set
                 setComparedFiles(files[0]);
                 setComparedFiles(files[1]);
             } else if(!response.data && !isLeftFile) {
-                diffToastError("Помилка при порівнянні файлів. Формати обох файлів повинні бути однаковими");
+                diffToastError("Помилка при порівнянні файлів. Ймовірна причина - формати обох файлів повинні бути однаковими");
             }
         }
         ).catch(() => {
@@ -74,7 +74,7 @@ export default function MyDropzone({isUpload, setComparedFiles, setFileName, set
                 {
                     isDragActive ?
                         <p className={classes.DropZoneItem}>Перетягніть файл сюди ...</p> :
-                        <p className={classes.DropZoneItem}>Перетягніть ваш документ<br/> сюди або натисність на<br/> текст, щоб вибрати файл</p>
+                        <p className={classes.DropZoneItem}>Перетягніть ваш документ<br/> сюди або натисність на<br/> текст, щоби вибрати файл</p>
                 }
             </div>
         </Tippy>

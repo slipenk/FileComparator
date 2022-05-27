@@ -164,6 +164,7 @@ const useRegistrationForm = (callback, validate, isRegistration) => {
                  getUserByID();
              } else if(response.data === "NEED_VERIFY_EMAIL") {
                  diffToastInfo("Ви змінили електронну пошту. Будь ласка, підтвердіть лист, що надійшов на вашу електронну поштову скриньку");
+                 getUserByID();
              } else {
                  diffToastError("Проблема з оновленням даних. Ймовірна причина - користувач з такою електронною поштою вже існує в системі");
              }
