@@ -150,7 +150,7 @@ const useLoginForm = (callback, validateInfoEmailPassword) => {
                 const message = object.split(":")[1];
                 diffToastError(message.slice(1, -2));
             } else {
-                diffToastError("Помилка при отриманні даних користувача");
+                diffToastError("Помилка під час отримання даних користувача");
             }
         })
     }

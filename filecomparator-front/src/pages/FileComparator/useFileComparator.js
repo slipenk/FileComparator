@@ -77,7 +77,7 @@ const useFileComparator = () => {
                 }
             }
         ).catch(() => {
-            diffToastError("Помилка при отриманні статистики");
+            diffToastError("Помилка під час отримання статистики");
         })
     }
 

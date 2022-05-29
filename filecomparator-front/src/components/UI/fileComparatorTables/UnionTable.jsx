@@ -10,7 +10,7 @@ const UnionTable = ({statistics}) => {
                         <th className={classesT.thFirstTopTable + " " + classesT.thFirstCol}>{typeof(statistics) === 'undefined' ? <div> </div> : <div>Кількість змін:<br/> {statistics[8]}</div>}</th>
                         <th className={classesT.thFirstTopTable}>{typeof(statistics) === 'undefined' ? <div> </div> : <div>Кількість видалень:<br/> {statistics[9]}</div>}</th>
                         <th className={classesT.thFirstTopTable}>{typeof(statistics) === 'undefined' ? <div> </div> : <div>Кількість додавань:<br/> {statistics[10]}</div>}</th>
-                        <th className={classesT.thFirstTopTable + " " + classesT.thLastCol}>{typeof(statistics) === 'undefined' ? <div> </div> : <div>Однакових символів:<br/> {statistics[11]}</div>}</th>
+                        <th className={classesT.thFirstTopTable + " " + classesT.thLastCol}>{typeof(statistics) === 'undefined' ? <div> </div> : <div>К-сть однакових символів:<br/> {statistics[11]}</div>}</th>
                     </tr>
                 </tbody>
             </table>

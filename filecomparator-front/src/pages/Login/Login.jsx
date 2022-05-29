@@ -25,7 +25,7 @@ const Login = () => {
                     <LoginForm submitForm={submitForm}/>
                     <div className={classes.alreadyReg + " " + classes.alreadyRegLogin}>
                         <div>
-                            <Link to="/registration" > <i>Ще не маєте акаунту?<br/>Давайте створимо :)</i></Link>
+                            <Link to="/registration" > <i>Ще не маєте акаунта?<br/>Давайте створимо :)</i></Link>
                         </div>
                     </div>
                 </div>

@@ -139,7 +139,7 @@ const useRegistrationForm = (callback, validate, isRegistration) => {
                 const message = object.split(":")[1];
                 diffToastError(message.slice(1, -2));
             } else {
-                diffToastError("Помилка при отриманні даних користувача");
+                diffToastError("Помилка під час отримання даних користувача");
             }
         })
     }
@@ -166,7 +166,7 @@ const useRegistrationForm = (callback, validate, isRegistration) => {
                  diffToastInfo("Ви змінили електронну пошту. Будь ласка, підтвердіть лист, що надійшов на вашу електронну поштову скриньку");
                  getUserByID();
              } else {
-                 diffToastError("Проблема з оновленням даних. Ймовірна причина - користувач з такою електронною поштою вже існує в системі");
+                 diffToastError("Проблема з оновленням даних. Ймовірна причина - користувач із такою електронною поштою вже є в системі");
              }
          }
          ).catch(() => {
