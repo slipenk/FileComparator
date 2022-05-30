@@ -12,6 +12,7 @@ const useLoginForm = (callback, validateInfoEmailPassword) => {
         email: "",
         password: ""
     });
+    const [isForgotPass, setIsForgotPass] = useState(false);
     const [errors, setErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isToolTipEmail, setToolTipEmail] = useState(false);
@@ -42,7 +43,9 @@ const useLoginForm = (callback, validateInfoEmailPassword) => {
             if (Object.keys(errors).length === 0 && isSubmitting) {
                 setBCEmail("#FFFCE2");
                 setBCPassword("#FFFCE2");
-                handleSubmitAfterValidation().then();
+                if (!isForgotPass) {
+                     handleSubmitAfterValidation();
+                }
             } else {
                 if (errors.email) {
                     setBCEmail("#FD8E90");
@@ -59,6 +62,7 @@ const useLoginForm = (callback, validateInfoEmailPassword) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setIsForgotPass(false);
         setErrors(validateInfoEmailPassword(values, false));
         setIsSubmitting(true);
     };
@@ -68,6 +72,7 @@ const useLoginForm = (callback, validateInfoEmailPassword) => {
     }, [auth]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const handleForgotPassword = () => {
+        setIsForgotPass(true);
         setErrors(validateInfoEmailPassword(values, true));
         if (Object.keys(errors).length === 0) {
             axios({
@@ -94,13 +99,13 @@ const useLoginForm = (callback, validateInfoEmailPassword) => {
         }
     }
 
-    const handleSubmitAfterValidation = async () => {
+    const handleSubmitAfterValidation = () => {
         let formData = new FormData();
 
         formData.append('username', values.email);
         formData.append('password', values.password);
 
-        axios({
+         axios({
             url: LOGIN_URL,
             method: 'POST',
             data: formData,
@@ -108,8 +113,7 @@ const useLoginForm = (callback, validateInfoEmailPassword) => {
                 'content-type': 'multipart/form-data'
             }
         }).then(() => {
-            setAuth(true);
-            getUser();
+            getUser().then(() => setAuth(true));
         }
         ).catch((err) => {
             if(err.response.data) {
@@ -132,8 +136,8 @@ const useLoginForm = (callback, validateInfoEmailPassword) => {
 
     }
 
-    const getUser = async () => {
-        axios({
+    const getUser = () => {
+        return axios({
             url: GET_USER,
             method: 'POST',
             data: values.email,

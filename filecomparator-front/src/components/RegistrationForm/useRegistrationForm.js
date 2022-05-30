@@ -23,6 +23,7 @@ const useRegistrationForm = (callback, validate, isRegistration) => {
     const [BCEmail, setBCEmail] = useState('#FFFCE2');
     const [BCPassword, setBCPassword] = useState('#FFFCE2');
     const [BCPasswordR, setBCPasswordR] = useState('#FFFCE2');
+    const [object, setObject] = useState();
     const REGISTRATION_URL = "/berulia/registration/register";
     const GET_USER_BY_ID = "/berulia/getUserByID";
     const UPDATE_USER_DATA_URL = "/berulia/update";
@@ -58,7 +59,7 @@ const useRegistrationForm = (callback, validate, isRegistration) => {
                 if(isRegistration) {
                     handleSubmitAfterValidation().then();
                 } else {
-                    updateUserData().then();
+                    updateUserData();
                 }
             } else {
                 if (errors.username) {
@@ -117,10 +118,9 @@ const useRegistrationForm = (callback, validate, isRegistration) => {
         })
     }
 
-    const getUserByID = async () => {
+    const getUserByID = () => {
         const text  = localStorage.getItem('user');
         const object = JSON.parse(text);
-
 
         axios({
             url: GET_USER_BY_ID,
@@ -144,12 +144,24 @@ const useRegistrationForm = (callback, validate, isRegistration) => {
         })
     }
 
-    const updateUserData = async () => {
-        await getUserByID();
-        const text  = localStorage.getItem('user');
-        const object = JSON.parse(text);
+    useEffect(
+        () => {
+            if (!isRegistration) {
+                const text  = localStorage.getItem('user');
+                const object = JSON.parse(text);
+                setObject(object);
 
+                setValues({
+                    ...values,
+                    ["username"]: object.username,
+                    ["email"]: object.email
+                });
+            }
+        },
+        [] // eslint-disable-line react-hooks/exhaustive-deps
+    );
 
+    const updateUserData = () => {
          axios({
              url: UPDATE_USER_DATA_URL,
              method: 'POST',

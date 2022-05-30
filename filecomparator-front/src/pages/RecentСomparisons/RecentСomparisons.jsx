@@ -17,7 +17,7 @@ const RecentComparisons = () => {
 
 
     const filteredOutput = recentComparisons.filter(item =>
-            labels.some((column) => item[column].toString().toLowerCase().indexOf(q) > -1)
+            labels.some((column) => item[column].toString().toLowerCase().indexOf(q.toLowerCase()) > -1)
     );
 
     const renderedOutput = filteredOutput.map(item => {
