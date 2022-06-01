@@ -138,7 +138,7 @@ public class StatisticsFileService {
             ++i;
             --j;
         }
-        System.out.println(str);
+
         return true;
     }
 

@@ -12,4 +12,7 @@ public class Constants {
     public static final String BERULIA_REG = "berulia/registration";
     public static final String BERULIA_UPDATE_USER_DATA = "update";
     public static final String CONSUMES_PRODUCES = "application/json";
+    public static final String DOCX = "docx";
+    public static final String TXT = "txt";
+    public static final String BR = "<br/>";
 }

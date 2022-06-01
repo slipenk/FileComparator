@@ -9,18 +9,44 @@ import 'tippy.js/dist/tippy.css'
 
 export default function MyDropzone({isUpload, setComparedFiles, setFileName, setOriginalFiles, isLeftFile}) {
     const UPLOAD_FILE_URL = "/berulia/uploadFile";
+    const UPLOAD_FILE_DOCX = "/berulia/uploadFileDOCX";
     const BORDER = "End File1  bordeeeeeer Start File2";
     const reader = new FileReader();
-
 
     const onDropCallback = useCallback(acceptedFiles => {
         const file = acceptedFiles[0];
 
 
-        reader.readAsText(acceptedFiles[0], "UTF-8")
-        reader.onload = () => {
-            if (!!reader.result) {
-                setOriginalFiles(reader.result);
+        if(acceptedFiles[0].type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
+            const formData = new FormData();
+            formData.append("file", file);
+
+            axios({
+                url: UPLOAD_FILE_DOCX,
+                method: 'POST',
+                data: formData,
+                dataType: 'json',
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }).then((response) => {
+                    if(response.data) {
+                        const object = JSON.stringify(response.data).slice(1, -1);
+                        setOriginalFiles(object);
+                    } else if(!response.data) {
+                        diffToastError("Проблеми з серверною частиною застосунку");
+                    }
+                }
+            ).catch(() => {
+                diffToastError("Проблеми з серверною частиною застосунку");
+            })
+
+        } else {
+            reader.readAsText(acceptedFiles[0], "UTF-8");
+            reader.onload = () => {
+                if (!!reader.result) {
+                    setOriginalFiles(reader.result);
+                }
             }
         }
 

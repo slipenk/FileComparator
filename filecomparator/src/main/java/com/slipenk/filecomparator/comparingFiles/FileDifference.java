@@ -12,14 +12,11 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
-
-import static com.slipenk.filecomparator.Constants.EMPTY_STRING;
-import static com.slipenk.filecomparator.Constants.NEW_ROW;
-
+import static com.slipenk.filecomparator.Constants.*;
+import static com.slipenk.filecomparator.comparingFiles.FileCommandsVisitor.leftV;
+import static com.slipenk.filecomparator.comparingFiles.FileCommandsVisitor.rightV;
 
 @Service
 @AllArgsConstructor
@@ -27,14 +24,27 @@ public class FileDifference {
 
     private final FileCommandsVisitor fileCommandsVisitor;
 
+    public static String leftVD = EMPTY_STRING;
+    public static String rightVD = EMPTY_STRING;
+
+    private static final String CONTAINS = "background-color:";
+    private static final String CONTAINS_PLUS = ") (+)  ";
+    private static final String CONTAINS_MINUS = ") (-)  ";
+    private static final String CONTAINS_EMPTY = ")  ";
+
+
     public List<File> FileDiffTXT(File file1, File file2) throws IOException {
+
+        int counter = 0;
 
         LineIterator fileLeft = FileUtils.lineIterator(file1);
         LineIterator fileRight = FileUtils.lineIterator(file2);
 
         while (fileLeft.hasNext() || fileRight.hasNext()) {
+            ++counter;
             String left = (fileLeft.hasNext() ? fileLeft.nextLine() : EMPTY_STRING) + NEW_ROW;
             String right = (fileRight.hasNext() ? fileRight.nextLine() : EMPTY_STRING) + NEW_ROW;
+
 
             StringsComparator comparator = new StringsComparator(left, right);
 
@@ -46,6 +56,22 @@ public class FileDifference {
                 StringsComparator rightComparator = new StringsComparator(EMPTY_STRING, right);
                 rightComparator.getScript().visit(fileCommandsVisitor);
             }
+
+            if (leftV.contains(CONTAINS)) {
+                leftV = counter + CONTAINS_MINUS + leftV;
+            } else {
+                leftV = counter + CONTAINS_EMPTY + leftV;
+            }
+            if (rightV.contains(CONTAINS)) {
+                rightV = counter + CONTAINS_PLUS + rightV;
+            } else {
+                rightV = counter + CONTAINS_EMPTY + rightV;
+            }
+
+            leftVD += leftV;
+            rightVD += rightV;
+            leftV = EMPTY_STRING;
+            rightV = EMPTY_STRING;
         }
 
       return fileCommandsVisitor.createComparedFilesTXT();
@@ -53,7 +79,9 @@ public class FileDifference {
 
     public List<XWPFDocument> FileDiffDOCX(File file1, File file2) throws IOException {
         try {
-            if (Objects.equals(FilenameUtils.getExtension(file1.getAbsolutePath()), "docx") && Objects.equals(FilenameUtils.getExtension(file2.getAbsolutePath()), "docx")) {
+            if (Objects.equals(FilenameUtils.getExtension(file1.getAbsolutePath()), DOCX) && Objects.equals(FilenameUtils.getExtension(file2.getAbsolutePath()), DOCX)) {
+                int counter = 0;
+
                 FileInputStream fis1 = new FileInputStream(file1.getAbsolutePath());
                 FileInputStream fis2 = new FileInputStream(file2.getAbsolutePath());
 
@@ -66,8 +94,10 @@ public class FileDifference {
                 Iterator<XWPFParagraph> it2 = paragraphs2.iterator();
 
                 while (it1.hasNext() || it2.hasNext()) {
+                    ++counter;
                     String left = (it1.hasNext() ? it1.next().getParagraphText() : EMPTY_STRING) + NEW_ROW;
                     String right = (it2.hasNext() ? it2.next().getParagraphText() : EMPTY_STRING) + NEW_ROW;
+
 
                     StringsComparator comparator = new StringsComparator(left, right);
 
@@ -79,16 +109,32 @@ public class FileDifference {
                         StringsComparator rightComparator = new StringsComparator(EMPTY_STRING, right);
                         rightComparator.getScript().visit(fileCommandsVisitor);
                     }
+
+                    if (leftV.contains(CONTAINS)) {
+                        leftV = counter + CONTAINS_MINUS + leftV;
+                    } else {
+                        leftV = counter + CONTAINS_EMPTY + leftV;
+                    }
+                    if (rightV.contains(CONTAINS)) {
+                        rightV = counter + CONTAINS_PLUS + rightV;
+                    } else {
+                        rightV = counter + CONTAINS_EMPTY + rightV;
+                    }
+
+                    leftVD += leftV;
+                    rightVD += rightV;
+                    leftV = EMPTY_STRING;
+                    rightV = EMPTY_STRING;
+
                 }
                 fis1.close();
                 fis2.close();
-
             }
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return fileCommandsVisitor.createComparedFilesDOCX();
+       return fileCommandsVisitor.createComparedFilesDOCX();
     }
 
     public List<Integer> getStatisticsOfComparing() {

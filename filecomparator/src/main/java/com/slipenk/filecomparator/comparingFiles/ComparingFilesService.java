@@ -4,13 +4,23 @@ import com.slipenk.filecomparator.statistics.StatisticsFileService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.springframework.stereotype.Service;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
+
+import static com.slipenk.filecomparator.Constants.*;
+import static com.slipenk.filecomparator.comparingFiles.ComparingFilesController.DIR;
+import static com.slipenk.filecomparator.comparingFiles.ComparingFilesController.TEMP_FILE_NAME;
 
 
 @Service
@@ -22,6 +32,7 @@ public class ComparingFilesService {
     private final FileDifference fileDifference;
     private StatisticsFileService statisticsFileService;
     private List<Integer> listStatisticsTwoFiles;
+    private static final String TEMP_DOCX = "temp.docx";
 
     public List<File> compareFileTXT(File file, String email) {
         listFiles.add(file);
@@ -87,6 +98,35 @@ public class ComparingFilesService {
             System.out.println(e.getMessage());
             return Collections.emptyList();
         }
+    }
+
+    public XWPFDocument getDOCXFile(File file) {
+        try {
+            FileInputStream fis = new FileInputStream(file.getAbsolutePath());
+            XWPFDocument document = new XWPFDocument(fis);
+            List<XWPFParagraph> paragraphs = document.getParagraphs();
+            Iterator<XWPFParagraph> it = paragraphs.iterator();
+            String text = EMPTY_STRING;
+            while (it.hasNext() ) {
+                text += it.next().getParagraphText() + BR;
+            }
+
+            XWPFDocument fileDOCX = new XWPFDocument();
+            XWPFParagraph fileDOCXP = fileDOCX.createParagraph();
+            fileDOCXP.setAlignment(ParagraphAlignment.LEFT);
+            XWPFRun rFile = fileDOCXP.createRun();
+
+            rFile.setText(text);
+
+            try (FileOutputStream out = new FileOutputStream(DIR + SLASH + TEMP_FILE_NAME + "T")) {
+                fileDOCX.write(out);
+            }
+
+            return fileDOCX;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return new XWPFDocument();
     }
 
 

@@ -153,8 +153,8 @@ const useRegistrationForm = (callback, validate, isRegistration) => {
 
                 setValues({
                     ...values,
-                    ["username"]: object.username,
-                    ["email"]: object.email
+                    "username": object.username,
+                    "email": object.email
                 });
             }
         },

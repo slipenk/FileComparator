@@ -14,6 +14,8 @@ import java.util.List;
 
 import static com.slipenk.filecomparator.Constants.*;
 import static com.slipenk.filecomparator.comparingFiles.ComparingFilesController.DIR;
+import static com.slipenk.filecomparator.comparingFiles.FileDifference.leftVD;
+import static com.slipenk.filecomparator.comparingFiles.FileDifference.rightVD;
 
 @Service
 public class FileCommandsVisitor implements CommandVisitor<Character> {
@@ -27,8 +29,8 @@ public class FileCommandsVisitor implements CommandVisitor<Character> {
     private static final String LEFT_FILE_DOCX = "LeftFile.docx";
     private static final String RIGHT_FILE_DOCX = "RightFile.docx";
 
-    private String left = "";
-    private String right = "";
+    public static String leftV = EMPTY_STRING;
+    public static String rightV = EMPTY_STRING;
     private int countChanges = 0;
     private int countDeletions = 0;
     private int countAdditions = 0;
@@ -37,8 +39,8 @@ public class FileCommandsVisitor implements CommandVisitor<Character> {
     @Override
     public void visitKeepCommand(Character c) {
         String append = NEW_ROW.equals(EMPTY_STRING + c) ? BR_ROW : EMPTY_STRING + c;
-        left = left + append;
-        right = right + append;
+        leftV = leftV + append;
+        rightV = rightV + append;
         if (append.equals(EMPTY_STRING + c)) {
             ++countSimilarSymbols;
         }
@@ -47,7 +49,7 @@ public class FileCommandsVisitor implements CommandVisitor<Character> {
     @Override
     public void visitInsertCommand(Character c) {
         String append = NEW_ROW.equals(EMPTY_STRING + c) ? BR_ROW : EMPTY_STRING + c;
-        right = right + INSERT_CHARS.replace(REPLACEMENT, EMPTY_STRING + append);
+        rightV = rightV + INSERT_CHARS.replace(REPLACEMENT, EMPTY_STRING + append);
         ++countChanges;
         ++countAdditions;
     }
@@ -55,7 +57,7 @@ public class FileCommandsVisitor implements CommandVisitor<Character> {
     @Override
     public void visitDeleteCommand(Character c) {
         String toAppend = NEW_ROW.equals(EMPTY_STRING + c) ? BR_ROW : EMPTY_STRING + c;
-        left = left + DELETE_CHARS.replace(REPLACEMENT, EMPTY_STRING + toAppend);
+        leftV = leftV + DELETE_CHARS.replace(REPLACEMENT, EMPTY_STRING + toAppend);
         ++countChanges;
         ++countDeletions;
     }
@@ -65,10 +67,10 @@ public class FileCommandsVisitor implements CommandVisitor<Character> {
         File tmpFileRight = new File(DIR + SLASH + RIGHT_FILE_TXT);
         FileWriter writerLeft = new FileWriter(tmpFileLeft);
         FileWriter writerRight = new FileWriter(tmpFileRight);
-        writerLeft.write(left);
-        writerRight.write(right);
-        left = EMPTY_STRING;
-        right = EMPTY_STRING;
+        writerLeft.write(leftVD);
+        writerRight.write(rightVD);
+        leftVD = EMPTY_STRING;
+        rightVD = EMPTY_STRING;
 
         writerLeft.close();
         writerRight.close();
@@ -89,10 +91,10 @@ public class FileCommandsVisitor implements CommandVisitor<Character> {
 
         XWPFRun rLeft = pLeft.createRun();
         XWPFRun rRight = pRight.createRun();
-        rLeft.setText(left);
-        rRight.setText(right);
-        left = EMPTY_STRING;
-        right = EMPTY_STRING;
+        rLeft.setText(leftVD);
+        rRight.setText(rightVD);
+        leftVD = EMPTY_STRING;
+        rightVD = EMPTY_STRING;
 
         try (FileOutputStream out = new FileOutputStream(DIR + SLASH + LEFT_FILE_DOCX)) {
             tmpFileLeft.write(out);
