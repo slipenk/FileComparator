@@ -5,12 +5,12 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 public class WebConfig implements WebMvcConfigurer {
-    public static final int MB_50 = 52428800;
+    public static final int MB_1 = 1000000;
 
     @Bean(name = "multipartResolver")
     public CommonsMultipartResolver multipartResolver() {
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-        multipartResolver.setMaxUploadSize(MB_50);
+        multipartResolver.setMaxUploadSize(MB_1);
         return new CommonsMultipartResolver();
     }
 }

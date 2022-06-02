@@ -74,7 +74,6 @@ export default function MyDropzone({isUpload, setComparedFiles, setFileName, set
             if(response.data) {
                 const object = JSON.stringify(response.data);
                 const files = object.slice(1, -1).replace(/\\"/g, "\"").split(BORDER);
-
                 setComparedFiles(files[0]);
                 setComparedFiles(files[1]);
             } else if(!response.data && !isLeftFile) {
@@ -92,12 +91,13 @@ export default function MyDropzone({isUpload, setComparedFiles, setFileName, set
             'application/vnd.openxmlformats-officedocument.wordprocessingml.document': ['.docx']
         },
         maxFiles: 1,
+        maxSize: 1000000,
         onDrop: onDropCallback
     })
 
 
     return (
-        <Tippy placement="bottom" content="Підтримувані формати файлів - TXT, DOCX">
+        <Tippy className={classes.alignTippy} placement="bottom" content="Підтримувані формати файлів - TXT, DOCX. Максимальний розмір файлу - 2 МБ">
             <div {...getRootProps()}>
                 <input {...getInputProps()} />
                 {

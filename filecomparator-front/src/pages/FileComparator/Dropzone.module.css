@@ -3,7 +3,9 @@
     text-align: center;
     font-size: 1.5vw;
 }
-
 .DropZoneItem:hover {
    color: #454444;
+}
+.alignTippy {
+    text-align: center;
 }

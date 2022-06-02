@@ -32,6 +32,9 @@ spring:
           connectiontimeout: 5000
           timeout: 3000
           writetimeout: 5000
+  servlet:
+    multipart:
+      maxFileSize: 1MB
 
 jasypt:
     encryptor:
