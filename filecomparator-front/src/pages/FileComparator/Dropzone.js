@@ -73,7 +73,8 @@ export default function MyDropzone({isUpload, setComparedFiles, setFileName, set
         }).then((response) => {
             if(response.data) {
                 const object = JSON.stringify(response.data);
-                const files = object.slice(1, -1).split(BORDER);
+                const files = object.slice(1, -1).replace(/\\"/g, "\"").split(BORDER);
+
                 setComparedFiles(files[0]);
                 setComparedFiles(files[1]);
             } else if(!response.data && !isLeftFile) {
