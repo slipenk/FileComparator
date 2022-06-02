@@ -66,9 +66,11 @@ export default function MyDropzone({isUpload, setComparedFiles, setFileName, set
             dataType: 'json',
             headers: {
                 'Content-Type': 'multipart/form-data'
+            },
+            onUploadProgress: () => {
+                isUpload(true);
             }
         }).then((response) => {
-            isUpload(true);
             if(response.data) {
                 const object = JSON.stringify(response.data);
                 const files = object.slice(1, -1).split(BORDER);

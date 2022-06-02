@@ -12,6 +12,7 @@ import FileComparatorTables from "../../components/UI/fileComparatorTables/FileC
 import classesT from "../../components/UI/fileComparatorTables/fileComparatorTables.module.css"
 import UnionTable from "../../components/UI/fileComparatorTables/UnionTable";
 import useFileComparator from "./useFileComparator";
+import LoadingSpinner from "../../components/UI/LoadingSpinner/LoadingSpinner";
 
 
 
@@ -34,7 +35,7 @@ const FileComparator = () => {
                                 {isUploadFileFirst ? <div/> : <MyDropzone isUpload={isUpload} setComparedFiles={setComparedFiles} setFileName={setFileName} setOriginalFiles={setOriginalFilesLeft} isLeftFile={true} />}
                                 <div className={classesF.firstDrop} >
                                     {isUploadFileFirst && isCompared ? <EditorLeft file={leftFile} fileOr={leftFileOr}/> : <div/>}
-                                    {isUploadFileFirst && !isCompared ? <div/> : <div/>}
+                                    {isUploadFileFirst && !isCompared ? <LoadingSpinner/> : <div/>}
                                 </div>
                             </div>
                         </div>
@@ -47,7 +48,7 @@ const FileComparator = () => {
                                 {isUploadFileSecond ? <div/> : <MyDropzone isUpload={isUpload} setComparedFiles={setComparedFiles} setFileName={setFileName} setOriginalFiles={setOriginalFilesRight} isLeftFile={false} />}
                                 <div className={classesF.secondDrop}>
                                     {isUploadFileSecond && isCompared ? <EditorRight file={rightFile} fileOr={rightFileOr}/> : <div/>}
-                                    {isUploadFileSecond && !isCompared ? <div/> : <div/>}
+                                    {isUploadFileSecond && !isCompared ? <LoadingSpinner/> : <div/>}
                                 </div>
                             </div>
                         </div>

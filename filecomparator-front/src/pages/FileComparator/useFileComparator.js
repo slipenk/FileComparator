@@ -51,8 +51,7 @@ const useFileComparator = () => {
         } else if(counterSetComparedFiles === 2) {
             counterSetComparedFiles = 0;
             setRightFile(value.replace(/`/g, '"'));
-            setIsCompared(true);
-            getStatistics();
+            getStatistics().then(() => setIsCompared(true));
         }
     }
 
@@ -67,8 +66,7 @@ const useFileComparator = () => {
     }
 
     const getStatistics = () => {
-
-        axios({
+        return axios({
             url: GET_STATISTICS_URL,
             method: 'GET',
         }).then((response) => {
