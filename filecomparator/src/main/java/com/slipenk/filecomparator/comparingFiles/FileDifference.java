@@ -33,7 +33,7 @@ public class FileDifference {
     private static final String CONTAINS_EMPTY = ")  ";
 
 
-    public List<File> FileDiffTXT(File file1, File file2) throws IOException {
+    public List<String> FileDiffTXT(File file1, File file2) throws IOException {
 
         int counter = 0;
 
@@ -74,10 +74,10 @@ public class FileDifference {
             rightV = EMPTY_STRING;
         }
 
-      return fileCommandsVisitor.createComparedFilesTXT();
+      return fileCommandsVisitor.createComparedFiles();
     }
 
-    public List<XWPFDocument> FileDiffDOCX(File file1, File file2) throws IOException {
+    public List<String> FileDiffDOCX(File file1, File file2) {
         try {
             if (Objects.equals(FilenameUtils.getExtension(file1.getAbsolutePath()), DOCX) && Objects.equals(FilenameUtils.getExtension(file2.getAbsolutePath()), DOCX)) {
                 int counter = 0;
@@ -134,7 +134,7 @@ public class FileDifference {
         catch (Exception e) {
             System.out.println(e.getMessage());
         }
-       return fileCommandsVisitor.createComparedFilesDOCX();
+       return fileCommandsVisitor.createComparedFiles();
     }
 
     public List<Integer> getStatisticsOfComparing() {

@@ -77,7 +77,7 @@ export default function MyDropzone({isUpload, setComparedFiles, setFileName, set
                 setComparedFiles(files[0]);
                 setComparedFiles(files[1]);
             } else if(!response.data && !isLeftFile) {
-                diffToastError("Помилка під час порівняння файлів. Ймовірна причина - формати обох файлів повинні бути однаковими");
+                diffToastError("Помилка під час порівняння файлів. Ймовірна причина - формати обох файлів повинні бути однаковими, а от назви - різними");
             }
         }
         ).catch(() => {
@@ -91,13 +91,13 @@ export default function MyDropzone({isUpload, setComparedFiles, setFileName, set
             'application/vnd.openxmlformats-officedocument.wordprocessingml.document': ['.docx']
         },
         maxFiles: 1,
-        maxSize: 1000000,
+        maxSize: 100000,
         onDrop: onDropCallback
     })
 
 
     return (
-        <Tippy className={classes.alignTippy} placement="bottom" content="Підтримувані формати файлів - TXT, DOCX. Максимальний розмір файлу - 2 МБ">
+        <Tippy className={classes.alignTippy} placement="bottom" content="Підтримувані формати файлів - TXT, DOCX. Максимальний розмір файлу - 100KB">
             <div {...getRootProps()}>
                 <input {...getInputProps()} />
                 {
