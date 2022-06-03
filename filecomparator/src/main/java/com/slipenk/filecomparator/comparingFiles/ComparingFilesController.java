@@ -60,8 +60,10 @@ public class ComparingFilesController {
                     bytes1 = stringList.get(0).getBytes();
                     bytes2 = stringList.get(1).getBytes();
                     comparingFilesService.listFiles.clear();
+                    comparingFilesService.listCountingRows.clear();
                 } else {
                     comparingFilesService.listFiles.clear();
+                    comparingFilesService.listCountingRows.clear();
                     clearDirectory();
                     return ResponseEntity.ok().body(EMPTY_STRING.getBytes());
                 }
@@ -75,6 +77,7 @@ public class ComparingFilesController {
                 return ResponseEntity.ok().headers(httpHeaders).body(combined);
             } else if(counter == 2) {
                 comparingFilesService.listFiles.clear();
+                comparingFilesService.listCountingRows.clear();
                 clearDirectory();
                 counter = 0;
             }
@@ -83,6 +86,7 @@ public class ComparingFilesController {
             counter = 0;
             clearDirectory();
             comparingFilesService.listFiles.clear();
+            comparingFilesService.listCountingRows.clear();
             System.out.println(e.getMessage());
         }
         return ResponseEntity.ok().body(EMPTY_STRING.getBytes());

@@ -16,13 +16,6 @@ export default function MyDropzone({isUpload, setComparedFiles, setFileName, set
     const onDropCallback = useCallback(acceptedFiles => {
         const file = acceptedFiles[0];
 
-        if(isLeftFile) {
-            console.log("FROM Dropzone " + localStorage.getItem("selectedOptionRowsLeft"))
-        } else {
-            console.log("FROM Dropzone " + localStorage.getItem("selectedOptionRowsRight"))
-        }
-
-
         if(acceptedFiles[0].type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
             const formData = new FormData();
             formData.append("file", file);

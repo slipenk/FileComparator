@@ -34,7 +34,7 @@ public class FileDifference {
     private static final String WITH_COUNTING_ROWS = "With counting rows";
 
 
-    public List<String> FileDiffTXT(File file1, File file2, String optionsCountingRows) throws IOException {
+    public List<String> FileDiffTXT(File file1, File file2, List<String> listCountingRows) throws IOException {
 
         int counter = 0;
 
@@ -58,12 +58,14 @@ public class FileDifference {
                 rightComparator.getScript().visit(fileCommandsVisitor);
             }
 
-            if (optionsCountingRows.equals(WITH_COUNTING_ROWS)) {
+            if (listCountingRows.get(0).equals(WITH_COUNTING_ROWS)) {
                 if (leftV.contains(CONTAINS)) {
                     leftV = counter + CONTAINS_MINUS + leftV;
                 } else {
                     leftV = counter + CONTAINS_EMPTY + leftV;
                 }
+            }
+            if (listCountingRows.get(1).equals(WITH_COUNTING_ROWS)) {
                 if (rightV.contains(CONTAINS)) {
                     rightV = counter + CONTAINS_PLUS + rightV;
                 } else {
@@ -80,7 +82,7 @@ public class FileDifference {
       return fileCommandsVisitor.createComparedFiles();
     }
 
-    public List<String> FileDiffDOCX(File file1, File file2, String optionsCountingRows) {
+    public List<String> FileDiffDOCX(File file1, File file2, List<String> listCountingRows) {
         try {
             if (Objects.equals(FilenameUtils.getExtension(file1.getAbsolutePath()), DOCX) && Objects.equals(FilenameUtils.getExtension(file2.getAbsolutePath()), DOCX)) {
                 int counter = 0;
@@ -113,12 +115,14 @@ public class FileDifference {
                         rightComparator.getScript().visit(fileCommandsVisitor);
                     }
 
-                    if (optionsCountingRows.equals(WITH_COUNTING_ROWS)) {
+                    if (listCountingRows.get(0).equals(WITH_COUNTING_ROWS)) {
                         if (leftV.contains(CONTAINS)) {
                             leftV = counter + CONTAINS_MINUS + leftV;
                         } else {
                             leftV = counter + CONTAINS_EMPTY + leftV;
                         }
+                    }
+                    if (listCountingRows.get(1).equals(WITH_COUNTING_ROWS)) {
                         if (rightV.contains(CONTAINS)) {
                             rightV = counter + CONTAINS_PLUS + rightV;
                         } else {
