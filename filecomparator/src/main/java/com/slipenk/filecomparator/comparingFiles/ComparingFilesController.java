@@ -29,6 +29,7 @@ public class ComparingFilesController {
     private static final String PATH_DOCX = "uploadFileDOCX";
     private static final String PARAM = "file";
     private static final String USER_EMAIL = "userEmail";
+    private static final String SELECTED_OPTION_COUNTING_ROWS = "selectedOptionCountingRows";
     private static final String FILE_NAME = "compare.txt";
     public static String TEMP_FILE_NAME = "";
     private ComparingFilesService comparingFilesService;
@@ -40,7 +41,7 @@ public class ComparingFilesController {
     @PostMapping(path = PATH,
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<byte[]> uploadFile(@RequestParam(PARAM) MultipartFile multipartFile, @RequestParam(USER_EMAIL) String email) {
+    public ResponseEntity<byte[]> uploadFile(@RequestParam(PARAM) MultipartFile multipartFile,  @RequestParam(USER_EMAIL) String email, @RequestParam(SELECTED_OPTION_COUNTING_ROWS) String optionsCountingRows) {
         try {
             File convFile = new File(DIR + SLASH + multipartFile.getOriginalFilename());
             try(InputStream is = multipartFile.getInputStream()) {
@@ -48,7 +49,7 @@ public class ComparingFilesController {
             }
             ++counter;
 
-            stringList = comparingFilesService.compareFile(convFile, email);
+            stringList = comparingFilesService.compareFile(convFile, email, optionsCountingRows);
 
             if(!stringList.isEmpty()) {
                 counter = 0;

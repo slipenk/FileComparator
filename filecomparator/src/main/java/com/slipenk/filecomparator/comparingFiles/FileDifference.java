@@ -31,9 +31,10 @@ public class FileDifference {
     private static final String CONTAINS_PLUS = ") (+)  ";
     private static final String CONTAINS_MINUS = ") (-)  ";
     private static final String CONTAINS_EMPTY = ")  ";
+    private static final String WITH_COUNTING_ROWS = "With counting rows";
 
 
-    public List<String> FileDiffTXT(File file1, File file2) throws IOException {
+    public List<String> FileDiffTXT(File file1, File file2, String optionsCountingRows) throws IOException {
 
         int counter = 0;
 
@@ -57,15 +58,17 @@ public class FileDifference {
                 rightComparator.getScript().visit(fileCommandsVisitor);
             }
 
-            if (leftV.contains(CONTAINS)) {
-                leftV = counter + CONTAINS_MINUS + leftV;
-            } else {
-                leftV = counter + CONTAINS_EMPTY + leftV;
-            }
-            if (rightV.contains(CONTAINS)) {
-                rightV = counter + CONTAINS_PLUS + rightV;
-            } else {
-                rightV = counter + CONTAINS_EMPTY + rightV;
+            if (optionsCountingRows.equals(WITH_COUNTING_ROWS)) {
+                if (leftV.contains(CONTAINS)) {
+                    leftV = counter + CONTAINS_MINUS + leftV;
+                } else {
+                    leftV = counter + CONTAINS_EMPTY + leftV;
+                }
+                if (rightV.contains(CONTAINS)) {
+                    rightV = counter + CONTAINS_PLUS + rightV;
+                } else {
+                    rightV = counter + CONTAINS_EMPTY + rightV;
+                }
             }
 
             leftVD += leftV;
@@ -77,7 +80,7 @@ public class FileDifference {
       return fileCommandsVisitor.createComparedFiles();
     }
 
-    public List<String> FileDiffDOCX(File file1, File file2) {
+    public List<String> FileDiffDOCX(File file1, File file2, String optionsCountingRows) {
         try {
             if (Objects.equals(FilenameUtils.getExtension(file1.getAbsolutePath()), DOCX) && Objects.equals(FilenameUtils.getExtension(file2.getAbsolutePath()), DOCX)) {
                 int counter = 0;
@@ -110,15 +113,17 @@ public class FileDifference {
                         rightComparator.getScript().visit(fileCommandsVisitor);
                     }
 
-                    if (leftV.contains(CONTAINS)) {
-                        leftV = counter + CONTAINS_MINUS + leftV;
-                    } else {
-                        leftV = counter + CONTAINS_EMPTY + leftV;
-                    }
-                    if (rightV.contains(CONTAINS)) {
-                        rightV = counter + CONTAINS_PLUS + rightV;
-                    } else {
-                        rightV = counter + CONTAINS_EMPTY + rightV;
+                    if (optionsCountingRows.equals(WITH_COUNTING_ROWS)) {
+                        if (leftV.contains(CONTAINS)) {
+                            leftV = counter + CONTAINS_MINUS + leftV;
+                        } else {
+                            leftV = counter + CONTAINS_EMPTY + leftV;
+                        }
+                        if (rightV.contains(CONTAINS)) {
+                            rightV = counter + CONTAINS_PLUS + rightV;
+                        } else {
+                            rightV = counter + CONTAINS_EMPTY + rightV;
+                        }
                     }
 
                     leftVD += leftV;

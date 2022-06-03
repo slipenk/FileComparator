@@ -5,6 +5,7 @@ import Ukraine from "../../../icons/Ukraine.png";
 import DropDownForSave from "./DropDownForSave";
 import Tippy from "@tippy.js/react";
 import 'tippy.js/dist/tippy.css'
+import RadioButtons from "../radiobuttons/RadioButtons";
 
 const FileComparatorTables = ({value, statistics, isFirstFile, fileName, isUpload, setComparedFalse, zeroStatistics}) => {
 
@@ -37,6 +38,13 @@ const FileComparatorTables = ({value, statistics, isFirstFile, fileName, isUploa
                         <th onMouseEnter={DropdownEnter} onMouseLeave={DropdownLeave}><span className={classes.spanStyle}>Зберегти</span>
                             {show && (<DropDownForSave isFirstFile={isFirstFile}/>)}
                         </th>
+                    </tr>
+                </tbody>
+            </table>
+            <table className={classes.tableTable + " " + classes.tableTableStat_2}>
+                <tbody>
+                    <tr>
+                        <th className={classes.thSecond}><RadioButtons isFirstFile={isFirstFile}/></th>
                     </tr>
                 </tbody>
             </table>

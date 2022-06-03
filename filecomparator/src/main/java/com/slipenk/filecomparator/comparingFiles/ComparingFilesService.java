@@ -29,16 +29,16 @@ public class ComparingFilesService {
     private List<Integer> listStatisticsTwoFiles;
     private static final String TEMP_DOCX = "temp.docx";
 
-    public List<String> compareFile(File file, String email) {
+    public List<String> compareFile(File file, String email, String optionsCountingRows) {
         listFiles.add(file);
         if(listFiles.size() == 2) {
-            return compareFiles(listFiles.get(0), listFiles.get(1), email);
+            return compareFiles(listFiles.get(0), listFiles.get(1), email, optionsCountingRows);
         }
         return Collections.emptyList();
     }
 
 
-    private List<String> compareFiles(File fileLeft, File fileRight, String email) {
+    private List<String> compareFiles(File fileLeft, File fileRight, String email, String optionsCountingRows) {
         getStatisticsFiles(fileLeft, fileRight);
 
         try {
@@ -46,9 +46,9 @@ public class ComparingFilesService {
             List<String> files = Collections.emptyList();
 
             if (Objects.equals(FilenameUtils.getExtension(fileLeft.getAbsolutePath()), DOCX) && Objects.equals(FilenameUtils.getExtension(fileRight.getAbsolutePath()), DOCX)) {
-               files = fileDifference.FileDiffDOCX(fileLeft, fileRight);
+               files = fileDifference.FileDiffDOCX(fileLeft, fileRight, optionsCountingRows);
             } else if (Objects.equals(FilenameUtils.getExtension(fileLeft.getAbsolutePath()), TXT) && Objects.equals(FilenameUtils.getExtension(fileRight.getAbsolutePath()), TXT)) {
-                files = fileDifference.FileDiffTXT(fileLeft, fileRight);
+                files = fileDifference.FileDiffTXT(fileLeft, fileRight, optionsCountingRows);
             } else {
                 return files;
             }

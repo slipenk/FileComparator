@@ -16,6 +16,12 @@ export default function MyDropzone({isUpload, setComparedFiles, setFileName, set
     const onDropCallback = useCallback(acceptedFiles => {
         const file = acceptedFiles[0];
 
+        if(isLeftFile) {
+            console.log("FROM Dropzone " + localStorage.getItem("selectedOptionRowsLeft"))
+        } else {
+            console.log("FROM Dropzone " + localStorage.getItem("selectedOptionRowsRight"))
+        }
+
 
         if(acceptedFiles[0].type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
             const formData = new FormData();
@@ -58,7 +64,11 @@ export default function MyDropzone({isUpload, setComparedFiles, setFileName, set
         const formData = new FormData();
         formData.append("file", file);
         formData.append("userEmail", object.email);
-
+        if (isLeftFile) {
+            formData.append("selectedOptionCountingRows", localStorage.getItem("selectedOptionRowsLeft"));
+        } else {
+            formData.append("selectedOptionCountingRows", localStorage.getItem("selectedOptionRowsRight"));
+        }
         axios({
             url: UPLOAD_FILE_URL,
             method: 'POST',
