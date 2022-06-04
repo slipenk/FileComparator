@@ -4,7 +4,7 @@ import Menu from "../pages/Menu/Menu";
 import NoPageFound from "../pages/NoPageFound/NoPageFound";
 import FileComparator from "../pages/FileComparator/FileComparator";
 import PersonalAccount from "../pages/PersonalAccount/PersonalAccount";
-import RecentComparisons from "../pages/RecentСomparisons/RecentСomparisons";
+import RecentComparisons from "../pages/RecentComparisons/RecentComparisons";
 import RegistrationSuccess from "../pages/RegistrationSuccess/RegistrationSuccess";
 
 export const privateRoutes = [
