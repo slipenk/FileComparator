@@ -95,7 +95,7 @@ public class StatisticsFileService {
                         | ch == '»' | ch == '"' | ch == '[' | ch == ']' | ch == '(' | ch == ')'
                         | ch == '{' | ch == '}' | ch == '/' | ch == ' ').count();
 
-                nextLine = nextLine.replaceAll("[^A-Za-zА-ЩЬЮЯҐЄІЇа-щьюяґєії'`’ʼ\\d]"," ");
+                nextLine = nextLine.replaceAll("[^A-Za-zА-ЩЬЮЯҐЄІЇа-щьюяґєії'`’ʼ\\-\\d]"," ");
 
                 Scanner word = new Scanner(nextLine);
 
