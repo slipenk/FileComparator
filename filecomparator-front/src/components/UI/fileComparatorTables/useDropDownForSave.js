@@ -12,13 +12,13 @@ const useDropDownForSave = (isFirstFile) => {
             const file = localStorage.getItem('rightEditor');
             saveFile('yourFile.' + item, file, type);
         } else if(isFirstFile) {
-            const file = localStorage.getItem('leftEditor');
+            const file = localStorage.getItem('leftEditor').replace(/<\/p>/g, "</br>").replace(/<p>/g, "");
             const text = htmlToText(file, {
                 wordwrap: 130
             });
             saveFile('yourFile.' + item, text, type);
         }  else if(!isFirstFile) {
-            const file = localStorage.getItem('rightEditor');
+            const file = localStorage.getItem('rightEditor').replace(/<\/p>/g, "</br>").replace(/<p>/g, "");
             const text = htmlToText(file, {
                 wordwrap: 130
             });
